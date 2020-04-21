@@ -34,7 +34,7 @@ create table Project_Notes (
 	display_index int unsigned not null,
 	primary key (id),
 	foreign key (project_id) references Projects (id) on update cascade on delete cascade,
-	unique key (user_id, display_index)
+	unique key (project_id, display_index)
 );
 
 create table Project_Checklists (

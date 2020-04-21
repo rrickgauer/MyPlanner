@@ -26,7 +26,7 @@ function insertUser($email, $password) {
    // filter, sanitize, and hash email and password
    $email    = filter_var($email, FILTER_SANITIZE_EMAIL);
    $password = filter_var($password, FILTER_SANITIZE_STRING);
-   $password = password_hash($password, PASSWORD_DEFAULT);
+   // $password = password_hash($password, PASSWORD_DEFAULT);
 
    // bind parameters to the prepared sql statement
    $sql->bindParam(':email', $email, PDO::PARAM_STR);
@@ -36,6 +36,37 @@ function insertUser($email, $password) {
    $sql->execute();
    $sql = null;
    $pdo = null;
+}
+
+function validateLogin($email, $password) {
+   $pdo = dbConnect();
+   $sql = $pdo->prepare('SELECT password FROM Users WHERE email=:email LIMIT 1');
+
+   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+   $sql->bindParam(':email', $email, PDO::PARAM_STR);
+   $sql->execute();
+
+   $storedPassword = $sql->fetch(PDO::FETCH_ASSOC);
+   $storedPassword = $storedPassword['password'];
+
+   if ($storedPassword == $password) {
+      return true;
+   } else {
+      return false;
+   }
+
+}
+
+function getUserID($email) {
+   $pdo = dbConnect();
+   $sql = $pdo->prepare('SELECT id FROM Users WHERE email=:email LIMIT 1');
+
+   $email = filter_var($email, FILTER_SANITIZE_NUMBER_INT);
+   $sql->bindParam(':email', $email, PDO::PARAM_STR);
+   $sql->execute();
+
+   $row = $sql->fetch(PDO::FETCH_ASSOC);
+   return $row['id'];
 }
 
 

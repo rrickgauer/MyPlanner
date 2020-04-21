@@ -8,31 +8,8 @@
 
       <div class="container">
          <h1>My Planner</h1>
-         <p>Written by Ryan Rickgauer</p>
+
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <?php include('footer.php'); ?>

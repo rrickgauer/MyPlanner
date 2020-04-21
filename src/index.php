@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
    <head>
-      <meta charset="utf-8">
+      <?php include('header.php'); ?>
       <title>My Planner</title>
    </head>
    <body>
-      <h1>My Planner</h1>
-      <p>Written by Ryan Rickgauer</p>
+
+      <div class="container">
+         <h1>My Planner</h1>
+         <p>Written by Ryan Rickgauer</p>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <?php include('footer.php'); ?>
    </body>
 </html>

@@ -61,12 +61,24 @@ function getUserID($email) {
    $pdo = dbConnect();
    $sql = $pdo->prepare('SELECT id FROM Users WHERE email=:email LIMIT 1');
 
-   $email = filter_var($email, FILTER_SANITIZE_NUMBER_INT);
+   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
    $sql->bindParam(':email', $email, PDO::PARAM_STR);
    $sql->execute();
 
    $row = $sql->fetch(PDO::FETCH_ASSOC);
    return $row['id'];
+}
+
+function getUserInfo($id) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Users WHERE id=:id LIMIT 1');
+
+  $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':id', $id, PDO::PARAM_INT);
+
+  $sql->execute();
+
+  return $sql;
 }
 
 

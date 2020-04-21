@@ -7,7 +7,7 @@ if (isset($_POST['new-email']) && isset($_POST['new-password1']) && isset($_POST
    if ($_POST['new-password1'] == $_POST['new-password2']) {
       insertUser($_POST['new-email'], $_POST['new-password1']);
       session_start();
-      $_SESSION['userID'] = getUserID($_POST['email']);
+      $_SESSION['userID'] = getUserID($_POST['new-email']);
       header('Location: index.php');
    }
 }
@@ -16,7 +16,7 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
 
    if (validateLogin($_POST['login-email'], $_POST['login-password'])) {
       session_start();
-      $_SESSION['userID'] = getUserID($_POST['email']);
+      $_SESSION['userID'] = getUserID($_POST['login-email']);
       header('Location: index.php');
       exit;
    }

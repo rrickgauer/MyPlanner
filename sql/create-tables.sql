@@ -3,7 +3,7 @@ create table Users (
 	email varchar(50) not null unique,
 	password char(30) not null,
 	primary key (id)
-)
+);
 
 create table Labels (
 	id int unsigned not null unique auto_increment,
@@ -12,10 +12,9 @@ create table Labels (
 	color char(7),
 	primary key (id),
 	foreign key (user_id) references Users(id) on update cascade on delete cascade
-)
+);
 
 create table Projects (
-
 	id int unsigned not null unique auto_increment,
 	user_id int unsigned not null,
 	name varchar(50) not null,
@@ -26,7 +25,7 @@ create table Projects (
 	primary key (id),
 	foreign key (user_id) references Users (id) on update cascade on delete cascade,
 	unique key (user_id, display_index)
-)
+);
 
 create table Project_Notes (
 	id int unsigned not null unique auto_increment,
@@ -36,7 +35,7 @@ create table Project_Notes (
 	primary key (id),
 	foreign key (project_id) references Projects (id) on update cascade on delete cascade,
 	unique key (user_id, display_index)
-)
+);
 
 create table Project_Checklists (
 	id int unsigned not null unique auto_increment,
@@ -46,7 +45,7 @@ create table Project_Checklists (
 	primary key (id),
 	foreign key (project_id) references Projects(id) on update cascade on delete cascade,
 	unique key (project_id, display_index)
-)
+);
 
 create table Project_Checklist_Items (
 	id int unsigned not null unique auto_increment,
@@ -57,7 +56,7 @@ create table Project_Checklist_Items (
 	primary key (id),
 	foreign key (project_checklist_id) references Project_Checklists(id) on update cascade on delete cascade,
 	unique key (project_checklist_id, display_index)
-)
+);
 
 create table Items (
 	id int unsigned not null unique auto_increment,
@@ -71,7 +70,7 @@ create table Items (
 	primary key (id),
 	foreign key (project_id) references Projects(id) on update cascade on delete cascade,
 	unique key (project_id, display_index)
-)
+);
 
 create table Item_Labels (
 	item_id int unsigned not null,
@@ -79,7 +78,7 @@ create table Item_Labels (
 	primary key (item_id, label_id),
 	foreign key (item_id) references Items(id) on update cascade on delete cascade,
 	foreign key (label_id) references Labels(id) on update cascade on delete cascade
-)
+);
 
 create table Item_Notes (
 	id int unsigned not null unique auto_increment,
@@ -89,7 +88,7 @@ create table Item_Notes (
 	primary key (id),
 	foreign key (item_id) references Items(id) on update cascade on delete cascade,
 	unique key (item_id, display_index)
-)
+);
 
 create table Item_Checklists (
 	id int unsigned not null unique auto_increment,
@@ -99,7 +98,7 @@ create table Item_Checklists (
 	primary key (id),
 	foreign key (item_id) references Items(id) on update cascade on delete cascade,
 	unique key (item_id, display_index)
-)
+);
 
 create table Item_Checklist_Items (
 	id int unsigned not null unique auto_increment,
@@ -110,4 +109,4 @@ create table Item_Checklist_Items (
 	primary key (id),
 	foreign key (item_checklist_id) references Item_Checklists(id) on update cascade on delete cascade,
 	unique key (item_id, display_index)
-)
+);

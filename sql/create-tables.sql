@@ -108,5 +108,5 @@ create table Item_Checklist_Items (
 	display_index int unsigned not null,
 	primary key (id),
 	foreign key (item_checklist_id) references Item_Checklists(id) on update cascade on delete cascade,
-	unique key (item_id, display_index)
+	unique key (item_checklist_id, display_index)
 );

@@ -61,9 +61,9 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
    <form method="post">
      <!-- email -->
      <div class="form-group">
-      <label for="exampleInputPassword1">Email:</label>
-      <input type="email" class="form-control" id="new-email" name="new-email" required>
-   </div>
+         <label for="exampleInputPassword1">Email:</label>
+         <input type="email" class="form-control" id="new-email" name="new-email" required>
+      </div>
 
       <!-- password -->
       <div class="form-group">

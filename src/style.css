@@ -1,3 +1,7 @@
 body {
    background-color: #FFF6F4;
 }
+
+.form-group label {
+	font-weight: bold;
+}

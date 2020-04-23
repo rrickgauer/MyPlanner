@@ -1,6 +1,12 @@
 <?php include('functions.php'); ?>
 <?php include('session.php'); ?>
 
+<?php
+if(isset($_POST['name'])) {
+  insertProject($_SESSION['userID'], $_POST['name'], $_POST['description'], $_POST['date-due']);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +21,15 @@
 
  <div class="container">
   <h1>New Project</h1> 
-  <form>
+  <form method="post">
    <!-- project name -->
    <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" class="form-control" id="name" name="name" required autofocus>
-  </div>
+   </div>
 
-  <!-- description -->
-  <div class="form-group">
+   <!-- description -->
+   <div class="form-group">
     <label for="name">Description:</label>
     <textarea class="form-control" rows="5" id="description" name="description"></textarea>
   </div>
@@ -32,7 +38,7 @@
   <!-- date due -->
   <div class="form-group">
     <label for="name">Date due:</label>
-    <input type="date" class="form-control" id="date-due" name="date-due" required>
+    <input type="date" class="form-control" id="date-due" name="date-due">
   </div>
 
   <!-- submit button -->

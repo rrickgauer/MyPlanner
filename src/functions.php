@@ -81,6 +81,63 @@ function getUserInfo($id) {
   return $sql;
 }
 
+function insertProject($userID, $name, $description = NULL, $dateDue = NULL, $dateCreated = NULL, $displayIndex = NULL) {
+  $pdo = dbConnect();
+
+  // check if date created is null
+  if ($dateCreated != NULL) {
+    $sql = $pdo->prepare('INSERT INTO Projects (user_id, name, description, date_due, date_created, display_index) VALUES (:user_id, :name, :description, :date_due, :date_created, :display_index)');
+    $dateCreated  = filter_var($dateCreated, FILTER_SANITIZE_STRING);
+    $sql->bindParam(':date_created', $dateCreated, PDO::PARAM_STR);
+
+  } else {
+    $sql = $pdo->prepare('INSERT INTO Projects (user_id, name, description, date_due, date_created, display_index) VALUES (:user_id, :name, :description, :date_due, NOW(), :display_index)');
+  }
+
+
+  // filter and sanitize variables
+  $userID       = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $name         = filter_var($name, FILTER_SANITIZE_STRING);
+  $displayIndex = getProjectCount($userID) + 1;   // need to update later
+  $description = setProjectValueNull($description);
+  $dateDue = setProjectValueNull($dateDue);
+
+  // bind parameters
+  $sql->bindParam(':user_id', $userID, PDO::PARAM_INT);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+  $sql->bindParam(':description', $description, PDO::PARAM_STR);
+  $sql->bindParam(':date_due', $dateDue, PDO::PARAM_STR);
+  $sql->bindParam(':display_index', $displayIndex, PDO::PARAM_INT);
+
+  // execute statement
+  $sql->execute();
+
+  // close connections
+  $pdo = NULL;
+  $sql = NULL;
+
+}
+
+// get the number of projects a user has
+function getProjectCount($userID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) as count FROM Projects WHERE user_id=:userID');
+  $userID = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
+// if length of paramter is 0 then set it to null 
+function setProjectValueNull($value) {
+  if (strlen($value) > 0) 
+    return filter_var($value, FILTER_SANITIZE_STRING);
+  else 
+    return NULL;
+}
+
 
 
 

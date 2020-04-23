@@ -1,17 +1,14 @@
 body {
-   background-color: #FFF6F4;
+  background-color: #FFF6F4;
 }
 
 .form-group label {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .card-project .card-footer {
-  display        : flex;
+  display: flex;
   justify-content: space-between;
-}
-
-.card-project .card-footer {
   background: white;
   border: none;
 }
@@ -22,15 +19,19 @@ body {
 
 .wrapper {
   display: flex;
-  /*width: 100%;*/
+  width: 100%;
   align-items: stretch;
 }
 
 #sidebar {
+  transition: all 0.2s;
   min-width: 250px;
   max-width: 250px;
+  min-height: 100vh;
 }
 
 #sidebar.active {
   margin-left: -250px;
 }
+
+/*# sourceMappingURL=mystyle.css.map */

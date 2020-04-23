@@ -7,7 +7,7 @@ body {
 }
 
 .card-project .card-footer {
-  display        : flex;
+  display: flex;
   justify-content: space-between;
 }
 

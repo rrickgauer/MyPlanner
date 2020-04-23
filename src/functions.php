@@ -138,6 +138,25 @@ function setProjectValueNull($value) {
     return NULL;
 }
 
+function getProjects($userID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT id, name, date_due, DATE_FORMAT(date_due, "%c-%d-%Y") AS date_due_display_date, DATE_FORMAT(date_due, "%l:%i %p") AS date_due_display_time, display_index FROM Projects WHERE user_id=:userID ORDER BY display_index');
+  $userID = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
+  $sql->execute();
+
+  return $sql;
+}
+
+function getProjectCard($id, $name, $dateDue, $time) {
+  echo '<div class="col"><div class="card card-project"><div class="card-body"><h5 class="card-title">';
+  echo $name;
+  echo '</h5></div><div class="card-footer">';
+  echo  "<div class=\"card-project-date\">$dateDue $time</div>";
+  echo '<a href="#">View</a>';
+  echo '</div></div></div>';
+}
+
 
 
 

@@ -5,3 +5,17 @@ body {
 .form-group label {
 	font-weight: bold;
 }
+
+.card-project .card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-project .card-footer {
+  background: white;
+  border: none;
+}
+
+#projects .row {
+  margin-bottom: 20px;
+}

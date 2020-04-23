@@ -28,10 +28,56 @@ body {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
+  background: #7386D5;
+  color: #fff;
+  margin-right: 10px;
+}
+#sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#sidebar ul li {
+  margin-left: none;
+}
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+#sidebar .sidebar-header {
+  display: flex;
+  justify-content: space-between;
+}
+#sidebar .sidebar-header i {
+  font-size: 1.5em;
 }
 
 #sidebar.active {
   margin-left: -250px;
+}
+
+#content {
+  width: 100%;
+}
+
+.project-info {
+  width: 100%;
+  margin: 10px;
+}
+.project-info h1 {
+  text-align: center;
+  margin: 20px;
+}
+.project-info .project-info-element .descriptor {
+  font-weight: bold;
+  margin-bottom: 1px;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

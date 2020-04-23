@@ -157,6 +157,18 @@ function getProjectCard($id, $name, $dateDue, $time) {
   echo '</div></div></div>';
 }
 
+function getProjectInfo($id) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT name, description, date_format(date_created, "%c-%d-%Y") AS date_created, date_format(date_created, "%l:%i %p") AS date_created_time, date_format(date_due, "%c-%d-%Y") AS date_due, date_format(date_due, "%l:%i %p") AS date_due_time FROM Projects WHERE id=:id');
+
+  $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':id', $id, PDO::PARAM_INT);
+
+  $sql->execute();
+
+  return $sql;
+}
+
 
 
 

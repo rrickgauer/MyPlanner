@@ -149,11 +149,11 @@ function getProjects($userID) {
 }
 
 function getProjectCard($id, $name, $dateDue, $time) {
-  echo '<div class="col"><div class="card card-project"><div class="card-body"><h5 class="card-title">';
+  echo '<div class="col"><div class="card card-project" data-project-id="' . $id . '"><div class="card-body"><h5 class="card-title">';
   echo $name;
   echo '</h5></div><div class="card-footer">';
-  echo  "<div class=\"card-project-date\">$dateDue $time</div>";
-  echo '<a href="#">View</a>';
+  echo "<div class=\"card-project-date\">$dateDue $time</div>";
+  echo "<a href=\"project.php?projectID=$id\">View</a>";
   echo '</div></div></div>';
 }
 

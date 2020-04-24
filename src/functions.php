@@ -216,6 +216,46 @@ function getProjectChecklists($projectID) {
   return $sql;
 }
 
+function insertProjectChecklistItem($projectChecklistID, $content, $completed = 'n') {
+
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('INSERT INTO Project_Checklist_Items (project_checklist_id, content, completed, display_index) VALUES (:projectChecklistID, :content, :completed, :displayIndex)');
+
+
+  $projectChecklistID = filter_var($projectChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistID', $projectChecklistID, PDO::PARAM_INT);
+
+  $content = filter_var($content, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':content', $content, PDO::PARAM_STR);
+
+  $completed = filter_var($completed, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':completed', $completed, PDO::PARAM_STR);
+
+
+  $displayIndex = getProjectChecklistItemsCount($projectChecklistID) + 1;
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+  $sql->execute();
+
+  $pdo = null;
+  $sql = null;
+
+
+}
+
+function getProjectChecklistItemsCount($projectChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) as count FROM Project_Checklist_Items WHERE project_checklist_id=:projectChecklistID');
+
+  $projectChecklistID = filter_var($projectChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistID', $projectChecklistID, PDO::PARAM_INT);
+
+  $sql->execute();
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
 
 
 ?>

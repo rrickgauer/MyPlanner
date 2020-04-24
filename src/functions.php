@@ -169,7 +169,52 @@ function getProjectInfo($id) {
   return $sql;
 }
 
+function insertProjectChecklist($projectID, $name) {
 
+  $pdo = dbConnect();
+
+  $sql = $pdo->prepare('INSERT INTO Project_Checklists (project_id, name, display_index) VALUES (:projectID, :name, :displayIndex)');
+
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+
+  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+
+
+  $displayIndex = getProjectChecklistCount($projectID) + 1;
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+
+  $sql->execute();
+
+  $sql = null;
+  $pdo = null;
+
+}
+
+
+function getProjectChecklistCount($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) as count FROM Project_Checklists WHERE project_id=:projectID');
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
+
+function getProjectChecklists($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Project_Checklists WHERE project_id=:projectID');
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
+
+  return $sql;
+}
 
 
 

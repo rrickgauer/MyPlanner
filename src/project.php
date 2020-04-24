@@ -3,13 +3,6 @@
 <?php $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC); ?>
 
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +24,7 @@
       
       <!-- checklists -->
       <ul>
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-        <li><a href="#">Page 4</a></li>      
+        
       </ul>
     </nav>
 
@@ -92,7 +82,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">New checklist</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearNewChecklistInput()">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -119,9 +109,13 @@
   <?php include('footer.php'); ?>
 
   <script>
-  
+    
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
+    $(document).ready(function() {
+      getChecklists();
+    });
 
     function activateSidebar() {
       $('#sidebar').toggleClass('active');
@@ -148,8 +142,8 @@
         }
       });
 
-
-
+      $('#new-checklist-modal').modal('hide')
+      clearNewChecklistInput();
     }
 
 
@@ -158,11 +152,31 @@
       var html = '';
 
       // create html to insert into the sidebar
-      for (var count = 0; count < size; count++) {
+      for (var count = 0; count < size; count++) 
         html += '<li><a href="#">' + data[count].name + '</a></li>';
-      }
-
+      
       $("#sidebar ul").html(html);
+    }
+
+    function clearNewChecklistInput() {
+      $("#new-checklist-name").val('');
+    }
+
+    function getChecklists() {
+      const projectID = urlParams.get('projectID');
+
+      $.ajax({
+        type: "GET",
+        url: 'get-checklist.php',
+        data: {
+          "projectID": projectID
+        },
+
+        success: function(response) {
+          var data = JSON.parse(response);
+          setChecklistSidebar(data);
+        }
+      });
     }
 
 

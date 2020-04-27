@@ -44,6 +44,19 @@ else if (isset($_GET['projectID'])) {
 }
 
 
+else if (isset($_POST['checklistID']) && isset($_POST['action']) && $_POST['action'] == 'delete' && isset($_POST['projectID'])) {
+
+  $checklistID = $_POST['checklistID'];
+  $projectID = $_POST['projectID'];
+
+  // delete checklist
+  deleteProjectChecklist($checklistID);
+  $checklists = getProjectChecklists($projectID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($checklists);
+  exit;
+
+
+}
 
 
 

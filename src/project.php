@@ -124,11 +124,8 @@
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div role="separator" class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
+                  <button class="dropdown-item">Rename</button>
+                  <button class="dropdown-item" onclick="deleteChecklist()">Delete</button>
                 </div>
               </div>
             </div>
@@ -159,6 +156,7 @@
     
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    const projectID = urlParams.get('projectID');
 
     $(document).ready(function() {
       getChecklists();
@@ -278,7 +276,7 @@
     }
 
     function getChecklists() {
-      const projectID = urlParams.get('projectID');
+      
 
       $.ajax({
         type: "GET",
@@ -314,6 +312,34 @@
 
     function setProjectChecklistModalTitle(title) {
       $("#project-checklist-modal .modal-title").html(title);
+    }
+
+    function deleteChecklist() {
+
+      var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+      // alert(checklistID);
+
+      $.ajax({
+        type: "POST",
+        url: 'project-backend.php',
+        data: {
+          "checklistID": checklistID,
+          "projectID": projectID,
+          "action": 'delete',
+        },
+
+        success: function(response) {
+          // var data = JSON.parse(response);
+          // console.log(response);
+
+          getChecklists();
+          $('#project-checklist-modal').modal('hide');
+        }
+      });
+
+
+
+
     }
 
 

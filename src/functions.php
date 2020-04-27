@@ -278,13 +278,26 @@ function getProjectChecklistItems($projectChecklistID) {
 function deleteProjectChecklist($projectChecklistID) {
   $pdo = dbConnect();
   $sql = $pdo->prepare('DELETE FROM Project_Checklists WHERE id=:projectChecklistID');
-
   $projectChecklistID = filter_var($projectChecklistID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':projectChecklistID', $projectChecklistID, PDO::PARAM_INT);
-
   $sql->execute();
-
 }
+
+
+function deleteProjectChecklistItem($projectChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('DELETE FROM Project_Checklist_Items WHERE id=:projectChecklistItemID');
+  $projectChecklistItemID = filter_var($projectChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistItemID', $projectChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
+
+
+
+
+
+
 
 
 

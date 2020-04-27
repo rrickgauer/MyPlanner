@@ -4,6 +4,18 @@ const projectID = urlParams.get('projectID');
 
 $(document).ready(function() {
   getChecklists();
+
+
+
+
+});
+
+// executes addTodoItem when enter is pressed
+$(document).on("keypress", "#new-project-checklist-item-input", function(e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+    addChecklistItem();
+  }
 });
 
 
@@ -99,7 +111,7 @@ function getChecklistTableRow(id, content) {
   tr += '<tr data-project-checklist-item-id="' + id + '">';
   tr += '<td><input type="checkbox"></td>';
   tr += '<td>' + content + '</td>';
-  tr += '<td><i class="bx bx-trash"></i></td>';
+  tr += '<td><i class="bx bx-trash" onclick="deleteChecklistItem(' + id + ')"></i></td>';
   tr += '</tr>';
   return tr;
 }
@@ -189,5 +201,48 @@ function deleteChecklist() {
       }
     });
   }
-
 }
+
+function deleteChecklistItem(checklistItemID) {
+  var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+  $.ajax({
+    type: "POST",
+    url: 'project-backend.php',
+    data: {
+      "projectChecklistItemID": checklistItemID,
+      "checklistID": checklistID,
+      "action": 'delete',
+    },
+
+    success: function(response) {
+      displayChecklistItems(JSON.parse(response));
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

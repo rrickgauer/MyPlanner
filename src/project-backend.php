@@ -54,8 +54,20 @@ else if (isset($_POST['checklistID']) && isset($_POST['action']) && $_POST['acti
   $checklists = getProjectChecklists($projectID)->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode($checklists);
   exit;
+}
 
+else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && $_POST['action'] == 'delete' && isset($_POST['checklistID'])) {
+  // get the variables
+  $projectChecklistItemID = $_POST['projectChecklistItemID'];
+  $checklistID = $_POST['checklistID'];
 
+  // delete the project checklist item
+  deleteProjectChecklistItem($projectChecklistItemID);
+
+  // retrieve the new list of items
+  $items = getProjectChecklistItems($checklistID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($items);
+  exit;
 }
 
 

@@ -7,7 +7,7 @@ include('functions.php');
 // insert a new checklist item
 if (isset($_POST['checklistID']) && isset($_POST['content'])) {
 
-  // insertProjectChecklistItem($checklistID, $content);
+  // insert the new checklist item
   insertProjectChecklistItem($_POST['checklistID'], $_POST['content']);
 
   // retrieve the updated list

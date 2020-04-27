@@ -139,40 +139,8 @@
             <!-- checklist items -->
             <table class="table" id="project-checklist-modal-items">
               <tbody>
-<!--                 <tr>
-                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
-                  <td>This is the thing that I am checking</td>
-                  <td><i class='bx bx-trash'></i></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
-                  <td>This is the thing that I am checking</td>
-                  <td><i class='bx bx-trash'></i></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
-                  <td>This is the thing that I am checking</td>
-                  <td><i class='bx bx-trash'></i></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
-                  <td>This is the thing that I am checking</td>
-                  <td><i class='bx bx-trash'></i></td>
-                </tr>
-               -->
-
-
-
-
-
               </tbody>
             </table>
-
-
-
-
-            
-
 
 
           </div>
@@ -203,7 +171,7 @@
 
       $.ajax({
         type: "POST",
-        url: 'insert-project-checklist-item.php',
+        url: 'project-backend.php',
         data: {
           "checklistID": checklistID,
           "content": content
@@ -226,15 +194,16 @@
     function getChecklistItems(checklistID) {
         $.ajax({
           type: "GET",
-          url: 'get-project-checklist-items.php',
+          url: 'project-backend.php',
           data: {
             "checklistID": checklistID,
+            "data": 'items',
           },
 
           success: function(response) {
             var data = JSON.parse(response);
             displayChecklistItems(data);
-          },
+          }
       });
     }
 
@@ -251,8 +220,8 @@
 
     }
 
-    function getChecklistTableRow(id, content) {
 
+    function getChecklistTableRow(id, content) {
       var tr = '';
       tr += '<tr data-project-checklist-item-id="' + id + '">';
       tr += '<td><input type="checkbox"></td>';
@@ -276,10 +245,10 @@
 
       $.ajax({
         type: "POST",
-        url: 'insert-checklist.php',
+        url: 'project-backend.php',
         data: {
           "projectID": projectID,
-          "name": name
+          "name": name,
         },
 
         success: function(response) {
@@ -299,7 +268,6 @@
 
       // create html to insert into the sidebar
       for (var count = 0; count < size; count++) 
-        // html += '<li><a href="#" data-id="' + data[count].id + '">' + data[count].name + '</a></li>';
         html += '<li onclick="openProjectChecklist(this)" data-id="' + data[count].id + '">' + data[count].name + '</a></li>';
       
       $("#sidebar ul").html(html);
@@ -314,7 +282,7 @@
 
       $.ajax({
         type: "GET",
-        url: 'get-checklist.php',
+        url: 'project-backend.php',
         data: {
           "projectID": projectID
         },
@@ -331,6 +299,12 @@
       var checklistID = $(checklist).data("id");
       $("#project-checklist-modal").attr('data-checklist-id', checklistID);
       getChecklistItems(checklistID);
+
+      // set the modal title to the list name
+      var listName = $(checklist).html();
+      $("#project-checklist-modal .modal-title").html(listName);
+
+      // show the checklist
       $('#project-checklist-modal').modal('show');
     }
 
@@ -341,6 +315,7 @@
     function setProjectChecklistModalTitle(title) {
       $("#project-checklist-modal .modal-title").html(title);
     }
+
 
 
   </script>

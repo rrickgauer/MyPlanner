@@ -21,27 +21,18 @@ $projects = getProjects($_SESSION['userID']);
   <!-- project selection -->
   <div id="projects">
     <h3>Your projects</h3>
-    <div class="row row-cols-1 row-cols-md-3">
-      
-      <?php
-      $count = 0;
-      while ($project = $projects->fetch(PDO::FETCH_ASSOC)) {
-            // line break
-        if ($count % 3 == 0) 
-          echo '</div><div class="row row-cols-1 row-cols-md-3">';
-        
-            // print project
-        getProjectCard($project['id'], $project['name'], $project['date_due_display_date'], $project['date_due_display_time']);
 
-        $count++;
-      }
-      ?>
+    <!-- project cards go here -->
+    <div class="row row-cols-1 row-cols-md-3">
     </div>
   </div>
 
 </div>
 
-
 <?php include('footer.php'); ?>
+<script src="index-js.js"></script>
+
+
+
 </body>
 </html>

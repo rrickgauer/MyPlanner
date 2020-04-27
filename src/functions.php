@@ -15,6 +15,12 @@ function dbConnect() {
   }
 }
 
+function echoResponse($data) {
+  $resonse = json_decode($data);
+  echo $response;
+  exit;
+}
+
 function insertUser($email, $password) {
 
    // connect to db

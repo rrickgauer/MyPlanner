@@ -133,6 +133,41 @@
               </div>
             </div>
 
+            <br>
+
+
+            <!-- checklist items -->
+            <table class="table" id="project-checklist-modal-items">
+              <tbody>
+<!--                 <tr>
+                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
+                  <td>This is the thing that I am checking</td>
+                  <td><i class='bx bx-trash'></i></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
+                  <td>This is the thing that I am checking</td>
+                  <td><i class='bx bx-trash'></i></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
+                  <td>This is the thing that I am checking</td>
+                  <td><i class='bx bx-trash'></i></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></td>
+                  <td>This is the thing that I am checking</td>
+                  <td><i class='bx bx-trash'></i></td>
+                </tr>
+               -->
+
+
+
+
+
+              </tbody>
+            </table>
+
 
 
 
@@ -175,26 +210,58 @@
         },
 
         success: function(response) {
-          // var data = JSON.parse(response);
-          console.log(response);
-        },
+          var data = JSON.parse(response);
 
-  
-    })
+          // get the updated data
+          getChecklistItems(checklistID); 
+
+          // clear the input
+          $("#new-project-checklist-item-input").val('');
+
+        },
+    });
   }
 
 
+    function getChecklistItems(checklistID) {
+        $.ajax({
+          type: "GET",
+          url: 'get-project-checklist-items.php',
+          data: {
+            "checklistID": checklistID,
+          },
 
-    
+          success: function(response) {
+            var data = JSON.parse(response);
+            displayChecklistItems(data);
+          },
+      });
+    }
 
+    function displayChecklistItems(data) {
+      const size = data.length;
+      var html = '';
 
+      // create new table html
+      for (var count = 0; count < size; count++) 
+        html += getChecklistTableRow(data[count].id, data[count].content);
+      
+      // set the table to the new html
+      $("#project-checklist-modal-items tbody").html(html);
 
+    }
 
+    function getChecklistTableRow(id, content) {
 
+      var tr = '';
+      tr += '<tr data-project-checklist-item-id="' + id + '">';
+      tr += '<td><input type="checkbox"></td>';
+      tr += '<td>' + content + '</td>';
+      tr += '<td><i class="bx bx-trash"></i></td>';
+      tr += '</tr>';
 
-
-
-
+      return tr;
+    }
 
     function activateSidebar() {
       $('#sidebar').toggleClass('active');
@@ -261,26 +328,9 @@
 
 
     function openProjectChecklist(checklist) {
-
       var checklistID = $(checklist).data("id");
-
       $("#project-checklist-modal").attr('data-checklist-id', checklistID);
-
-      // $.ajax({
-      //   type: "GET",
-      //   url: 'get-project-checklist-items.php',
-      //   data: {
-      //     "checklistID": checklistID
-      //   },
-
-      //   success: function(response) {
-      //     var data = JSON.parse(response);
-      //     setProjectChecklist(data);
-      //   }
-
-     
-
-
+      getChecklistItems(checklistID);
       $('#project-checklist-modal').modal('show');
     }
 

@@ -257,5 +257,24 @@ function getProjectChecklistItemsCount($projectChecklistID) {
 }
 
 
+function getProjectChecklistItems($projectChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Project_Checklist_Items WHERE project_checklist_id=:projectChecklistID');
+
+  $projectChecklistID = filter_var($projectChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistID', $projectChecklistID, PDO::PARAM_INT);
+
+  $sql->execute();
+
+  return $sql;
+}
+
+
+
+
+
+
+
+
 
 ?>

@@ -8,9 +8,11 @@ $content = $_POST['content'];
 
 insertProjectChecklistItem($checklistID, $content);
 
-echo getProjectChecklistItemsCount($checklistID);
-exit;
 
+// retrieve the updated list
+
+$items = getProjectChecklistItems($checklistID)->fetchAll(PDO::FETCH_ASSOC);
+echo json_encode($items);
 
 
 ?>

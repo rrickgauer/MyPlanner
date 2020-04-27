@@ -10,38 +10,4 @@ $checklists = getProjectChecklists($_POST['projectID'])->fetchAll(PDO::FETCH_ASS
 $response = json_encode($checklists);
 echo $response;                                                   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

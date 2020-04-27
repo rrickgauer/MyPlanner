@@ -6,11 +6,16 @@ body {
   font-weight: bold;
 }
 
+.card-project .card-header {
+  background-color: white;
+  border: none;
+}
 .card-project .card-footer {
   display: flex;
   justify-content: space-between;
   background: white;
   border: none;
+  padding: 5px 0px 0px 0px;
 }
 
 #projects .row {

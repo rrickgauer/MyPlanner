@@ -146,7 +146,7 @@ function setProjectValueNull($value) {
 
 function getProjects($userID) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT id, name, date_due, DATE_FORMAT(date_due, "%c-%d-%Y") AS date_due_display_date, DATE_FORMAT(date_due, "%l:%i %p") AS date_due_display_time, display_index FROM Projects WHERE user_id=:userID ORDER BY display_index');
+  $sql = $pdo->prepare('SELECT Projects.id, Projects.name, Projects.date_due, DATE_FORMAT(Projects.date_due, "%c-%d-%Y") AS date_due_display_date, DATE_FORMAT(Projects.date_due, "%l:%i %p") AS date_due_display_time, Projects.display_index, COUNT(Project_Checklists.id) as count_checklists FROM Projects LEFT JOIN Project_Checklists ON Projects.id=Project_Checklists.project_id WHERE user_id=:userID GROUP BY Projects.id ORDER BY Projects.display_index ');
   $userID = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
   $sql->execute();
@@ -165,7 +165,7 @@ function getProjectCard($id, $name, $dateDue, $time) {
 
 function getProjectInfo($id) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT name, description, date_format(date_created, "%c-%d-%Y") AS date_created, date_format(date_created, "%l:%i %p") AS date_created_time, date_format(date_due, "%c-%d-%Y") AS date_due, date_format(date_due, "%l:%i %p") AS date_due_time FROM Projects WHERE id=:id');
+  $sql = $pdo->prepare('SELECT Projects.name, Projects.description, date_format(Projects.date_created, "%c-%d-%Y") AS date_created, date_format(Projects.date_created, "%l:%i %p") AS date_created_time, date_format(Projects.date_due, "%c-%d-%Y") AS date_due, date_format(Projects.date_due, "%l:%i %p") AS date_due_time FROM Projects WHERE id=:id GROUP BY Projects.id');
 
   $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':id', $id, PDO::PARAM_INT);

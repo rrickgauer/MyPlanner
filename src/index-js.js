@@ -25,6 +25,7 @@ function getUserProjects() {
 
     success: function(response) {
       displayProjects(JSON.parse(response));
+      console.log(JSON.parse(response));
     },
   });
 }
@@ -39,12 +40,17 @@ function displayProjects(data) {
 
   // create html for the project cards
   for (var count = 0; count < data.length; count++) {    
-    const id      = data[count].id;
-    const name    = data[count].name;
-    const dateDue = data[count].date_due_display_date;
-    const timeDue = data[count].timeDue;
+    const id              = data[count].id;
+    const name            = data[count].name;
+    const dateDue         = data[count].date_due_display_date;
+    const timeDue         = data[count].timeDue;
+    const countChecklists = data[count].count_checklists;
 
-    html += getProjectCard(id, name, dateDue, timeDue);
+    if (count % 3 == 0) {
+      // html += '</div><div class="row row-cols-1 row-cols-md-3">';
+    }
+
+    html += getProjectCard(id, name, dateDue, timeDue, countChecklists);
   }
 
   // set the new html
@@ -52,12 +58,13 @@ function displayProjects(data) {
 }
 
 
-function getProjectCard(id, name, dateDue, timeDue) {
+function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
 
   html = '';
   html += '<div class="card card-project" data-project-id="' + id + '">';
+  html += '<div class="card-header"><h5>' + name + '</h5></div>';
   html += '<div class="card-body">';
-  html += '<h5 class="card-title">' + name + '</h5>';
+  html += '<span class="badge badge-secondary">' + countChecklists + '&nbsp;checklists</span>';
   html += '<div class="card-footer">';
   html += '<div class="card-project-date">' + dateDue + '</div>';
   html += '<a href="project.php?projectID=' + id + '">View</a>';

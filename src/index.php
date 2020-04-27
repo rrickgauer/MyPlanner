@@ -24,9 +24,6 @@ $projects = getProjects($_SESSION['userID']);
 
     <!-- project cards go here -->
     <div class="row row-cols-1 row-cols-md-3">
-
-
-
     </div>
   </div>
 

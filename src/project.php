@@ -123,6 +123,8 @@
                 <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
+
+                <!-- project checklist dropdown menu items -->
                 <div class="dropdown-menu">
                   <button class="dropdown-item">Rename</button>
                   <button class="dropdown-item" onclick="deleteChecklist()">Delete</button>

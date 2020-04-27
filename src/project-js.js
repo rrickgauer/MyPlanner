@@ -7,13 +7,10 @@ $(document).ready(function() {
 });
 
 
+// insert a new checklist item
 function addChecklistItem() {
   var content = $("#new-project-checklist-item-input").val();
-  // var checklistID = $("#project-checklist-modal").data("checklist-id");
-
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
-
-  // console.log(checklistID);
 
   $.ajax({
     type: "POST",
@@ -37,15 +34,11 @@ function addChecklistItem() {
 }
 
 
-
-
-
+// opens a checklist modal from the seletced option on the sidebar
 function openProjectChecklist(checklist) {
 
   // get the id of the sidebar item selected
   const checklistID = $(checklist).data("id");
-
-  console.log(checklistID);
 
   // add this id to the modal
   $("#project-checklist-modal").attr('data-checklist-id', checklistID);
@@ -63,12 +56,13 @@ function openProjectChecklist(checklist) {
 }
 
 
+// clears the new checklist input in the modal
 function clearNewChecklistInput() {
   $("#new-checklist-name").val('');
 }
 
 
-
+// retrieves the checklist modal from the server
 function getChecklistItems(checklistID) {
   $.ajax({
     type: "GET",
@@ -82,9 +76,10 @@ function getChecklistItems(checklistID) {
       var data = JSON.parse(response);
       displayChecklistItems(data);
     }
-});
+  });
 }
 
+// displays the retrieved checklist modal
 function displayChecklistItems(data) {
   const size = data.length;
   var html = '';
@@ -98,23 +93,24 @@ function displayChecklistItems(data) {
 
   }
 
-
-  function getChecklistTableRow(id, content) {
+// gets the html to be inserted for a project checklist item row in the modal
+function getChecklistTableRow(id, content) {
   var tr = '';
   tr += '<tr data-project-checklist-item-id="' + id + '">';
   tr += '<td><input type="checkbox"></td>';
   tr += '<td>' + content + '</td>';
   tr += '<td><i class="bx bx-trash"></i></td>';
   tr += '</tr>';
-
   return tr;
 }
 
+// activates the sidebar open or close
 function activateSidebar() {
-$('#sidebar').toggleClass('active');
+  $('#sidebar').toggleClass('active');
 }
 
 
+// creates a new project checklist
 function createChecklist() {
 
   // get the name of the checklist
@@ -139,7 +135,7 @@ function createChecklist() {
   clearNewChecklistInput();
 }
 
-
+// displays the sidebar project checklist data
 function setChecklistSidebar(data) {
   const size = data.length;
   var html = '';
@@ -152,7 +148,7 @@ function setChecklistSidebar(data) {
   $("#sidebar ul").html(html);
 }
 
-
+// retrieves the project checklists from the server
 function getChecklists() {
   $.ajax({
     type: "GET",
@@ -167,64 +163,31 @@ function getChecklists() {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// updates the selected project checklist modal title
 function setProjectChecklistModalTitle(title) {
   $("#project-checklist-modal .modal-title").html(title);
 }
 
+// deletes a checklist
 function deleteChecklist() {
 
-  var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
-  // alert(checklistID);
+  if (confirm('Are you sure you want to delete?')) {
+    var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
 
-  $.ajax({
-    type: "POST",
-    url: 'project-backend.php',
-    data: {
-      "checklistID": checklistID,
-      "projectID": projectID,
-      "action": 'delete',
-    },
+    $.ajax({
+      type: "POST",
+      url: 'project-backend.php',
+      data: {
+        "checklistID": checklistID,
+        "projectID": projectID,
+        "action": 'delete',
+      },
 
-    success: function(response) {
-      getChecklists();
-      $('#project-checklist-modal').modal('hide');
-    }
-  });
-
-
-
+      success: function(response) {
+        getChecklists();
+        $('#project-checklist-modal').modal('hide');
+      }
+    });
+  }
 
 }

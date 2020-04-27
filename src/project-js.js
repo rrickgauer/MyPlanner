@@ -5,6 +5,7 @@ const projectID = urlParams.get('projectID');
 $(document).ready(function() {
   getChecklists();
 
+  // $(".project-checklist-item-checkbox").on("click", checkboxFunction(this));
 
 
 
@@ -87,6 +88,7 @@ function getChecklistItems(checklistID) {
     success: function(response) {
       var data = JSON.parse(response);
       displayChecklistItems(data);
+      console.log(data);
     }
   });
 }
@@ -98,7 +100,7 @@ function displayChecklistItems(data) {
 
   // create new table html
   for (var count = 0; count < size; count++) 
-    html += getChecklistTableRow(data[count].id, data[count].content);
+    html += getChecklistTableRow(data[count].id, data[count].content, data[count].completed);
 
   // set the table to the new html
   $("#project-checklist-modal-items tbody").html(html);
@@ -106,10 +108,21 @@ function displayChecklistItems(data) {
   }
 
 // gets the html to be inserted for a project checklist item row in the modal
-function getChecklistTableRow(id, content) {
+function getChecklistTableRow(id, content, completed) {
   var tr = '';
   tr += '<tr data-project-checklist-item-id="' + id + '">';
-  tr += '<td><input type="checkbox"></td>';
+
+  if (completed == 'y')
+      tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)" checked></td>';
+  else
+      tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
+
+  console.log(completed);
+
+  // tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
+
+
+
   tr += '<td>' + content + '</td>';
   tr += '<td><i class="bx bx-trash" onclick="deleteChecklistItem(' + id + ')"></i></td>';
   tr += '</tr>';
@@ -171,6 +184,7 @@ function getChecklists() {
 
     success: function(response) {
       setChecklistSidebar(JSON.parse(response));
+      // console.log(JSON.parse(response));
     }
   });
 }
@@ -220,6 +234,54 @@ function deleteChecklistItem(checklistItemID) {
   });
 }
 
+
+function updateChecklistItem(checkbox) {
+  
+  var tr = $(checkbox).closest("tr");
+  var id = $(tr).data("project-checklist-item-id");
+
+  if (checkbox.checked)
+    setChecklistItemIncomplete(id);
+  else
+    setChecklistItemComplete(id);
+  
+
+
+}
+
+function setChecklistItemIncomplete(checklistItemID) {
+  var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+  $.ajax({
+    type: "POST",
+    url: 'project-backend.php',
+    data: {
+      "projectChecklistItemID": checklistItemID,
+      "checklistID": checklistID,
+      "action": 'incomplete',
+    },
+
+    success: function(response) {
+      displayChecklistItems(JSON.parse(response));
+    }
+  });
+}
+
+function setChecklistItemComplete(checklistItemID) {
+  var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+  $.ajax({
+    type: "POST",
+    url: 'project-backend.php',
+    data: {
+      "projectChecklistItemID": checklistItemID,
+      "checklistID": checklistID,
+      "action": 'complete',
+    },
+
+    success: function(response) {
+      displayChecklistItems(JSON.parse(response));
+    }
+  });
+}
 
 
 

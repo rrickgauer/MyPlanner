@@ -292,6 +292,22 @@ function deleteProjectChecklistItem($projectChecklistItemID) {
   $sql->execute();
 }
 
+function setProjectChecklistItemComplete($projectChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Project_Checklist_Items SET completed="y" WHERE id=:projectChecklistItemID');
+  $projectChecklistItemID = filter_var($projectChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistItemID', $projectChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
+function setProjectChecklistItemIncomplete($projectChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Project_Checklist_Items SET completed="n" WHERE id=:projectChecklistItemID');
+  $projectChecklistItemID = filter_var($projectChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectChecklistItemID', $projectChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
 
 
 

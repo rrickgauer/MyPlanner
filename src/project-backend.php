@@ -70,6 +70,33 @@ else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && $
   exit;
 }
 
+else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && isset($_POST['checklistID']) && $_POST['action'] == 'incomplete' ) {
+  // get the variables
+  $projectChecklistItemID = $_POST['projectChecklistItemID'];
+  $checklistID = $_POST['checklistID'];
+
+  // delete the project checklist item
+  setProjectChecklistItemIncomplete($projectChecklistItemID);
+
+  // retrieve the new list of items
+  $items = getProjectChecklistItems($checklistID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($items);
+  exit;
+}
+
+else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && isset($_POST['checklistID']) && $_POST['action'] == 'complete' ) {
+  // get the variables
+  $projectChecklistItemID = $_POST['projectChecklistItemID'];
+  $checklistID = $_POST['checklistID'];
+
+  // delete the project checklist item
+  setProjectChecklistItemComplete($projectChecklistItemID);
+
+  // retrieve the new list of items
+  $items = getProjectChecklistItems($checklistID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($items);
+  exit;
+}
 
 
 

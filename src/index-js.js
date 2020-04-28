@@ -1,17 +1,7 @@
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// const projectID = urlParams.get('projectID'); // url parameters
-
 const phpFile = 'index-backend.php';
 
 $(document).ready(function() {
-
-  // get all the projects
-  getUserProjects();
-
-
-
-
+  getUserProjects();  // get all the projects
 });
 
 
@@ -31,10 +21,7 @@ function getUserProjects() {
 }
 
 
-
-
 function displayProjects(data) {
-
   // empty html
   html = '';
 
@@ -46,10 +33,6 @@ function displayProjects(data) {
     const timeDue         = data[count].timeDue;
     const countChecklists = data[count].count_checklists;
 
-    if (count % 3 == 0) {
-      // html += '</div><div class="row row-cols-1 row-cols-md-3">';
-    }
-
     html += getProjectCard(id, name, dateDue, timeDue, countChecklists);
   }
 
@@ -59,7 +42,6 @@ function displayProjects(data) {
 
 
 function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
-
   html = '';
   html += '<div class="card card-project" data-project-id="' + id + '">';
   html += '<div class="card-header"><h5>' + name + '</h5></div>';

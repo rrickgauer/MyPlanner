@@ -124,6 +124,20 @@ function insertProject($userID, $name, $description = NULL, $dateDue = NULL, $da
 
 }
 
+
+// returns the id of the most recently created project by a user
+function getLastCreatedProjectID($userID) {
+
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT id FROM Projects WHERE user_id=:userID ORDER BY id DESC LIMIT 1');
+  $userID = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['id'];
+}
+
 // get the number of projects a user has
 function getProjectCount($userID) {
   $pdo = dbConnect();

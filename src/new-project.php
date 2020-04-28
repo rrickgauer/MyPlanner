@@ -26,10 +26,10 @@ if(isset($_POST['name'])) {
    <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" class="form-control" id="name" name="name" maxlength="50" required autofocus>
-   </div>
+  </div>
 
-   <!-- description -->
-   <div class="form-group">
+  <!-- description -->
+  <div class="form-group">
     <label for="name">Description:</label>
     <textarea class="form-control" rows="5" id="description" name="description"></textarea>
   </div>

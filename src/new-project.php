@@ -1,10 +1,20 @@
+<?php session_start(); ?>
 <?php include('functions.php'); ?>
-<?php include('session.php'); ?>
 
 <?php
-if(isset($_POST['name'])) {
-  insertProject($_SESSION['userID'], $_POST['name'], $_POST['description'], $_POST['date-due']);
+if (isset($_POST['new-project-name'])) {
+  // insert the project
+  insertProject($_SESSION['userID'], $_POST['new-project-name'], $_POST['description'], $_POST['date-due']);
+
+  // get the id of the project just created
+  $projectID = getLastCreatedProjectID($_SESSION['userID']);
+
+  // go to that projects page
+  $url = 'Location: project.php?projectID=' . $projectID;
+  header($url);
+  exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +30,14 @@ if(isset($_POST['name'])) {
  <?php include('navbar.php'); ?>
 
  <div class="container">
+
   <h1>New Project</h1> 
+  
   <form method="post">
    <!-- project name -->
    <div class="form-group">
     <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="name" maxlength="50" required autofocus>
+    <input type="text" class="form-control" id="name" name="new-project-name" maxlength="50" required autofocus>
   </div>
 
   <!-- description -->

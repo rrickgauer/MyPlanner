@@ -14,6 +14,10 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
 <html>
 <head>
   <?php include('header.php'); ?>
+  <!-- flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <title><?php echo $projectInfo['name']; ?></title>
 </head>
 <body>
@@ -93,6 +97,32 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
           </div>
         </div>
       </div>
+
+      <!-- navbar for items and pills -->
+      <ul class="nav nav-pills justify-content-center" id="project-pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#project-pills-items" role="tab">Items</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#project-pills-notes" role="tab">Notes</a>
+        </li>
+      </ul>
+
+      <!-- item and notes content -->
+      <div class="tab-content" id="pills-tabContent">
+        
+        <!-- items section -->
+        <div class="tab-pane fade show active" id="project-pills-items" role="tabpanel">
+          <?php include('project-section-items.php'); ?>
+        </div>
+        
+
+        <!-- notes section -->
+        <div class="tab-pane fade" id="project-pills-notes" role="tabpanel">
+          <h5>Notes</h5>
+        </div>
+      </div>
+
 
     </div>
 

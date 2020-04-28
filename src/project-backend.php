@@ -101,25 +101,4 @@ else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && i
   echo json_encode($items);
   exit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

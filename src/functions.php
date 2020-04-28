@@ -344,6 +344,41 @@ function deleteProject($projectID) {
   $sql->execute();
 }
 
+function insertItem($projectID, $name, $description) {
+
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('INSERT INTO Items (project_id, name, description, date_created, display_index) VALUES (:projectID, :name, :description, NOW(), :displayIndex)');
+
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+
+  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+
+  $description = filter_var($description, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':description', $description, PDO::PARAM_STR);
+
+  $displayIndex = getProjectItemCount($projectID) + 1;
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+  $sql->execute();
+
+  $sql = NULL;
+  $pdo = NULL;
+}
+
+function getProjectItemCount($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) AS count FROM Items WHERE project_id=:projectID');
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
 
 
 

@@ -303,6 +303,35 @@ function updateNewChecklistButton() {
 
 
 
+function newProjectItem() {
+  const itemName = $("#new-item-name").val();
+  const itemDescription = $("#new-item-description").val();
+
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'insert-item',
+      "projectID": projectID,
+      "name": itemName,
+      "description": itemDescription,
+    },
+
+    success: function(response) {
+      // console.log(JSON.parse(response));
+      console.log(response);
+    }
+  });
+
+
+
+
+
+
+
+
+}
+
 
 
 

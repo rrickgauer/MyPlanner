@@ -130,4 +130,32 @@ body {
   background: #efecec;
 }
 
+.dropdown-form {
+  padding: 10px;
+}
+
+#items-deck .item-card .card-header {
+  background: #e5b622;
+  display: flex;
+  justify-content: space-between;
+}
+#items-deck .item-card .card-header .left .date-created {
+  font-size: 0.7em;
+  color: #585858;
+}
+#items-deck .item-card .card-header .left h5 {
+  line-height: 20px;
+}
+#items-deck .item-card .card-header .right i {
+  font-weight: bold;
+  font-size: 2em;
+  color: green;
+}
+#items-deck .item-card .card-header .right i.hidden {
+  display: none;
+}
+#items-deck .item-card .item-card-stats .card {
+  margin: 2px;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

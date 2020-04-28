@@ -163,6 +163,51 @@ body {
   }
 }
 
+.dropdown-form {
+  padding: 10px;
+}
+
+#items-deck {
+  .item-card {
+    .card-header {
+      background: $base-color-yellow;
+      display: flex;
+      justify-content: space-between;
+
+      .left {
+        .date-created {
+          font-size: .7em;
+          color: #585858;
+        }
+
+        h5 {
+          line-height: 20px;
+        }
+      }
+
+      .right {
+        i {
+          font-weight: bold;
+          font-size: 2em;
+          color: green;
+        }
+
+        i.hidden {
+          display: none;
+        }
+      }
+    }
+
+    .item-card-stats {
+      .card {
+        margin: 2px;
+      }
+    }
+  }
+
+}
+
+
 
 
 

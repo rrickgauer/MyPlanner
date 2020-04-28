@@ -1,18 +1,26 @@
+// variables
+$base-color-yellow: #e5b622;
+$base-color-grey: #efecec;
+$base-color-red: #bf3e43;
+
+$base-color-yellow-hover: #f1d98b;
+
+
+.custom-font {
+  font-family: 'Fredoka One', cursive;
+}
+
 body {
-  // background-color: #FFF6F4;
+  background-color: $base-color-grey; 
 }
 
 .form-group {
   label {
     font-weight: bold;
   }
-
 }
 
 .card-project {
-
-
-  
   .card-header {
     background-color: white;
     border: none; 
@@ -40,6 +48,7 @@ body {
   display: flex;
   width: 100%;
   align-items: stretch;
+  margin-top: 3px;
 }
 
 #sidebar {
@@ -47,7 +56,7 @@ body {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
-  background: #7386D5;
+  background: $base-color-red;
   color: #fff;
   margin-right: 10px;
 
@@ -58,25 +67,25 @@ body {
 
     li {
       margin-left: none;
+      padding: 5px;
+      font-size: 1.1em;
+      display: block;
+      text-decoration: none;
+      color: white;
+    }
 
-      a {
-        padding: 10px;
-        font-size: 1.1em;
-        display: block;
-        text-decoration: none;
-        color: white;
-      }
-
-      a:hover {
-        color: #7386D5;
-        background: #fff;
-      }
+    li:hover {
+      color: black;
+      background: #d3787c;
+      cursor: pointer;
     }
   }
 
   .sidebar-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 5px;
 
     i {
       font-size: 1.5em;
@@ -92,9 +101,8 @@ body {
 
 #content {
   width: 100%;
+  margin: 5px;
 }
-
-
 
 .project-info {
   width: 100%;
@@ -115,15 +123,44 @@ body {
 
 .pointer {cursor: pointer;}
 
-.completed {
-  text-decoration: line-through;
-}
+.completed {text-decoration: line-through;}
 
 .project-buttons {
-  
   display: flex;
-  justify-content: space-between;
 
-
+  button {
+    margin: 0px 3px 0px 3px;
+  }
 }
+
+#navbar {
+  background: $base-color-yellow;
+  margin-bottom: 10px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+
+  a:hover {
+    background: $base-color-yellow-hover;
+  }
+}
+
+.modal {
+
+  .modal-header {
+    background: $base-color-yellow;
+  }
+
+  .modal-body {
+    background: $base-color-grey;
+  }
+}
+
+
+
+
+
 

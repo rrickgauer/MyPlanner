@@ -117,7 +117,7 @@ function getChecklistTableRow(id, content, completed) {
     tr += '<td>' + content + '</td>';
   }
 
-  tr += '<td><i class="bx bx-trash" onclick="deleteChecklistItem(' + id + ')"></i></td>';
+  tr += '<td><i class="bx bx-trash pointer" onclick="deleteChecklistItem(' + id + ')"></i></td>';
   tr += '</tr>';
   return tr;
 }

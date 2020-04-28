@@ -8,9 +8,7 @@ if (isset($_POST['new-project-name']))
 
 // load the project info
 $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC); 
-
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -33,20 +31,20 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
       
       <!-- checklists -->
       <ul>
-        
+
       </ul>
     </nav>
 
     <div id="content">
-  
+
       <div class="project-buttons">
-        
+
         <!-- checklist sidebar -->
-        <button type="button" class="btn btn-primary" onclick="activateSidebar()"><i class='bx bx-menu'></i></button>
+        <button type="button" class="btn btn-secondary" onclick="activateSidebar()"><i class='bx bx-menu'></i></button>
 
         <!-- project settings -->
-        <div class="dropleft">
-          <button class="btn btn-primary" type="button" data-toggle="dropdown"><i class='bx bx-cog'></i></button>
+        <div class="dropdown">
+          <button class="btn btn-secondary" type="button" data-toggle="dropdown"><i class='bx bx-cog'></i></button>
           <div class="dropdown-menu">
             <button class="dropdown-item" type="button" data-toggle="modal" data-target="#rename-project-modal">Rename</button>
             <button class="dropdown-item" type="button" onclick="deleteProject()">Delete</button>
@@ -59,7 +57,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
       <div class="project-info">
 
         <!-- name -->
-        <h1><?php echo $projectInfo['name']; ?></h1>
+        <h1 class="custom-font"><?php echo $projectInfo['name']; ?></h1>
 
         <div class="row">
 
@@ -101,9 +99,9 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
   </div>
 
   <div class="modals">
-    
+
     <!-- new checklist -->
-    <div class="modal" id="new-checklist-modal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal" id="new-checklist-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -139,10 +137,10 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
           </div>
 
           <div class="modal-body">
-            
+
             <!-- add item input group -->
             <div class="input-group">
-              <input type="text" id="new-project-checklist-item-input" class="form-control" placeholder="Checklist item">
+              <input type="text" id="new-project-checklist-item-input" class="form-control" placeholder="Add item">
               <div class="input-group-append">
                 <button type="button" class="btn btn-outline-secondary" onclick="addChecklistItem()"><i class='bx bx-plus'></i></button>
                 <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -158,7 +156,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             </div>
 
             <br>
-
 
             <!-- checklist items -->
             <table class="table" id="project-checklist-modal-items">
@@ -194,7 +191,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
               <!-- submit button -->
               <input id="new-project-name-btn" type="submit" value="Save" class="btn btn-primary float-right" disabled>
             </form>
-
           </div>
         </div>
       </div>

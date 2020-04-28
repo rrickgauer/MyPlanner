@@ -1,3 +1,11 @@
+.custom-font {
+  font-family: "Fredoka One", cursive;
+}
+
+body {
+  background-color: #efecec;
+}
+
 .form-group label {
   font-weight: bold;
 }
@@ -22,6 +30,7 @@
   display: flex;
   width: 100%;
   align-items: stretch;
+  margin-top: 3px;
 }
 
 #sidebar {
@@ -29,7 +38,7 @@
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
-  background: #7386D5;
+  background: #bf3e43;
   color: #fff;
   margin-right: 10px;
 }
@@ -40,21 +49,22 @@
 }
 #sidebar ul li {
   margin-left: none;
-}
-#sidebar ul li a {
-  padding: 10px;
+  padding: 5px;
   font-size: 1.1em;
   display: block;
   text-decoration: none;
   color: white;
 }
-#sidebar ul li a:hover {
-  color: #7386D5;
-  background: #fff;
+#sidebar ul li:hover {
+  color: black;
+  background: #d3787c;
+  cursor: pointer;
 }
 #sidebar .sidebar-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 5px;
 }
 #sidebar .sidebar-header i {
   font-size: 1.5em;
@@ -66,6 +76,7 @@
 
 #content {
   width: 100%;
+  margin: 5px;
 }
 
 .project-info {
@@ -91,7 +102,29 @@
 
 .project-buttons {
   display: flex;
-  justify-content: space-between;
+}
+.project-buttons button {
+  margin: 0px 3px 0px 3px;
+}
+
+#navbar {
+  background: #e5b622;
+  margin-bottom: 10px;
+}
+#navbar a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+#navbar a:hover {
+  background: #f1d98b;
+}
+
+.modal .modal-header {
+  background: #e5b622;
+}
+.modal .modal-body {
+  background: #efecec;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

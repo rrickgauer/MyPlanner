@@ -25,7 +25,7 @@ if(isset($_POST['name'])) {
    <!-- project name -->
    <div class="form-group">
     <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="name" required autofocus>
+    <input type="text" class="form-control" id="name" name="name" maxlength="50" required autofocus>
    </div>
 
    <!-- description -->

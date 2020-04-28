@@ -188,7 +188,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
               <!-- new project name input -->
               <div class="form-group">
                 <label for="project-name">New project name:</label>
-                <input type="text" class="form-control" name="new-project-name" id="new-project-name">
+                <input type="text" class="form-control" name="new-project-name" id="new-project-name" maxlength="50">
               </div>
 
               <!-- submit button -->

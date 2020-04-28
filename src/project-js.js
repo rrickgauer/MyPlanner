@@ -4,6 +4,8 @@ const projectID = urlParams.get('projectID');
 
 $(document).ready(function() {
   getChecklists();
+  $("#new-project-name").on("keyup", updateRenameProjectButton);
+  $("#new-checklist-name").on("keyup", updateNewChecklistButton);
 });
 
 // executes addTodoItem when enter is pressed
@@ -273,6 +275,26 @@ function setChecklistItemComplete(checklistItemID) {
 function deleteProject() {
   if (confirm('Are you sure you want to delete this project?'))
     window.location.href = 'delete-project.php?projectID=' + projectID;
+}
+
+function updateRenameProjectButton() {
+  var newProjectName = $("#new-project-name").val();
+
+  if (newProjectName.length > 0) {
+    $("#new-project-name-btn").prop('disabled', false);
+  } else {
+    $("#new-project-name-btn").prop('disabled', true);
+  }
+}
+
+function updateNewChecklistButton() {
+  var newChecklistName = $("#new-checklist-name").val();
+
+  if (newChecklistName.length > 0) {
+    $("#new-checklist-modal-btn").prop('disabled', false);
+  } else {
+    $("#new-checklist-modal-btn").prop('disabled', true);
+  }
 }
 
 

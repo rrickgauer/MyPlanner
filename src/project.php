@@ -119,7 +119,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
                 <label>Name:</label>
                 <input type="text" class="form-control" id="new-checklist-name" name="new-checklist-name">
               </div>
-              <button type="button" class="btn btn-primary float-right" onclick="createChecklist()">Create checklist</button>
+              <button type="button" id="new-checklist-modal-btn" class="btn btn-primary float-right" onclick="createChecklist()" disabled>Create checklist</button>
             </form>
             
           </div>
@@ -192,7 +192,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
               </div>
 
               <!-- submit button -->
-              <input type="submit" value="Save" class="btn btn-primary float-right">
+              <input id="new-project-name-btn" type="submit" value="Save" class="btn btn-primary float-right" disabled>
             </form>
 
           </div>

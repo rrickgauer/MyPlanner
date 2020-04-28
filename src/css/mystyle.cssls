@@ -54,9 +54,6 @@ body {
   display: block;
   text-decoration: none;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 #sidebar ul li:hover {
   color: black;
@@ -130,4 +127,4 @@ body {
   background: #efecec;
 }
 
-/*# sourceMappingURL=mystyle.css.map */
+/*# sourceMappingURL=mystyle.cssls.map */

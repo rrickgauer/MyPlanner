@@ -72,6 +72,10 @@ body {
       display: block;
       text-decoration: none;
       color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
     }
 
     li:hover {

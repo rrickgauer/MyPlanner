@@ -159,8 +159,11 @@ function setChecklistSidebar(data) {
   var html = '';
 
   // create html to insert into the sidebar
-  for (var count = 0; count < size; count++) 
-    html += '<li onclick="openProjectChecklist(this)" data-id="' + data[count].id + '">' + data[count].name + '</a></li>';
+  for (var count = 0; count < size; count++)  {
+    html += '<li onclick="openProjectChecklist(this)" data-id="' + data[count].id + '">' + data[count].name;    
+    html += '<span class="badge badge-secondary">' + data[count].itemCount + '</span>';
+    html += '</li>';
+  }
 
   // set the html
   $("#sidebar ul").html(html);
@@ -177,7 +180,6 @@ function getChecklists() {
 
     success: function(response) {
       setChecklistSidebar(JSON.parse(response));
-      // console.log(JSON.parse(response));
     }
   });
 }

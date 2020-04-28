@@ -214,7 +214,7 @@ function getProjectChecklistCount($projectID) {
 
 function getProjectChecklists($projectID) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT * FROM Project_Checklists WHERE project_id=:projectID');
+  $sql = $pdo->prepare('SELECT Project_Checklists.id, Project_Checklists.name, Project_Checklists.display_index, COUNT(Project_Checklist_Items.id) as itemCount FROM Project_Checklists LEFT JOIN Project_Checklist_Items ON Project_Checklists.id=Project_Checklist_Items.project_checklist_id WHERE project_id=:projectID GROUP BY Project_Checklists.id');
   $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
   $sql->execute();

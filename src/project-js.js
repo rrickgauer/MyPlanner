@@ -317,7 +317,7 @@ function newProjectItem() {
 
     success: function(response) {
       // console.log(JSON.parse(response));
-      console.log(response);
+      // console.log(response);
     }
   });
 }
@@ -333,7 +333,7 @@ function getProjectItems() {
     },
 
     success: function(response) {
-      console.log(JSON.parse(response));
+      // console.log(JSON.parse(response));
       // console.log(response);
       displayProjectItems(JSON.parse(response));
     }
@@ -406,9 +406,8 @@ function getProjectItemCardHTML(item) {
   html += '<div class="card-footer">';
 
   // activate item modal
-  html += '<button type="button" class="btn btn-primary float-right">View</button>';
+  html += '<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#item-modal" onclick="openItemModal(' + item.id + ')">View</button>';
   html += '</div>';
-
 
   html += '</div></div>';
 
@@ -416,6 +415,16 @@ function getProjectItemCardHTML(item) {
 
 }
 
+function openItemModal(itemID) {
+  // set the current modal to the item id
+  $("#item-modal").attr("data-item-id", itemID);
+
+  
+
+
+
+
+}
 
 
 

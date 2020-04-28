@@ -70,6 +70,8 @@ else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && $
   exit;
 }
 
+
+// set project checklist item to incomplete
 else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && isset($_POST['checklistID']) && $_POST['action'] == 'incomplete' ) {
   // get the variables
   $projectChecklistItemID = $_POST['projectChecklistItemID'];
@@ -84,6 +86,8 @@ else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && i
   exit;
 }
 
+
+// set project checklist item to complete
 else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && isset($_POST['checklistID']) && $_POST['action'] == 'complete' ) {
   // get the variables
   $projectChecklistItemID = $_POST['projectChecklistItemID'];

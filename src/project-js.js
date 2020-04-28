@@ -88,7 +88,7 @@ function getChecklistItems(checklistID) {
     success: function(response) {
       var data = JSON.parse(response);
       displayChecklistItems(data);
-      console.log(data);
+      // console.log(data);
     }
   });
 }
@@ -117,7 +117,7 @@ function getChecklistTableRow(id, content, completed) {
   else
       tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
 
-  console.log(completed);
+  // console.log(completed);
 
   // tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
 
@@ -236,17 +236,13 @@ function deleteChecklistItem(checklistItemID) {
 
 
 function updateChecklistItem(checkbox) {
-  
   var tr = $(checkbox).closest("tr");
   var id = $(tr).data("project-checklist-item-id");
 
   if (checkbox.checked)
-    setChecklistItemIncomplete(id);
-  else
     setChecklistItemComplete(id);
-  
-
-
+  else
+    setChecklistItemIncomplete(id);
 }
 
 function setChecklistItemIncomplete(checklistItemID) {

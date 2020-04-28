@@ -380,18 +380,32 @@ function getProjectItemCount($projectID) {
 }
 
 
+/******************************************************************
+  returns:
+  
+    id
+    name
+    date_created
+    date_due
+    completed
+    display_index
+    count_checklists
+    count_notes
+    date_due_date
+    date_created_date
+    date_created_time
 
+********************************************************************/
+function getProjectItems($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT Items.id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, count(Item_Checklists.id) as count_checklists, count(Item_Notes.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID GROUP by Items.id');
 
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
 
+  return $sql;
 
-
-
-
-
-
-
-
-
-
+}
 
 ?>

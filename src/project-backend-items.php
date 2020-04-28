@@ -17,11 +17,11 @@ if (isset($_POST['function']) && $_POST['function'] == 'insert-item' && isset($_
   exit;
 }
 
-
-
-
-
-
-
-
+// return all the project items
+else if (isset($_GET['function']) && $_GET['function'] == 'get-items' && isset($_GET['projectID'])) {
+  $projectID = $_GET['projectID'];
+  $items = getProjectItems($projectID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($items);
+  exit;
+}
 ?>

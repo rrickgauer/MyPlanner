@@ -4,6 +4,7 @@ const projectID = urlParams.get('projectID');
 
 $(document).ready(function() {
   getChecklists();
+  getProjectItems();
   $("#new-project-name").on("keyup", updateRenameProjectButton);
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
 });
@@ -300,9 +301,6 @@ function updateNewChecklistButton() {
 }
 
 
-
-
-
 function newProjectItem() {
   const itemName = $("#new-item-name").val();
   const itemDescription = $("#new-item-description").val();
@@ -322,16 +320,101 @@ function newProjectItem() {
       console.log(response);
     }
   });
-
-
-
-
-
-
-
-
 }
 
+
+function getProjectItems() {
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-items',
+      "projectID": projectID,
+    },
+
+    success: function(response) {
+      console.log(JSON.parse(response));
+      // console.log(response);
+      displayProjectItems(JSON.parse(response));
+    }
+  });
+}
+
+function displayProjectItems(data) {
+
+  const size = data.length;
+
+  var html = '';
+
+  for (var count = 0; count < size; count++) {
+    html += getProjectItemCardHTML(data[count]);
+  }
+
+  $("#items-deck").html(html);
+}
+
+
+function getProjectItemCardHTML(item) {
+
+  html = '';
+
+  // main card
+  html += '<div class="col"><div class="card item-card" data-item-id="' + item.id + '">';
+
+  // card header
+  html += '<div class="card-header"><div class="left">';
+  html += '<h5>' + item.name + '</h5>';
+  html += '<div class="date-created">' + item.date_created_date + ' &bull; ' + item.date_created_time + '</div></div>';
+
+  // card header right side
+  html += '<div class="right">';
+  if (item.completed == 'y')
+    html += '<i class="bx bx-check-circle"></i>';
+  else 
+    html += '<i class="bx bx-check-circle hidden"></i>';
+  html += '</div></div>';
+
+  // card body
+  html += '<div class="card-body item-card-stats"><div class="row">';  
+
+  // date due
+  if (item.date_due != null) {
+    html += '<div class="card"><div class="card-body">';
+    html += 'Date due: ' + item.date_due_date;
+    html += '</div></div>';
+  }
+
+  // checklists count
+  html += '<div class="card"><div class="card-body">';
+  html += item.count_checklists + ' checklists';
+  html += '</div></div>';
+
+  // notes count
+  html += '<div class="card"><div class="card-body">';
+  html += item.count_notes + ' notes';
+  html += '</div></div>';
+
+  // labels
+  html += '<div class="card"><div class="card-body">';
+  html += 'labels';
+  html += '</div></div>';
+
+  html += '</div></div>';
+
+
+  // card footer
+  html += '<div class="card-footer">';
+
+  // activate item modal
+  html += '<button type="button" class="btn btn-primary float-right">View</button>';
+  html += '</div>';
+
+
+  html += '</div></div>';
+
+  return html;
+
+}
 
 
 

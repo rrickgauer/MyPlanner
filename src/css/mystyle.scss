@@ -1,5 +1,5 @@
 body {
-  background-color: #FFF6F4;
+  // background-color: #FFF6F4;
 }
 
 .form-group {
@@ -114,4 +114,16 @@ body {
 }
 
 .pointer {cursor: pointer;}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.project-buttons {
+  
+  display: flex;
+  justify-content: space-between;
+
+
+}
 

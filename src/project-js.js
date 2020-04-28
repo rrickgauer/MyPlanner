@@ -4,11 +4,6 @@ const projectID = urlParams.get('projectID');
 
 $(document).ready(function() {
   getChecklists();
-
-  // $(".project-checklist-item-checkbox").on("click", checkboxFunction(this));
-
-
-
 });
 
 // executes addTodoItem when enter is pressed
@@ -65,9 +60,7 @@ function openProjectChecklist(checklist) {
 
   // show the checklist
   $('#project-checklist-modal').modal('show');
-
 }
-
 
 // clears the new checklist input in the modal
 function clearNewChecklistInput() {
@@ -112,18 +105,16 @@ function getChecklistTableRow(id, content, completed) {
   var tr = '';
   tr += '<tr data-project-checklist-item-id="' + id + '">';
 
-  if (completed == 'y')
-      tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)" checked></td>';
-  else
-      tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
+  if (completed == 'y') {
+    tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)" checked></td>';
+    tr += '<td><span class="completed">' + content + '</span></td>';
+  }
 
-  // console.log(completed);
+  else {
+    tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
+    tr += '<td>' + content + '</td>';
+  }
 
-  // tr += '<td><input type="checkbox" class="project-checklist-item-checkbox" onclick="updateChecklistItem(this)"></td>';
-
-
-
-  tr += '<td>' + content + '</td>';
   tr += '<td><i class="bx bx-trash" onclick="deleteChecklistItem(' + id + ')"></i></td>';
   tr += '</tr>';
   return tr;
@@ -277,6 +268,11 @@ function setChecklistItemComplete(checklistItemID) {
       displayChecklistItems(JSON.parse(response));
     }
   });
+}
+
+function deleteProject() {
+  if (confirm('Are you sure you want to delete this project?'))
+    window.location.href = 'delete-project.php?projectID=' + projectID;
 }
 
 

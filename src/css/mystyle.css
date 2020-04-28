@@ -1,7 +1,3 @@
-body {
-  background-color: #FFF6F4;
-}
-
 .form-group label {
   font-weight: bold;
 }
@@ -87,6 +83,15 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.project-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

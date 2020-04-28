@@ -308,6 +308,28 @@ function setProjectChecklistItemIncomplete($projectChecklistItemID) {
   $sql->execute();
 }
 
+function updateProjectName($projectID, $name) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Projects SET name=:name WHERE id=:projectID');
+
+
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+
+  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+
+  $sql->execute();
+}
+
+function deleteProject($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('DELETE FROM Projects WHERE id=:projectID');
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
 
 
 

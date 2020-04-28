@@ -1,6 +1,15 @@
-<?php include('functions.php'); ?>
-<?php include('session.php'); ?>
-<?php $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC); ?>
+<?php 
+include('functions.php'); 
+include('session.php'); 
+
+// update the project name
+if (isset($_POST['new-project-name'])) 
+  updateProjectName($_GET['projectID'], $_POST['new-project-name']);
+
+// load the project info
+$projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC); 
+
+?>
 
 
 <!DOCTYPE html>
@@ -29,7 +38,23 @@
     </nav>
 
     <div id="content">
-      <button type="button" class="btn btn-primary" onclick="activateSidebar()">View checklists</button>
+  
+      <div class="project-buttons">
+        
+        <!-- checklist sidebar -->
+        <button type="button" class="btn btn-primary" onclick="activateSidebar()"><i class='bx bx-menu'></i></button>
+
+        <!-- project settings -->
+        <div class="dropleft">
+          <button class="btn btn-primary" type="button" data-toggle="dropdown"><i class='bx bx-cog'></i></button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#rename-project-modal">Rename</button>
+            <button class="dropdown-item" type="button" onclick="deleteProject()">Delete</button>
+          </div>
+        </div>
+
+      </div>
+
 
       <div class="project-info">
 
@@ -141,6 +166,34 @@
               </tbody>
             </table>
 
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- rename project -->
+    <div class="modal fade" id="rename-project-modal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Rename project</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form method="post">
+              <!-- new project name input -->
+              <div class="form-group">
+                <label for="project-name">New project name:</label>
+                <input type="text" class="form-control" name="new-project-name" id="new-project-name">
+              </div>
+
+              <!-- submit button -->
+              <input type="submit" value="Save" class="btn btn-primary float-right">
+            </form>
 
           </div>
         </div>

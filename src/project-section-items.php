@@ -47,23 +47,23 @@
 
       <div class="modal-body">
 
-        <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills justify-content-center" role="tablist">
 
           <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab">Checklists</a>
+            <a class="nav-link active" id="item-pills-checklists-tab" data-toggle="pill" href="#pills-home" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab">Notes</a>
+            <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#pills-profile" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab">Info</a>
+            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#pills-info" role="tab">Info</a>
           </li>
         </ul>
 
 
 
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="item-pills-checklists" role="tabpanel">
 
             <br>
 
@@ -77,6 +77,10 @@
 
                 <ul class="nav nav-pills flex-column">
 
+
+
+
+
                   <li class="nav-item dropright">
                     <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
                     <div class="dropdown-menu">
@@ -89,6 +93,54 @@
                       <button class="dropdown-item" type="button">Delete</button>
                     </div>
                   </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                   <li class="nav-item dropright">
                     <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
@@ -217,28 +269,16 @@
           </div>
 
 
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel">
+          <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
             profile
           </div>
 
 
-          <div class="tab-pane fade" id="pills-info" role="tabpanel">
+          <div class="tab-pane fade" id="item-pills-info" role="tabpanel">
             info part
           </div>
 
         </div>
-
-
-
-        
-
-
-
-
-
-
-
-
 
       </div>
       

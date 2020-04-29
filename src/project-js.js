@@ -434,6 +434,8 @@ function openItemModal(itemID) {
       var item = JSON.parse(response);
       setItemModalData(item[0]);
 
+      getItemChecklistSidebar(itemID);
+
       $('#item-modal').modal('show');
     }
   });
@@ -477,6 +479,27 @@ function addProjectChecklist() {
     }
   });
 }
+
+
+// populate the item modal checklist sidebar 
+function getItemChecklistSidebar(itemID) {
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-item-checklists',
+      "itemID": itemID,
+    },
+
+    success: function(response) {
+      var checklists = JSON.parse(response);
+      setItemChecklistSidebar(checklists);
+    }
+  });
+}
+
+
+
 
 function setItemChecklistSidebar(checklists) {
   var html = '';

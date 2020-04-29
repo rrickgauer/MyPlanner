@@ -39,19 +39,29 @@ else if (isset($_GET['itemID']) && isset($_GET['function']) && $_GET['function']
 }
 
 else if (isset($_POST['itemID'], $_POST['function'], $_POST['checklistName']) && $_POST['function'] == 'insert-item-checklist') {
+
+  // set variables
   $itemID = $_POST['itemID'];
   $checklistName = $_POST['checklistName'];
 
+  // insert the new checklist into the database
   insertItemChecklist($itemID, $checklistName);
 
-
-  // send all the checklists
+  // retrieve the new item checklists data
   $itemChecklists = getItemChecklists($itemID)->fetchAll(PDO::FETCH_ASSOC);
 
+  // return the checklists
   echo json_encode($itemChecklists);
   exit;
 }
 
+// client requests an item's checklists
+else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-item-checklists') {
+  $itemID = $_GET['itemID'];
+  $checklists = getItemChecklists($itemID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($checklists);
+  exit;
+}
 
 
 

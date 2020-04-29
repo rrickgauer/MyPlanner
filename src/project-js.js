@@ -411,8 +411,10 @@ function newProjectItem() {
     success: function(response) {
       console.log(JSON.parse(response));
 
-      item = JSON.parse(response);
+      var item = JSON.parse(response);
       setItemModalData(item[0]);
+      getItemChecklistSidebar(item[0].id);
+      getProjectItems();
 
       // display the modal
       $('#item-modal').modal('show');

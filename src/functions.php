@@ -473,7 +473,15 @@ function getItemChecklistItems($itemChecklistID) {
   $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
   $sql->execute();
   return $sql;
+}
 
+function getItemChecklist($itemChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Item_Checklists WHERE id=:itemChecklistID LIMIT 1');
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+  $sql->execute();
+  return $sql;
 }
 
 

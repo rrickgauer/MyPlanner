@@ -543,8 +543,6 @@ function getItemChecklistSidebarHtml(checklist) {
 }
 
 
-
-
 function openItemChecklist(itemChecklistID) {
 
   $.ajax({
@@ -556,25 +554,22 @@ function openItemChecklist(itemChecklistID) {
     },
 
     success: function(response) {
-      console.log(JSON.parse(response));
-
       var html = getItemChecklistCardHtml(JSON.parse(response));
       $("#item-checklists").append(html);
-
     }
   });
 
 }
 
 
-
 function getItemChecklistCardHtml(data) {
+  var checklistData = data['Item_Checklists'];
+  var items = data['Item_Checklist_Items'];
 
   var html = '';
-
-  html += '<div class="card item-checklist">';
+  html += '<div class="card item-checklist" data-item-checklist-id="' + checklistData.id + '">';
   html += '<div class="card-header">';
-  html += '<h6>Checklist name</h6>';
+  html += '<h6>' + checklistData.name + '</h6>';
   html += '<div class="dropdown">';
   html += '<button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i></button>';
   html += '<div class="dropdown-menu">';
@@ -594,8 +589,8 @@ function getItemChecklistCardHtml(data) {
   html += '<ul class="list-group list-group-flush">';
 
   // get the html for the checklist items
-  for (var count = 0; count < data.length; count++) {
-    html += getItemChecklistCardBodyHtml(data[count]);
+  for (var count = 0; count < items.length; count++) {
+    html += getItemChecklistCardBodyHtml(items[count]);
   }
 
   html += '</ul>';

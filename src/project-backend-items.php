@@ -66,8 +66,20 @@ else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-
 // return all the items in an item checklist
 else if (isset($_GET['itemChecklistID'], $_GET['function']) && $_GET['function'] == 'get-item-checklist-items') {
   $itemChecklistID = $_GET['itemChecklistID'];
-  $itemChecklistItems = getItemChecklistItems($itemChecklistID)->fetchAll(PDO::FETCH_ASSOC);
-  echo json_encode($itemChecklistItems);
+
+
+  // $itemChecklistItems = getItemChecklistItems($itemChecklistID)->fetchAll(PDO::FETCH_ASSOC);
+
+  // $itemChecklist = getItemChecklist($itemChecklistID)->fetch(PDO::FETCH_ASSOC);
+
+  // $data = array_merge($itemChecklist, $itemChecklistItems);
+
+  $data = [];
+
+  $data['Item_Checklists'] = getItemChecklist($itemChecklistID)->fetch(PDO::FETCH_ASSOC);
+  $data['Item_Checklist_Items'] = getItemChecklistItems($itemChecklistID)->fetchAll(PDO::FETCH_ASSOC);
+
+  echo json_encode($data);
   exit;
 }
 

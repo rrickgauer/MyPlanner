@@ -464,6 +464,15 @@ function getItemChecklists($itemID) {
   $sql->execute();
 
   return $sql;
+}
+
+function getItemChecklistItems($itemChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT Item_Checklist_Items.id, Item_Checklist_Items.item_checklist_id, Item_Checklist_Items.content, Item_Checklist_Items.completed, Item_Checklist_Items.display_index FROM Item_Checklist_Items WHERE Item_Checklist_Items.item_checklist_id=:itemChecklistID ORDER BY Item_Checklist_Items.display_index ASC');
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+  $sql->execute();
+  return $sql;
 
 }
 

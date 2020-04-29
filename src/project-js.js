@@ -10,6 +10,13 @@ $(document).ready(function() {
 
   $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
   $("#new-project-checklist-btn").on("click", addProjectChecklist);
+
+
+
+
+  // $("#item-modal").modal('show');
+
+
 });
 
 // executes addTodoItem when enter is pressed
@@ -520,10 +527,9 @@ function setItemChecklistSidebar(checklists) {
 function getItemChecklistSidebarHtml(checklist) {
   html = '';
   html += '<li class="nav-item dropright" data-item-checklist-id="' + checklist.id + '">';
-  html += '<a class="nav-link" data-toggle="dropdown" href="#" role="button">';
-  html += checklist.name + '</a>';
+  html += '<a class="nav-link" data-toggle="dropdown" href="#" role="button">' + checklist.name + '</a>';
   html += '<div class="dropdown-menu">';
-  html += '<button class="dropdown-item" type="button">Open</button>';
+  html += '<button class="dropdown-item" type="button" onclick="openItemChecklist(' + checklist.id + ')">Open</button>';
   html += '<button class="dropdown-item" type="button">Close</button>';
   html += '<div class="dropdown-divider"></div>';
   html += '<button class="dropdown-item" type="button">Move up</button>';
@@ -537,6 +543,120 @@ function getItemChecklistSidebarHtml(checklist) {
 }
 
 
+
+
+function openItemChecklist(itemChecklistID) {
+
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-item-checklist-items',
+      "itemChecklistID": itemChecklistID,
+    },
+
+    success: function(response) {
+      console.log(JSON.parse(response));
+
+      var html = getItemChecklistCardHtml(JSON.parse(response));
+      $("#item-checklists").append(html);
+
+    }
+  });
+
+}
+
+
+
+function getItemChecklistCardHtml(data) {
+
+  var html = '';
+
+  html += '<div class="card item-checklist">';
+  html += '<div class="card-header">';
+  html += '<h6>Checklist name</h6>';
+  html += '<div class="dropdown">';
+  html += '<button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i></button>';
+  html += '<div class="dropdown-menu">';
+  html += '<a class="dropdown-item" href="#">Close</a>';
+  html += '<a class="dropdown-item" href="#">Rename</a>';
+  html += '<a class="dropdown-item" href="#">Mark all incomplete</a>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div class="card-body">';
+  html += '<div class="input-group mb-3">';
+  html += '<input type="text" class="form-control">';
+  html += '<div class="input-group-append">';
+  html += '<button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>';
+  html += '</div>';
+  html += '</div>';
+  html += '<ul class="list-group list-group-flush">';
+
+  // get the html for the checklist items
+  for (var count = 0; count < data.length; count++) {
+    html += getItemChecklistCardBodyHtml(data[count]);
+  }
+
+  html += '</ul>';
+  html += '</div>';
+  html += '</div>';
+
+  return html;
+}
+
+
+function getItemChecklistCardBodyHtml(itemChecklistItem) {
+
+  var html = '';
+
+
+  html += '<li class="list-group-item" data-item-checklist-item-id="' + itemChecklistItem.id + '">';
+  
+  // left portion: checkbox and content
+  html += '<div class="left">';
+
+  // item is completed
+  if (itemChecklistItem.completed == 'n') {
+    html += '<input class="form-check-input position-static" type="checkbox">';
+    html += '<div class="content">' + itemChecklistItem.content + '</div>';
+
+    // item is incomplete
+  } else {
+    html += '<input class="form-check-input position-static" type="checkbox" checked>';
+    html += '<div class="content completed">' + itemChecklistItem.content + '</div>';
+  }
+  html += '</div>';
+
+
+  // right portion: dropdown menu
+  html += '<div class="right">';
+
+
+  // dropdown button
+  html += '<div class="dropleft">';
+  html += '<button class="btn" type="button" data-toggle="dropdown">';
+  html += '<i class="bx bx-dots-vertical-rounded"></i>';
+  html += '</button>';
+
+  // dropdown menu
+  html += '<div class="dropdown-menu">';
+  html += '<button class="dropdown-item" type="button">Edit</button>';
+  html += '<div class="dropdown-divider"></div>';
+  html += '<button class="dropdown-item" type="button">Move up</button>';
+  html += '<button class="dropdown-item" type="button">Move down</button>';
+  html += '<div class="dropdown-divider"></div>';
+  html += '<button class="dropdown-item" type="button">Delete</button>';
+  html += '</div>';
+
+
+  // closing tags
+  html += '</div>';
+  html += '</div>';
+  html += '</li>';
+
+  return html;
+}
 
 
 

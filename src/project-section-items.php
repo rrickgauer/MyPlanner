@@ -93,78 +93,8 @@
 
               </div>
 
-
+              <!-- open checklists go here -->
               <div class="col-10" id="item-checklists">
-
-                <div class="card item-checklist">
-                  <div class="card-header">
-                    <h6>Checklist name</h6>
-                    
-                    <!-- checklist dropdown -->
-                    <div class="dropdown">
-                      <button class="btn" type="button" data-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded'></i></button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Close</a>
-                        <a class="dropdown-item" href="#">Rename</a>
-                        <a class="dropdown-item" href="#">Mark all incomplete</a>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="card-body">
-                    <!-- new item input -->
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
-                      </div>
-                    </div>
-                    
-                    <!-- checklist items -->
-                    <ul class="list-group list-group-flush">
-
-                      <li class="list-group-item">
-                        <div class="left">
-                          <i class='bx bx-checkbox checkbox'></i>
-                          <div class="content">content</div>
-                        </div>
-                        <div class="right">
-                          <div class="trash float-right"><i class='bx bx-trash' ></i></div>
-                        </div>
-                      </li>
-
-                      <li class="list-group-item">
-                        <div class="left">
-                          <i class='bx bx-checkbox-checked' ></i>
-                          <div class="content">content</div>
-                        </div>
-                        <div class="right">
-                          <div class="trash float-right"><i class='bx bx-trash' ></i></div>
-                        </div>
-                      </li>
-
-                      <li class="list-group-item">
-                        <div class="left">
-                          <i class='bx bx-checkbox' ></i>
-                          <div class="content">content</div>
-                        </div>
-                        <div class="right">
-                          <i class='bx bx-trash trash' ></i>
-                        </div>
-                      </li>
-
-
-
-
-
-
-
-
-                    </ul>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>

@@ -173,13 +173,16 @@ body {
 #item-checklists .item-checklist .list-group-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
 }
 #item-checklists .item-checklist .list-group-item .left {
   display: flex;
+  justify-content: space-around;
   align-items: center;
 }
-#item-checklists .item-checklist .list-group-item .left .checkbox {
-  margin-right: 10px;
+#item-checklists .item-checklist .list-group-item .left .content {
+  margin-left: 10px;
 }
 
 .dropdown-menu form {

@@ -221,17 +221,34 @@ body {
     }
 
     .list-group-item {
+      
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding-right: 10px;
 
       .left {
         display: flex;
+        justify-content: space-around;
         align-items: center;
-        .checkbox {
-          margin-right: 10px;
+
+        .content {
+          margin-left: 10px;
         }
       }
+
+
+
+
+
     }
+
+
+
+
+
+
+
   }
 }
 

@@ -220,9 +220,6 @@ body {
       align-items: center;
     }
 
-
-
-
     .list-group-item {
       display: flex;
       justify-content: space-between;
@@ -234,37 +231,17 @@ body {
           margin-right: 10px;
         }
       }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
-
-
 }
 
 
+.dropdown-menu {
+
+  form {
+    padding: 10px;
+  }
+}
 
 
 

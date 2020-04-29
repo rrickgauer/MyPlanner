@@ -418,17 +418,53 @@ function getMostRecentItem($projectID) {
   return $sql;
 }
 
-
-
 function getProjectItem($itemID) {
   $pdo = dbConnect($itemID);
   $sql = $pdo->prepare('SELECT * FROM Items WHERE id=:itemID LIMIT 1');
   $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
   $sql->execute();
-
-  // return 'hi';
   return $sql;
+}
+
+function insertItemChecklist($itemID, $name) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('INSERT INTO Item_Checklists (item_id, name, display_index) VALUES (:itemID, :name, :displayIndex)');
+
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+
+  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+
+  $displayIndex = getItemChecklistCount($itemID) + 1;
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+  $sql->execute();
+
+}
+
+function getItemChecklistCount($itemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(Item_Checklists.id) as count FROM Item_Checklists WHERE item_id=:itemID LIMIT 1');
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
+function getItemChecklists($itemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT Item_Checklists.id, Item_Checklists.name, Item_Checklists.display_index FROM Item_Checklists WHERE Item_Checklists.item_id=:itemID ORDER BY Item_Checklists.display_index ASC');
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  $sql->execute();
+
+  return $sql;
+
 }
 
 

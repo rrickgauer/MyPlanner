@@ -8,7 +8,8 @@ $(document).ready(function() {
   $("#new-project-name").on("keyup", updateRenameProjectButton);
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
 
-  $('#item-modal').modal('show');
+  $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
+  $("#new-project-checklist-btn").on("click", addProjectChecklist);
 });
 
 // executes addTodoItem when enter is pressed
@@ -438,14 +439,85 @@ function openItemModal(itemID) {
 }
 
 function setItemModalData(item) {
-
   // set the title
   $("#item-modal .modal-title").html(item.name);
 
   // set the modal data-id
   $("#item-modal").attr("data-item-id", item.id);
-
 }
+
+
+function updateNewProjectChecklistButton() {
+  var newProjectChecklistName = $("#new-project-checklist-name").val();
+
+  if (newProjectChecklistName.length > 0) {
+    $("#new-project-checklist-btn").prop('disabled', false);
+  } else {
+    $("#new-project-checklist-btn").prop('disabled', true);
+  }
+}
+
+
+function addProjectChecklist() {
+
+  var itemID = $("#item-modal").attr('data-item-id');
+  var checklistName = $("#new-project-checklist-name").val();
+
+
+
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'insert-item-checklist',
+      "itemID": itemID,
+      "checklistName": checklistName,
+    },
+
+    success: function(response) {
+      console.log(JSON.parse(response));
+      // console.log(response);
+
+      // item = JSON.parse(response);
+      // setItemModalData(item[0]);
+
+      // // display the modal
+      // $('#item-modal').modal('show');
+    }
+  });
+}
+
+function setItemChecklistSidebar(checklists) {
+
+  html += '';
+
+  for (var count = 0; count < checklists.length; count++) {
+    html += getItemChecklistSidebarHtml(checklists[count]);
+  }
+
+  
+}
+
+
+function getItemChecklistSidebarHtml(checklist) {
+  html = '';
+  html += '<li class="nav-item dropright" data-item-checklist-id="' + checklist.id + '">';
+  html += '<a class="nav-link" data-toggle="dropdown" href="#" role="button">';
+  html += checklist.name + '</a>';
+  html += '<div class="dropdown-menu">';
+  html += '<button class="dropdown-item" type="button">Open</button>';
+  html += '<button class="dropdown-item" type="button">Close</button>';
+  html += '<div class="dropdown-divider"></div>';
+  html += '<button class="dropdown-item" type="button">Move up</button>';
+  html += '<button class="dropdown-item" type="button">Move down</button>';
+  html += '<div class="dropdown-divider"></div>';
+  html += '<button class="dropdown-item" type="button">Delete</button>';
+  html += '</div>';
+  html += '</li>';
+
+  return html;
+}
+
 
 
 

@@ -116,19 +116,21 @@
                       <button class="dropdown-item" type="button">Delete</button>
                     </div>
                   </li>
-
-
-                  <li class="nav-item"><button class="nav-link btn btn-secondary btn-sm">Add checklist</button></li>
-
-
-
-
-
-
                 </ul>
-
-
-
+                
+                <!-- new project checklist dropdown -->
+                <div class="dropright">
+                  <button class="btn btn-secondary btn-sm" type="button" data-toggle="dropdown">Add checklist</button>
+                  <div class="dropdown-menu">
+                    <form>
+                      <div class="form-group">
+                        <label for="new-project-checklist-name">Name:</label>
+                        <input type="text" id="new-project-checklist-name" class="form-control">
+                      </div>
+                      <button id="new-project-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
+                    </form>
+                  </div>
+                </div>
 
               </div>
 

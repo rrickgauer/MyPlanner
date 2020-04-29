@@ -32,14 +32,23 @@ else if (isset($_GET['function']) && $_GET['function'] == 'get-items' && isset($
 
 // return all of an item's data
 else if (isset($_GET['itemID']) && isset($_GET['function']) && $_GET['function'] == 'get-item') {
-
-
   $itemID = $_GET['itemID'];
   $item = getProjectItem($itemID)->fetchAll(PDO::FETCH_ASSOC);
-
   echo json_encode($item);
+  exit;
+}
 
-  // echo 'hi';
+else if (isset($_POST['itemID'], $_POST['function'], $_POST['checklistName']) && $_POST['function'] == 'insert-item-checklist') {
+  $itemID = $_POST['itemID'];
+  $checklistName = $_POST['checklistName'];
+
+  insertItemChecklist($itemID, $checklistName);
+
+
+  // send all the checklists
+  $itemChecklists = getItemChecklists($itemID)->fetchAll(PDO::FETCH_ASSOC);
+
+  echo json_encode($itemChecklists);
   exit;
 }
 

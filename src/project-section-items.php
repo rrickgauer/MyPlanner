@@ -32,7 +32,7 @@
 
 
 
-<!-- Modal -->
+<!-- item modal -->
 <div class="modal" id="item-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
@@ -66,108 +66,13 @@
           <div class="tab-pane fade show active" id="item-pills-checklists" role="tabpanel">
 
             <br>
-
             <h1 class="custom-font">Checklists</h1><br>
-            
             <div class="row">
-
               <div class="col-2">
 
                 <b>Current lists</b><br>
-
-                <ul class="nav nav-pills flex-column">
-
-
-
-
-
-                  <li class="nav-item dropright">
-                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
-                    <div class="dropdown-menu">
-                      <button class="dropdown-item" type="button">Open</button>
-                      <button class="dropdown-item" type="button">Close</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Move up</button>
-                      <button class="dropdown-item" type="button">Move down</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Delete</button>
-                    </div>
-                  </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <li class="nav-item dropright">
-                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
-                    <div class="dropdown-menu">
-                      <button class="dropdown-item" type="button">Open</button>
-                      <button class="dropdown-item" type="button">Close</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Move up</button>
-                      <button class="dropdown-item" type="button">Move down</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Delete</button>
-                    </div>
-                  </li>
-
-                  <li class="nav-item dropright">
-                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
-                    <div class="dropdown-menu">
-                      <button class="dropdown-item" type="button">Open</button>
-                      <button class="dropdown-item" type="button">Close</button>
-                      <button class="dropdown-item" type="button">Rename</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Move up</button>
-                      <button class="dropdown-item" type="button">Move down</button>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item" type="button">Delete</button>
-                    </div>
-                  </li>
+                <!-- side bar of item checklists -->
+                <ul class="nav nav-pills flex-column sidebar-item-checklists">
                 </ul>
                 
                 <!-- new project checklist dropdown -->
@@ -258,15 +163,10 @@
                   </div>
                 </div>
 
-
-
               </div>
-
-
-              
             </div>
-
           </div>
+
 
 
           <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
@@ -282,9 +182,6 @@
 
       </div>
       
-
-
-
 
     </div>
   </div>

@@ -433,6 +433,7 @@ function openItemModal(itemID) {
     success: function(response) {
       var item = JSON.parse(response);
       setItemModalData(item[0]);
+
       $('#item-modal').modal('show');
     }
   });
@@ -459,11 +460,8 @@ function updateNewProjectChecklistButton() {
 
 
 function addProjectChecklist() {
-
   var itemID = $("#item-modal").attr('data-item-id');
   var checklistName = $("#new-project-checklist-name").val();
-
-
 
   $.ajax({
     type: "POST",
@@ -475,30 +473,25 @@ function addProjectChecklist() {
     },
 
     success: function(response) {
-      console.log(JSON.parse(response));
-      // console.log(response);
-
-      // item = JSON.parse(response);
-      // setItemModalData(item[0]);
-
-      // // display the modal
-      // $('#item-modal').modal('show');
+      setItemChecklistSidebar(JSON.parse(response));
     }
   });
 }
 
 function setItemChecklistSidebar(checklists) {
+  var html = '';
 
-  html += '';
-
+  // get the html of all the checklist sidebar items
   for (var count = 0; count < checklists.length; count++) {
     html += getItemChecklistSidebarHtml(checklists[count]);
   }
 
-  
+  // set the html 
+  $("#item-modal #item-pills-checklists .sidebar-item-checklists").html(html);
+
 }
 
-
+// the html for a item checklist sidebar item
 function getItemChecklistSidebarHtml(checklist) {
   html = '';
   html += '<li class="nav-item dropright" data-item-checklist-id="' + checklist.id + '">';

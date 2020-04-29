@@ -66,16 +66,11 @@ else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-
 // return all the items in an item checklist
 else if (isset($_GET['itemChecklistID'], $_GET['function']) && $_GET['function'] == 'get-item-checklist-items') {
   $itemChecklistID = $_GET['itemChecklistID'];
-
-
-  // $itemChecklistItems = getItemChecklistItems($itemChecklistID)->fetchAll(PDO::FETCH_ASSOC);
-
-  // $itemChecklist = getItemChecklist($itemChecklistID)->fetch(PDO::FETCH_ASSOC);
-
-  // $data = array_merge($itemChecklist, $itemChecklistItems);
+  
+  // set the checklist to open
+  updateItemChecklistOpen($itemChecklistID, 'y');
 
   $data = [];
-
   $data['Item_Checklists'] = getItemChecklist($itemChecklistID)->fetch(PDO::FETCH_ASSOC);
   $data['Item_Checklist_Items'] = getItemChecklistItems($itemChecklistID)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -83,6 +78,17 @@ else if (isset($_GET['itemChecklistID'], $_GET['function']) && $_GET['function']
   exit;
 }
 
+
+else if (isset($_POST['itemChecklistID'], $_POST['function']) && $_POST['function'] == 'close-item-checklist') {
+  $itemChecklistID = $_POST['itemChecklistID'];
+
+  // close the checklist
+  updateItemChecklistOpen($itemChecklistID, 'n');
+
+  echo 'closed';
+
+  exit;
+}
 
 
 

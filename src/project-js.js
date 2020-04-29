@@ -442,9 +442,7 @@ function openItemModal(itemID) {
     success: function(response) {
       var item = JSON.parse(response);
       setItemModalData(item[0]);
-
       getItemChecklistSidebar(itemID);
-
       $('#item-modal').modal('show');
     }
   });
@@ -525,12 +523,19 @@ function setItemChecklistSidebar(checklists) {
 
 // the html for a item checklist sidebar item
 function getItemChecklistSidebarHtml(checklist) {
-  html = '';
+  var html = '';
   html += '<li class="nav-item dropright" data-item-checklist-id="' + checklist.id + '">';
   html += '<a class="nav-link" data-toggle="dropdown" href="#" role="button">' + checklist.name + '</a>';
   html += '<div class="dropdown-menu">';
-  html += '<button class="dropdown-item" type="button" onclick="openItemChecklist(' + checklist.id + ')">Open</button>';
-  html += '<button class="dropdown-item" type="button">Close</button>';
+
+  if (checklist.open == 'n') {
+    html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)">Open</button>';
+  } else {
+      html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)" disabled>Open</button>';
+  }
+
+
+  // html += '<button class="dropdown-item close-item-checklist-btn" type="button">Close</button>';
   html += '<div class="dropdown-divider"></div>';
   html += '<button class="dropdown-item" type="button">Move up</button>';
   html += '<button class="dropdown-item" type="button">Move down</button>';
@@ -543,7 +548,8 @@ function getItemChecklistSidebarHtml(checklist) {
 }
 
 
-function openItemChecklist(itemChecklistID) {
+function openItemChecklist(itemChecklist) {
+  var itemChecklistID = $(itemChecklist).closest(".nav-item").attr("data-item-checklist-id");
 
   $.ajax({
     type: "GET",
@@ -555,7 +561,8 @@ function openItemChecklist(itemChecklistID) {
 
     success: function(response) {
       var html = getItemChecklistCardHtml(JSON.parse(response));
-      $("#item-checklists").append(html);
+      $("#item-checklists").append(html);       // add the checklist to the section
+      $(itemChecklist).prop('disabled', true);  // disable the open checklist button
     }
   });
 
@@ -573,7 +580,7 @@ function getItemChecklistCardHtml(data) {
   html += '<div class="dropdown">';
   html += '<button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i></button>';
   html += '<div class="dropdown-menu">';
-  html += '<a class="dropdown-item" href="#">Close</a>';
+  html += '<a class="dropdown-item" href="#" onclick="closeItemChecklist(this)">Close</a>';
   html += '<a class="dropdown-item" href="#">Rename</a>';
   html += '<a class="dropdown-item" href="#">Mark all incomplete</a>';
   html += '</div>';
@@ -655,12 +662,35 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
 
 
+function closeItemChecklist(itemChecklist) {
+  var itemChecklistID = $(itemChecklist).closest(".item-checklist").attr("data-item-checklist-id");
+
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'close-item-checklist',
+      "itemChecklistID": itemChecklistID,
+    },
+
+    success: function(response) {
+      $(itemChecklist).closest(".item-checklist").remove(); // remove the checklist
+      enableItemChecklistSidebarItem(itemChecklistID);
+    }
+  });
+}
 
 
 
+function getOpenItemModalID() {
+  return $("#item-modal").attr("data-item-id");
+}
 
 
-
+function enableItemChecklistSidebarItem(itemChecklistID) {
+  var element = '#item-pills-checklists .sidebar-item-checklists li[data-item-checklist-id="' + itemChecklistID + '"] .open-item-checklist-btn';
+  $(element).prop('disabled', false);  // disable the open checklist button
+}
 
 
 

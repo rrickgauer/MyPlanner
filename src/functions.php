@@ -458,7 +458,7 @@ function getItemChecklistCount($itemID) {
 
 function getItemChecklists($itemID) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT Item_Checklists.id, Item_Checklists.name, Item_Checklists.display_index FROM Item_Checklists WHERE Item_Checklists.item_id=:itemID ORDER BY Item_Checklists.display_index ASC');
+  $sql = $pdo->prepare('SELECT Item_Checklists.id, Item_Checklists.name, Item_Checklists.display_index, Item_Checklists.open FROM Item_Checklists WHERE Item_Checklists.item_id=:itemID ORDER BY Item_Checklists.display_index ASC');
   $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
   $sql->execute();
@@ -482,6 +482,22 @@ function getItemChecklist($itemChecklistID) {
   $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
   $sql->execute();
   return $sql;
+}
+
+function updateItemChecklistOpen($itemChecklistID, $open = 'n') {
+  
+  if ($open == 'n' || $open == 'y') {
+    $pdo = dbConnect();
+    $sql = $pdo->prepare('UPDATE Item_Checklists SET open=:open WHERE id=:itemChecklistID');
+
+    $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+    $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+    
+    $open = filter_var($open, FILTER_SANITIZE_STRING);
+    $sql->bindParam(':open', $open, PDO::PARAM_STR);
+
+    $sql->execute();
+  }
 }
 
 

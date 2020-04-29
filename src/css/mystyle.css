@@ -158,4 +158,28 @@ body {
   margin: 2px;
 }
 
+#item-checklists {
+  display: flex;
+  flex-wrap: wrap;
+}
+#item-checklists .item-checklist {
+  margin: 3px;
+}
+#item-checklists .item-checklist .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#item-checklists .item-checklist .list-group-item {
+  display: flex;
+  justify-content: space-between;
+}
+#item-checklists .item-checklist .list-group-item .left {
+  display: flex;
+  align-items: center;
+}
+#item-checklists .item-checklist .list-group-item .left .checkbox {
+  margin-right: 10px;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

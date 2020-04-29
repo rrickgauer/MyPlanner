@@ -204,8 +204,93 @@ body {
       }
     }
   }
+}
+
+
+#item-checklists {
+  display: flex;
+  flex-wrap: wrap;
+  
+  .item-checklist {
+    margin: 3px;
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+
+      .left {
+        display: flex;
+        align-items: center;
+        .checkbox {
+          margin-right: 10px;
+        }
+      }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

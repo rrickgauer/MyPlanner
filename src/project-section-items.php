@@ -46,24 +46,32 @@
       </div>
 
       <div class="modal-body">
-        
+
         <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+
           <li class="nav-item">
             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab">Notes</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab">Info</a>
+          </li>
         </ul>
-  
+
+
+
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel">
-    
+
             <br>
+
+            <h1 class="custom-font">Checklists</h1><br>
             
             <div class="row">
 
-              <div class="col-3">
+              <div class="col-2">
 
                 <b>Current lists</b><br>
 
@@ -110,60 +118,110 @@
                   </li>
 
 
+                  <li class="nav-item"><button class="nav-link btn btn-secondary btn-sm">Add checklist</button></li>
+
+
+
+
+
+
                 </ul>
 
- 
+
+
+
               </div>
+
+
+              <div class="col-10" id="item-checklists">
+
+                <div class="card item-checklist">
+                  <div class="card-header">
+                    <h6>Checklist name</h6>
+                    
+                    <!-- checklist dropdown -->
+                    <div class="dropdown">
+                      <button class="btn" type="button" data-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded'></i></button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Close</a>
+                        <a class="dropdown-item" href="#">Rename</a>
+                        <a class="dropdown-item" href="#">Mark all incomplete</a>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="card-body">
+                    <!-- new item input -->
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
+                      </div>
+                    </div>
+                    
+                    <!-- checklist items -->
+                    <ul class="list-group list-group-flush">
+
+                      <li class="list-group-item">
+                        <div class="left">
+                          <i class='bx bx-checkbox checkbox'></i>
+                          <div class="content">content</div>
+                        </div>
+                        <div class="right">
+                          <div class="trash float-right"><i class='bx bx-trash' ></i></div>
+                        </div>
+                      </li>
+
+                      <li class="list-group-item">
+                        <div class="left">
+                          <i class='bx bx-checkbox-checked' ></i>
+                          <div class="content">content</div>
+                        </div>
+                        <div class="right">
+                          <div class="trash float-right"><i class='bx bx-trash' ></i></div>
+                        </div>
+                      </li>
+
+                      <li class="list-group-item">
+                        <div class="left">
+                          <i class='bx bx-checkbox' ></i>
+                          <div class="content">content</div>
+                        </div>
+                        <div class="right">
+                          <i class='bx bx-trash trash' ></i>
+                        </div>
+                      </li>
+
+
+
+
+
+
+
+
+                    </ul>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+
               
             </div>
-
-
-
-
-
-
-            
-
-
-
-
-
-
 
           </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div class="tab-pane fade" id="pills-profile" role="tabpanel">
             profile
+          </div>
+
+
+          <div class="tab-pane fade" id="pills-info" role="tabpanel">
+            info part
           </div>
 
         </div>

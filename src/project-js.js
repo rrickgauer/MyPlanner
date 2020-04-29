@@ -7,6 +7,8 @@ $(document).ready(function() {
   getProjectItems();
   $("#new-project-name").on("keyup", updateRenameProjectButton);
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
+
+  $('#item-modal').modal('show');
 });
 
 // executes addTodoItem when enter is pressed

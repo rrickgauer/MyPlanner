@@ -46,13 +46,144 @@
       </div>
 
       <div class="modal-body">
-        modal content goes right ehrer
+        
+        <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab">Checklists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab">Notes</a>
+          </li>
+        </ul>
+  
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel">
+    
+            <br>
+            
+            <div class="row">
+
+              <div class="col-3">
+
+                <b>Current lists</b><br>
+
+                <ul class="nav nav-pills flex-column">
+
+                  <li class="nav-item dropright">
+                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item" type="button">Open</button>
+                      <button class="dropdown-item" type="button">Close</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Move up</button>
+                      <button class="dropdown-item" type="button">Move down</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Delete</button>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropright">
+                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item" type="button">Open</button>
+                      <button class="dropdown-item" type="button">Close</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Move up</button>
+                      <button class="dropdown-item" type="button">Move down</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Delete</button>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropright">
+                    <a class="nav-link" data-toggle="dropdown" href="#" role="button">List name</a>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item" type="button">Open</button>
+                      <button class="dropdown-item" type="button">Close</button>
+                      <button class="dropdown-item" type="button">Rename</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Move up</button>
+                      <button class="dropdown-item" type="button">Move down</button>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" type="button">Delete</button>
+                    </div>
+                  </li>
+
+
+                </ul>
+
+ 
+              </div>
+              
+            </div>
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel">
+            profile
+          </div>
+
+        </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+
       </div>
       
 
-      <div class="modal-footer">
 
-      </div>
 
 
     </div>

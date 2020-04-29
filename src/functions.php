@@ -405,7 +405,57 @@ function getProjectItems($projectID) {
   $sql->execute();
 
   return $sql;
-
 }
+
+
+function getMostRecentItem($projectID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Items WHERE project_id=:projectID ORDER BY id DESC LIMIT 1');
+  $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
+  $sql->execute();
+  
+  return $sql;
+}
+
+
+
+function getProjectItem($itemID) {
+  $pdo = dbConnect($itemID);
+  $sql = $pdo->prepare('SELECT * FROM Items WHERE id=:itemID LIMIT 1');
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  $sql->execute();
+
+  // return 'hi';
+  return $sql;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

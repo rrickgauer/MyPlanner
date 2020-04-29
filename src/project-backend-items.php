@@ -11,10 +11,15 @@ if (isset($_POST['function']) && $_POST['function'] == 'insert-item' && isset($_
   $name = $_POST['name'];
   $description = $_POST['description'];
 
+  // insert the item
   insertItem($projectID, $name, $description);
 
-  echo 'success';
+
+  // get the id of this items
+  $item = getMostRecentItem($projectID)->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($item);
   exit;
+  
 }
 
 // return all the project items
@@ -24,4 +29,33 @@ else if (isset($_GET['function']) && $_GET['function'] == 'get-items' && isset($
   echo json_encode($items);
   exit;
 }
+
+// return all of an item's data
+else if (isset($_GET['itemID']) && isset($_GET['function']) && $_GET['function'] == 'get-item') {
+
+
+  $itemID = $_GET['itemID'];
+  $item = getProjectItem($itemID)->fetchAll(PDO::FETCH_ASSOC);
+
+  echo json_encode($item);
+
+  // echo 'hi';
+  exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>

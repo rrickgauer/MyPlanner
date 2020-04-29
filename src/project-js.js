@@ -303,28 +303,6 @@ function updateNewChecklistButton() {
 }
 
 
-function newProjectItem() {
-  const itemName = $("#new-item-name").val();
-  const itemDescription = $("#new-item-description").val();
-
-  $.ajax({
-    type: "POST",
-    url: 'project-backend-items.php',
-    data: {
-      "function": 'insert-item',
-      "projectID": projectID,
-      "name": itemName,
-      "description": itemDescription,
-    },
-
-    success: function(response) {
-      // console.log(JSON.parse(response));
-      // console.log(response);
-    }
-  });
-}
-
-
 function getProjectItems() {
   $.ajax({
     type: "GET",
@@ -335,8 +313,6 @@ function getProjectItems() {
     },
 
     success: function(response) {
-      // console.log(JSON.parse(response));
-      // console.log(response);
       displayProjectItems(JSON.parse(response));
     }
   });
@@ -417,17 +393,59 @@ function getProjectItemCardHTML(item) {
 
 }
 
-function openItemModal(itemID) {
-  // set the current modal to the item id
-  $("#item-modal").attr("data-item-id", itemID);
+function newProjectItem() {
+  const itemName = $("#new-item-name").val();
+  const itemDescription = $("#new-item-description").val();
 
-  
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'insert-item',
+      "projectID": projectID,
+      "name": itemName,
+      "description": itemDescription,
+    },
 
+    success: function(response) {
+      console.log(JSON.parse(response));
 
+      item = JSON.parse(response);
+      setItemModalData(item[0]);
 
-
+      // display the modal
+      $('#item-modal').modal('show');
+    }
+  });
 }
 
+
+function openItemModal(itemID) {
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-item',
+      "itemID": itemID,
+    },
+
+    success: function(response) {
+      var item = JSON.parse(response);
+      setItemModalData(item[0]);
+      $('#item-modal').modal('show');
+    }
+  });
+}
+
+function setItemModalData(item) {
+
+  // set the title
+  $("#item-modal .modal-title").html(item.name);
+
+  // set the modal data-id
+  $("#item-modal").attr("data-item-id", item.id);
+
+}
 
 
 

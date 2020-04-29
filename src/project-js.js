@@ -10,13 +10,6 @@ $(document).ready(function() {
 
   $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
   $("#new-project-checklist-btn").on("click", addProjectChecklist);
-
-
-
-
-  // $("#item-modal").modal('show');
-
-
 });
 
 // executes addTodoItem when enter is pressed
@@ -431,6 +424,9 @@ function newProjectItem() {
 
 
 function openItemModal(itemID) {
+  
+  $("#item-checklists").html(''); // clear the current open item checklists
+
   $.ajax({
     type: "GET",
     url: 'project-backend-items.php',
@@ -443,7 +439,29 @@ function openItemModal(itemID) {
       var item = JSON.parse(response);
       setItemModalData(item[0]);
       getItemChecklistSidebar(itemID);
+      getAllOpenItemChecklists(itemID);
       $('#item-modal').modal('show');
+    }
+  });
+}
+
+
+function getAllOpenItemChecklists(itemID) {
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-open-item-checklists',
+      "itemID": itemID,
+    },
+
+    success: function(response) {
+      var openItemChecklists = JSON.parse(response);
+
+      // display all open checklists
+      for (var count = 0; count < openItemChecklists.length; count++) {
+        openItemChecklist(openItemChecklists[count].id);       
+      }
     }
   });
 }
@@ -506,8 +524,6 @@ function getItemChecklistSidebar(itemID) {
 }
 
 
-
-
 function setItemChecklistSidebar(checklists) {
   var html = '';
 
@@ -528,11 +544,20 @@ function getItemChecklistSidebarHtml(checklist) {
   html += '<a class="nav-link" data-toggle="dropdown" href="#" role="button">' + checklist.name + '</a>';
   html += '<div class="dropdown-menu">';
 
+  // if (checklist.open == 'n') {
+  //   html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)">Open</button>';
+  // } else {
+  //     html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)" disabled>Open</button>';
+  // }
+
   if (checklist.open == 'n') {
-    html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)">Open</button>';
+    html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(' + checklist.id + ')">Open</button>';
   } else {
-      html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(this)" disabled>Open</button>';
+    html += '<button class="dropdown-item open-item-checklist-btn" type="button" onclick="openItemChecklist(' + checklist.id + ')" disabled>Open</button>';
+
   }
+
+
 
 
   // html += '<button class="dropdown-item close-item-checklist-btn" type="button">Close</button>';
@@ -548,8 +573,8 @@ function getItemChecklistSidebarHtml(checklist) {
 }
 
 
-function openItemChecklist(itemChecklist) {
-  var itemChecklistID = $(itemChecklist).closest(".nav-item").attr("data-item-checklist-id");
+function openItemChecklist(itemChecklistID) {
+  // var itemChecklistID = $(itemChecklist).closest(".nav-item").attr("data-item-checklist-id");
 
   $.ajax({
     type: "GET",
@@ -560,9 +585,9 @@ function openItemChecklist(itemChecklist) {
     },
 
     success: function(response) {
-      var html = getItemChecklistCardHtml(JSON.parse(response));
-      $("#item-checklists").append(html);       // add the checklist to the section
-      $(itemChecklist).prop('disabled', true);  // disable the open checklist button
+      var html = getItemChecklistCardHtml(JSON.parse(response));  // server response
+      $("#item-checklists").append(html);                         // add the checklist to the section
+      disableItemChecklistSidebarItem(itemChecklistID);           // disable the checklist sidebar open button
     }
   });
 
@@ -690,6 +715,11 @@ function getOpenItemModalID() {
 function enableItemChecklistSidebarItem(itemChecklistID) {
   var element = '#item-pills-checklists .sidebar-item-checklists li[data-item-checklist-id="' + itemChecklistID + '"] .open-item-checklist-btn';
   $(element).prop('disabled', false);  // disable the open checklist button
+}
+
+function disableItemChecklistSidebarItem(itemChecklistID) {
+  var element = '#item-pills-checklists .sidebar-item-checklists li[data-item-checklist-id="' + itemChecklistID + '"] .open-item-checklist-btn';
+  $(element).prop('disabled', true);  // disable the open checklist button
 }
 
 

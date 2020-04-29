@@ -78,16 +78,22 @@ else if (isset($_GET['itemChecklistID'], $_GET['function']) && $_GET['function']
   exit;
 }
 
-
+// close the item checklist
 else if (isset($_POST['itemChecklistID'], $_POST['function']) && $_POST['function'] == 'close-item-checklist') {
   $itemChecklistID = $_POST['itemChecklistID'];
-
-  // close the checklist
   updateItemChecklistOpen($itemChecklistID, 'n');
-
-  echo 'closed';
-
   exit;
+}
+
+
+
+// return the ids of all open item checklists in an item
+else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-open-item-checklists') {
+  $itemID = $_GET['itemID'];
+  $openItemChecklists = getOpenItemChecklistIDs($itemID, 'y')->fetchAll(PDO::FETCH_ASSOC);
+  echo json_encode($openItemChecklists);
+  exit;
+
 }
 
 

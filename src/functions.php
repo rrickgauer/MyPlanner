@@ -500,7 +500,23 @@ function updateItemChecklistOpen($itemChecklistID, $open = 'n') {
   }
 }
 
+function getOpenItemChecklistIDs($itemID, $open = 'y') {
+  if ($open != 'y' && $open != 'n')
+    return;
 
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT id FROM Item_Checklists WHERE open=:open AND item_id=:itemID ORDER BY display_index ASC');
+
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  
+  $open = filter_var($open, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':open', $open, PDO::PARAM_STR);
+
+  $sql->execute();
+
+  return $sql;
+}
 
 
 

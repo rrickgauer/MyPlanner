@@ -31,38 +31,40 @@
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck"></div>
 
 
-
 <!-- item modal -->
 <div class="modal" id="item-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
 
-
+      <!-- header -->
       <div class="modal-header">
         <h5 class="modal-title">Item</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
+      
+      <!-- body -->
       <div class="modal-body">
-
+        
+        <!-- item modal navbar -->
         <ul class="nav nav-pills justify-content-center" role="tablist">
-
           <li class="nav-item">
-            <a class="nav-link active" id="item-pills-checklists-tab" data-toggle="pill" href="#pills-home" role="tab">Checklists</a>
+            <a class="nav-link active" id="item-pills-checklists-tab" data-toggle="pill" href="#item-pills-checklists" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#pills-profile" role="tab">Notes</a>
+            <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#pills-info" role="tab">Info</a>
+            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
           </li>
         </ul>
 
 
-
+        <!-- tab content -->
         <div class="tab-content">
+
+          <!-- checklists -->
           <div class="tab-pane fade show active" id="item-pills-checklists" role="tabpanel">
 
             <br>
@@ -168,12 +170,13 @@
           </div>
 
 
-
+          <!-- notes -->
           <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
             profile
           </div>
 
-
+          
+          <!-- info -->
           <div class="tab-pane fade" id="item-pills-info" role="tabpanel">
             info part
           </div>

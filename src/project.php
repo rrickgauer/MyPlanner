@@ -40,6 +40,14 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
     </nav>
 
     <div id="content">
+    
+
+    <div id="notifications">
+    </div>
+
+  
+
+
 
       <div class="project-buttons">
 
@@ -54,6 +62,9 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             <button class="dropdown-item" type="button" onclick="deleteProject()">Delete</button>
           </div>
         </div>
+
+      
+        <button type="button" class="btn btn-secondary" onclick="sendNotification()">Notify</button>
 
       </div>
 

@@ -4,6 +4,21 @@ $base-color-grey: #efecec;
 $base-color-red: #bf3e43;
 $base-color-yellow-hover: #f1d98b;
 
+
+#notifications {
+  position: fixed;
+  // width: 100%;
+  // float: right;
+
+  .toast {
+    float: right;
+
+    margin-top: 50px;
+  }
+
+
+}
+
 .custom-font {
   font-family: 'Fredoka One', cursive;
 }

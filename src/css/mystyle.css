@@ -1,3 +1,11 @@
+#notifications {
+  position: fixed;
+}
+#notifications .toast {
+  float: right;
+  margin-top: 50px;
+}
+
 .custom-font {
   font-family: "Fredoka One", cursive;
 }

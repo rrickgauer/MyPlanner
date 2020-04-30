@@ -4,6 +4,8 @@
 <div class="dropright">
   <!-- new item button -->
   <button class="btn btn-secondary" type="button" data-toggle="dropdown">New item</button>
+
+  <button type="button" class="btn btn-secondary" onclick="sendNotification()">Notify</button>
   
   <!-- menu -->
   <div class="dropdown-menu dropdown-form">
@@ -69,6 +71,8 @@
 
             <br>
             <h1 class="custom-font">Checklists</h1><br>
+
+
             <div class="row">
               <div class="col-2">
 

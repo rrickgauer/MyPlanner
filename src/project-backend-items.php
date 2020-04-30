@@ -86,16 +86,22 @@ else if (isset($_POST['itemChecklistID'], $_POST['function']) && $_POST['functio
 }
 
 
-
 // return the ids of all open item checklists in an item
 else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-open-item-checklists') {
   $itemID = $_GET['itemID'];
   $openItemChecklists = getOpenItemChecklistIDs($itemID, 'y')->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode($openItemChecklists);
   exit;
-
 }
 
+
+// delete item checklist
+else if (isset($_POST['itemChecklistID'], $_POST['function']) && $_POST['function'] == 'delete-item-checklist') {
+  $itemChecklistID = $_POST['itemChecklistID'];
+  deleteItemChecklist($itemChecklistID);
+
+  echo 'deleted';
+}
 
 
 

@@ -518,6 +518,13 @@ function getOpenItemChecklistIDs($itemID, $open = 'y') {
   return $sql;
 }
 
+function deleteItemChecklist($itemChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('DELETE FROM Item_Checklists WHERE id=:itemChecklistID');
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+  $sql->execute();
+}
 
 
 

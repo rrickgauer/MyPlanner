@@ -531,7 +531,7 @@ function deleteItemChecklist($itemChecklistID) {
 function updateItemChecklistItemIncomplete($itemChecklistItemID) {
   $pdo = dbConnect();
   $sql = $pdo->prepare('UPDATE Item_Checklist_Items SET completed="n" WHERE id=:itemChecklistItemID');
-  $itemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $itemChecklistItemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
   $sql->execute();
 }
@@ -540,11 +540,56 @@ function updateItemChecklistItemIncomplete($itemChecklistItemID) {
 function updateItemChecklistItemComplete($itemChecklistItemID) {
   $pdo = dbConnect();
   $sql = $pdo->prepare('UPDATE Item_Checklist_Items SET completed="y" WHERE id=:itemChecklistItemID');
-  $itemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $itemChecklistItemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
   $sql->execute();
 }
 
+// insert a new item checklist item
+function insertItemChecklistItem($itemChecklistID, $content) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('INSERT INTO Item_Checklist_Items (item_checklist_id, content, display_index) VALUES (:itemChecklistID, :content, :displayIndex)');
+
+
+  // sanitize item checklist id
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+
+  // sanitize contnent
+  $content = filter_var($content, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':content', $content, PDO::PARAM_STR);
+
+  // sanitize display index
+  $displayIndex = getItemChecklistItemCount($itemChecklistID) + 1;
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+  $sql->execute();
+}
+
+
+
+function getItemChecklistItemCount($itemChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) as count FROM Item_Checklist_Items WHERE item_checklist_id=:itemChecklistID LIMIT 1');
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
+
+function getRecentInsertedItemChecklistItem($itemChecklistID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT * FROM Item_Checklist_Items WHERE item_checklist_id=:itemChecklistID ORDER BY id DESC LIMIT 1');
+  $itemChecklistID = filter_var($itemChecklistID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistID', $itemChecklistID, PDO::PARAM_INT);
+  $sql->execute();
+
+  return $sql;
+
+}
 
 
 

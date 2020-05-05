@@ -1,17 +1,21 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const projectID = urlParams.get('projectID');
+const backendURL = 'project-backend-items.php';
 
 $(document).ready(function() {
   getChecklists();
   getProjectItems();
-  $("#new-project-name").on("keyup", updateRenameProjectButton);
-  $("#new-checklist-name").on("keyup", updateNewChecklistButton);
-
-  $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
-  $("#new-project-checklist-btn").on("click", addProjectChecklist);
+  addEventListeners();
 
 });
+
+function addEventListeners() {
+  $("#new-project-name").on("keyup", updateRenameProjectButton);
+  $("#new-checklist-name").on("keyup", updateNewChecklistButton);
+  $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
+  $("#new-project-checklist-btn").on("click", addProjectChecklist);
+}
 
 // executes addTodoItem when enter is pressed
 $(document).on("keypress", "#new-project-checklist-item-input", function(e) {
@@ -20,6 +24,8 @@ $(document).on("keypress", "#new-project-checklist-item-input", function(e) {
     addChecklistItem();
   }
 });
+
+
 
 
 // insert a new checklist item
@@ -633,9 +639,9 @@ function getItemChecklistCardHtml(data) {
   html += '</div>';
   html += '<div class="card-body">';
   html += '<div class="input-group mb-3">';
-  html += '<input type="text" class="form-control">';
+  html += '<input type="text" class="form-control new-item-checklist-item-input">';
   html += '<div class="input-group-append">';
-  html += '<button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>';
+  html += '<button class="btn btn-outline-secondary" type="button" onclick="addItemChecklistItem(this)">+</button>';
   html += '</div>';
   html += '</div>';
   html += '<ul class="list-group list-group-flush">';
@@ -819,4 +825,65 @@ function setItemChecklistItemToComplete(itemChecklistItemID) {
 }
 
 
+function addItemChecklistItem(btn) {
+
+  var itemChecklistID = $(btn).closest(".item-checklist").attr("data-item-checklist-id");
+  var content = $(btn).closest(".item-checklist").find(".new-item-checklist-item-input").val();
+  var itemChecklist = getItemChecklistCard(itemChecklistID);
+
+  var data = {
+    'content': content,
+    'function': 'add-item-checklist-item',
+    'itemChecklistID': itemChecklistID,
+  }
+
+  console.log(content);
+
+  $.post(backendURL, data, function(response) {
+      var newItem = JSON.parse(response);
+      appendNewItemChecklistItem(newItem, itemChecklist);
+
+      // clear the input
+      $(".new-item-checklist-item-input").val('');
+  });
+}
+
+
+
+function addItemChecklistItem(content, itemChecklistID) {
+  var itemChecklist = getItemChecklistCard(itemChecklistID);
+
+  var data = {
+    'content': content,
+    'function': 'add-item-checklist-item',
+    'itemChecklistID': itemChecklistID,
+  }
+
+  console.log(content);
+
+  $.post(backendURL, data, function(response) {
+      var newItem = JSON.parse(response);
+      appendNewItemChecklistItem(newItem, itemChecklist);
+
+      // clear the input
+      $(".new-item-checklist-item-input").val('');
+  });
+}
+
+
+
+function appendNewItemChecklistItem(item, itemChecklist) {
+  var html = getItemChecklistCardBodyHtml(item);
+  $(itemChecklist).find("ul.list-group").append(html);
+}
+
+// adds new item checklist item when enter is hit
+$(document).on("keypress", ".new-item-checklist-item-input", function(e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+    var content = $(this).val();
+    var itemChecklistID = $(this).closest(".item-checklist").attr("data-item-checklist-id");
+    addItemChecklistItem(content, itemChecklistID);
+  }
+});
 

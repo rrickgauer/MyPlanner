@@ -55,9 +55,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
           </div>
         </div>
 
-      
-        <button type="button" class="btn btn-secondary" onclick="sendNotification()">Notify</button>
-
       </div>
 
 

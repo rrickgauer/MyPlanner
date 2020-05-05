@@ -859,8 +859,6 @@ function addItemChecklistItem(content, itemChecklistID) {
     'itemChecklistID': itemChecklistID,
   }
 
-  console.log(content);
-
   $.post(backendURL, data, function(response) {
       var newItem = JSON.parse(response);
       appendNewItemChecklistItem(newItem, itemChecklist);

@@ -111,6 +111,7 @@ else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['fun
   exit;
 }
 
+// set item checklist to complete
 else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['function'] == 'update-item-checklist-item-complete') {
   $itemChecklistItemID = $_POST['itemChecklistItemID'];
   updateItemChecklistItemComplete($itemChecklistItemID);

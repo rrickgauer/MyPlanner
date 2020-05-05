@@ -665,12 +665,15 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
   // item is completed
   if (itemChecklistItem.completed == 'n') {
-    html += '<input class="form-check-input position-static" type="checkbox">';
+    // html += '<input class="form-check-input position-static" type="checkbox" onclick="updateItemChecklistItem(' + itemChecklistItem.id + ')">';
+
+    html += '<input class="form-check-input position-static" type="checkbox" onclick="updateItemChecklistItem(this)">';
     html += '<div class="content">' + itemChecklistItem.content + '</div>';
 
-    // item is incomplete
+  // item is incomplete
   } else {
-    html += '<input class="form-check-input position-static" type="checkbox" checked>';
+    // html += '<input class="form-check-input position-static" type="checkbox" checked onclick="updateItemChecklistItem(' + itemChecklistItem.id + ')">';
+    html += '<input class="form-check-input position-static" type="checkbox" checked onclick="updateItemChecklistItem(this)">';
     html += '<div class="content completed">' + itemChecklistItem.content + '</div>';
   }
   html += '</div>';
@@ -771,6 +774,48 @@ function deleteItemChecklist(itemChecklistID) {
 function getItemChecklistCard(itemChecklistID) {
   var element = '#item-checklists .item-checklist[data-item-checklist-id="' + itemChecklistID + '"]';
   return $(element);
+}
+
+// update item checklist item
+function updateItemChecklistItem(itemChecklistItem) {
+
+  var id = $(itemChecklistItem).closest(".list-group-item").attr("data-item-checklist-item-id");
+  var itemChecklist = $(itemChecklistItem).closest(".item-checklist");
+
+  // check if item is completed or not
+  if (itemChecklistItem.checked) {
+    setItemChecklistItemToComplete(id);
+  } else {
+    setItemChecklistItemToIncomplete(id);
+  }
+
+  $(itemChecklistItem).next().toggleClass('completed');
+
+
+}
+
+// set the item checklist item to incomplete
+function setItemChecklistItemToIncomplete(itemChecklistItemID) {
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'update-item-checklist-item-incomplete',
+      "itemChecklistItemID": itemChecklistItemID
+    },
+  });
+}
+
+// set the item checklist item to complete
+function setItemChecklistItemToComplete(itemChecklistItemID) {
+  $.ajax({
+    type: "POST",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'update-item-checklist-item-complete',
+      "itemChecklistItemID": itemChecklistItemID
+    },
+  });
 }
 
 

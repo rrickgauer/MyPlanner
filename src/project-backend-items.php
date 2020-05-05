@@ -104,6 +104,18 @@ else if (isset($_POST['itemChecklistID'], $_POST['function']) && $_POST['functio
 }
 
 
+// set item checklist to incomplete
+else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['function'] == 'update-item-checklist-item-incomplete') {
+  $itemChecklistItemID = $_POST['itemChecklistItemID'];
+  updateItemChecklistItemIncomplete($itemChecklistItemID);
+  exit;
+}
+
+else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['function'] == 'update-item-checklist-item-complete') {
+  $itemChecklistItemID = $_POST['itemChecklistItemID'];
+  updateItemChecklistItemComplete($itemChecklistItemID);
+  exit;
+}
 
 
 

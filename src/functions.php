@@ -527,7 +527,23 @@ function deleteItemChecklist($itemChecklistID) {
 }
 
 
+// set an item checklist item to incomplete
+function updateItemChecklistItemIncomplete($itemChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Item_Checklist_Items SET completed="n" WHERE id=:itemChecklistItemID');
+  $itemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
 
+// set an item checklist item to complete
+function updateItemChecklistItemComplete($itemChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Item_Checklist_Items SET completed="y" WHERE id=:itemChecklistItemID');
+  $itemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
 
 
 

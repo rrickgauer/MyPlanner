@@ -11,38 +11,8 @@ $(document).ready(function() {
   $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
   $("#new-project-checklist-btn").on("click", addProjectChecklist);
 
-  // $('.toast').toast('show');
-
-  $('.toast').on('hidden.bs.toast', function () {
-    alert('hi');
-  })
 });
 
-
-function sendNotification() {
-
-  var html = getToastHtml();
-  $("#notifications").html(html);
-  $('.toast').toast('show');
-}
-
-
-function getToastHtml() {
-  var html = '';
-  html += '<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">';
-  html += '<div class="toast-header">';
-  html += '<strong class="mr-auto">Bootstrap</strong>';
-  html += '<small>11 mins ago</small>';
-  html += '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">';
-  html += '<span aria-hidden="true">&times;</span>';
-  html += '</button>';
-  html += '</div>';
-  html += '<div class="toast-body">';
-  html += 'Hello, world! This is a toast message.';
-  html += '</div>';
-  html += '</div>';
-  return html; 
-}
 
 
 

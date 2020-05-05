@@ -40,14 +40,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
     </nav>
 
     <div id="content">
-    
-
-    <div id="notifications">
-    </div>
-
-  
-
-
 
       <div class="project-buttons">
 

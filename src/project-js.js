@@ -13,26 +13,6 @@ $(document).ready(function() {
 
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // executes addTodoItem when enter is pressed
 $(document).on("keypress", "#new-project-checklist-item-input", function(e) {
   if (e.keyCode == 13) {
@@ -255,6 +235,7 @@ function deleteChecklistItem(checklistItemID) {
 }
 
 
+// updates a project checklist item
 function updateChecklistItem(checkbox) {
   var tr = $(checkbox).closest("tr");
   var id = $(tr).data("project-checklist-item-id");
@@ -265,6 +246,7 @@ function updateChecklistItem(checkbox) {
     setChecklistItemIncomplete(id);
 }
 
+// sets a project checklist item to incomplete
 function setChecklistItemIncomplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
   $.ajax({
@@ -282,6 +264,7 @@ function setChecklistItemIncomplete(checklistItemID) {
   });
 }
 
+// sets a project checklist item to complete
 function setChecklistItemComplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
   $.ajax({
@@ -299,11 +282,14 @@ function setChecklistItemComplete(checklistItemID) {
   });
 }
 
+// deletes a project
+// see delete-project.php
 function deleteProject() {
   if (confirm('Are you sure you want to delete this project?'))
     window.location.href = 'delete-project.php?projectID=' + projectID;
 }
 
+// rename a project
 function updateRenameProjectButton() {
   var newProjectName = $("#new-project-name").val();
 
@@ -314,6 +300,7 @@ function updateRenameProjectButton() {
   }
 }
 
+// sets the new checklist button to disabled/enabled if there is text in the input
 function updateNewChecklistButton() {
   var newChecklistName = $("#new-checklist-name").val();
 
@@ -324,7 +311,7 @@ function updateNewChecklistButton() {
   }
 }
 
-
+// returns the project items
 function getProjectItems() {
   $.ajax({
     type: "GET",
@@ -340,6 +327,7 @@ function getProjectItems() {
   });
 }
 
+// displays a project item
 function displayProjectItems(data) {
 
   const size = data.length;
@@ -353,7 +341,7 @@ function displayProjectItems(data) {
   $("#items-deck").html(html);
 }
 
-
+// returns the html for a project item card
 function getProjectItemCardHTML(item) {
 
   html = '';
@@ -415,6 +403,7 @@ function getProjectItemCardHTML(item) {
 
 }
 
+// inserts a new project item into the database
 function newProjectItem() {
   const itemName = $("#new-item-name").val();
   const itemDescription = $("#new-item-description").val();
@@ -778,8 +767,6 @@ function deleteItemChecklist(itemChecklistID) {
     });
   }
 }
-
-
 
 function getItemChecklistCard(itemChecklistID) {
   var element = '#item-checklists .item-checklist[data-item-checklist-id="' + itemChecklistID + '"]';

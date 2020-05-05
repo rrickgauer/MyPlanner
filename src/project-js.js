@@ -702,7 +702,7 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
   html += '<button class="dropdown-item" type="button">Move up</button>';
   html += '<button class="dropdown-item" type="button">Move down</button>';
   html += '<div class="dropdown-divider"></div>';
-  html += '<button class="dropdown-item" type="button">Delete</button>';
+  html += '<button class="dropdown-item" type="button" onclick="deleteItemChecklistItem(this)">Delete</button>';
   html += '</div>';
 
 

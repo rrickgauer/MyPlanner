@@ -86,9 +86,9 @@
                     <form>
                       <div class="form-group">
                         <label for="new-project-checklist-name">Name:</label>
-                        <input type="text" id="new-project-checklist-name" class="form-control">
+                        <input type="text" id="new-item-checklist-name" class="form-control">
                       </div>
-                      <button id="new-project-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
+                      <button id="new-item-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
                     </form>
                   </div>
                 </div>

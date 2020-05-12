@@ -1,7 +1,7 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const projectID = urlParams.get('projectID');
-const backendURL = 'project-backend-items.php';
+const backendItemUrl = 'project-backend-items.php';
 
 $(document).ready(function() {
   getChecklists();
@@ -13,8 +13,8 @@ $(document).ready(function() {
 function addEventListeners() {
   $("#new-project-name").on("keyup", updateRenameProjectButton);
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
-  $("#new-project-checklist-name").on("keyup", updateNewProjectChecklistButton);
-  $("#new-project-checklist-btn").on("click", addProjectChecklist);
+  $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
+  $("#new-item-checklist-btn").on("click", addItemChecklist);
 }
 
 // executes addTodoItem when enter is pressed
@@ -457,9 +457,6 @@ function openItemModal(itemID) {
       getItemChecklistSidebar(itemID);
       getAllOpenItemChecklists(itemID);
       $('#item-modal').modal('show');
-
-
-
     }
   });
 }
@@ -511,20 +508,20 @@ function setItemModalData(item) {
 }
 
 
-function updateNewProjectChecklistButton() {
-  var newProjectChecklistName = $("#new-project-checklist-name").val();
+function updateNewItemChecklistButton() {
+  var newProjectChecklistName = $("#new-item-checklist-name").val();
 
   if (newProjectChecklistName.length > 0) {
-    $("#new-project-checklist-btn").prop('disabled', false);
+    $("#new-item-checklist-btn").prop('disabled', false);
   } else {
-    $("#new-project-checklist-btn").prop('disabled', true);
+    $("#new-item-checklist-btn").prop('disabled', true);
   }
 }
 
 
-function addProjectChecklist() {
+function addItemChecklist() {
   var itemID = $("#item-modal").attr('data-item-id');
-  var checklistName = $("#new-project-checklist-name").val();
+  var checklistName = $("#new-item-checklist-name").val();
 
   $.ajax({
     type: "POST",
@@ -537,6 +534,10 @@ function addProjectChecklist() {
 
     success: function(response) {
       setItemChecklistSidebar(JSON.parse(response));
+
+      // clear the input
+      $("#new-item-checklist-name").val('');
+      $("#new-item-checklist-btn").prop('disabled', true);
     }
   });
 }
@@ -839,7 +840,7 @@ function addItemChecklistItemFromButton(btn) {
 
   console.log(content);
 
-  $.post(backendURL, data, function(response) {
+  $.post(backendItemUrl, data, function(response) {
       var newItem = JSON.parse(response);
       appendNewItemChecklistItem(newItem, itemChecklist);
 
@@ -859,7 +860,7 @@ function addItemChecklistItem(content, itemChecklistID) {
     'itemChecklistID': itemChecklistID,
   }
 
-  $.post(backendURL, data, function(response) {
+  $.post(backendItemUrl, data, function(response) {
       var newItem = JSON.parse(response);
       appendNewItemChecklistItem(newItem, itemChecklist);
 

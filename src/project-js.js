@@ -918,6 +918,7 @@ function deleteItemChecklistItem(item) {
   // post the data
   $.post(backendItemUrl, data, function(response) {
     $(itemChecklistItem).remove();  // remove the item
+    toastAlert('Item deleted!');
   });
 }
 
@@ -950,6 +951,7 @@ function editItemChecklistItem(selector) {
     $(item).find('.content').text(newContent);
     $(item).find('.left').show();
     $(item).find('.right').show();
+    toastAlert('Item updated!');
   });
 
 
@@ -965,8 +967,11 @@ function editItemChecklistItem(selector) {
       $(item).find('.content').text(newContent);
       $(item).find('.left').show();
       $(item).find('.right').show();
+      toastAlert('Item updated!');
     }
   });
+
+
 }
 
 

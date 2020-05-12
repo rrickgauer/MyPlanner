@@ -15,7 +15,29 @@ function addEventListeners() {
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
   $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
   $("#new-item-checklist-btn").on("click", addItemChecklist);
+
+  $("#item-modal").on("hide.bs.modal", clearItemModalHtml);
 }
+
+
+function clearItemModalHtml() {
+
+  var modal = $("#item-modal");
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
 
 // executes addTodoItem when enter is pressed
 $(document).on("keypress", "#new-project-checklist-item-input", function(e) {
@@ -491,8 +513,12 @@ function getAllOpenItemChecklists(itemID) {
     success: function(response) {
       var openItemChecklists = JSON.parse(response);
 
+      console.log(openItemChecklists);
+
+      var size = openItemChecklists.length;
+
       // display all open checklists
-      for (var count = 0; count < openItemChecklists.length; count++) {
+      for (var count = 0; count < size; count++) {
         openItemChecklist(openItemChecklists[count].id);       
       }
     }

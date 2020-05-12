@@ -133,13 +133,12 @@ else if (isset($_POST['itemChecklistID'], $_POST['function'], $_POST['content'])
 }
 
 
-
-
-
-
-
-
-
+// delete item checklist item
+else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['function'] == 'delete-item-checklist-item') {
+  $itemChecklistItemID = $_POST['itemChecklistItemID'];
+  deleteItemChecklistItem($itemChecklistItemID);
+  exit;
+}
 
 
 ?>

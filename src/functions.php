@@ -591,24 +591,13 @@ function getRecentInsertedItemChecklistItem($itemChecklistID) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// delete a item checklist item
+function deleteItemChecklistItem($itemChecklistItemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('DELETE FROM Item_Checklist_Items WHERE id=:itemChecklistItemID');
+  $itemChecklistItemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
+  $sql->execute();
+}
 
 ?>

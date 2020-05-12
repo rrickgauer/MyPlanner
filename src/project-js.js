@@ -886,3 +886,22 @@ $(document).on("keypress", ".new-item-checklist-item-input", function(e) {
   }
 });
 
+function deleteItemChecklistItem(item) {
+
+  var itemChecklistItem = $(item).closest('li.list-group-item');      // item checklist item
+  var id = $(itemChecklistItem).attr('data-item-checklist-item-id');  // item checklist item id
+
+  // data to pass to the server
+  var data = {
+    'itemChecklistItemID': id,
+    'function': 'delete-item-checklist-item',
+  }
+
+
+  // post the data
+  $.post(backendItemUrl, data, function(response) {
+    $(itemChecklistItem).remove();  // remove the item
+  });
+
+}
+

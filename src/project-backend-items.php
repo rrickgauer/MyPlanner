@@ -118,6 +118,8 @@ else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['fun
   exit;
 }
 
+
+// add item checklist item
 else if (isset($_POST['itemChecklistID'], $_POST['function'], $_POST['content']) && $_POST['function'] == 'add-item-checklist-item') {
   $content = $_POST['content'];
   $itemChecklistID = $_POST['itemChecklistID'];

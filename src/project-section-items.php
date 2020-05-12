@@ -70,7 +70,6 @@
             <br>
             <h1 class="custom-font">Checklists</h1><br>
 
-
             <div class="row">
               <div class="col-2">
 

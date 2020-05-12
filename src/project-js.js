@@ -698,7 +698,7 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
   // dropdown menu
   html += '<div class="dropdown-menu">';
-  html += '<button class="dropdown-item" type="button">Edit</button>';
+  html += '<button class="dropdown-item" type="button" onclick="editItemChecklistItem(this)">Edit</button>';
   html += '<div class="dropdown-divider"></div>';
   html += '<button class="dropdown-item" type="button">Move up</button>';
   html += '<button class="dropdown-item" type="button">Move down</button>';
@@ -902,6 +902,27 @@ function deleteItemChecklistItem(item) {
   $.post(backendItemUrl, data, function(response) {
     $(itemChecklistItem).remove();  // remove the item
   });
+}
+
+
+function editItemChecklistItem(selector) {
+
+  var item = $(selector).closest('li.list-group-item');
+  var contentText = $(item).find('.content').html();
+  var inputHTML = '<input class="form-control" value="' + contentText + '">';
+  $(item).html(inputHTML);
+
+
+  // when the user clicks enter or clicks off the input set the value of the 
+
+  
+
+
+
+  
+
+
+
 
 }
 

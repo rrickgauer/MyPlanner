@@ -537,6 +537,9 @@ function addProjectChecklist() {
 
     success: function(response) {
       setItemChecklistSidebar(JSON.parse(response));
+
+      // console.log(response);
+
     }
   });
 }
@@ -641,7 +644,7 @@ function getItemChecklistCardHtml(data) {
   html += '<div class="input-group mb-3">';
   html += '<input type="text" class="form-control new-item-checklist-item-input">';
   html += '<div class="input-group-append">';
-  html += '<button class="btn btn-outline-secondary" type="button" onclick="addItemChecklistItem(this)">+</button>';
+  html += '<button class="btn btn-outline-secondary" type="button" onclick="addItemChecklistItemFromButton(this)">+</button>';
   html += '</div>';
   html += '</div>';
   html += '<ul class="list-group list-group-flush">';
@@ -825,7 +828,7 @@ function setItemChecklistItemToComplete(itemChecklistItemID) {
 }
 
 
-function addItemChecklistItem(btn) {
+function addItemChecklistItemFromButton(btn) {
 
   var itemChecklistID = $(btn).closest(".item-checklist").attr("data-item-checklist-id");
   var content = $(btn).closest(".item-checklist").find(".new-item-checklist-item-input").val();

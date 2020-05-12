@@ -142,5 +142,25 @@ else if (isset($_POST['itemChecklistItemID'], $_POST['function']) && $_POST['fun
   exit;
 }
 
+// update item checklist item content
+else if (isset($_POST['function'], $_POST['itemChecklistItemID'], $_POST['content']) && $_POST['function'] == 'update-item-checklist-item-content') {
+  $itemChecklistItemID = $_POST['itemChecklistItemID'];
+  $content = $_POST['content'];
+
+  updateItemChecklistItemContent($itemChecklistItemID, $content);
+
+  $data = [];
+
+  $data['id'] = $itemChecklistItemID;
+  $data['content'] = $content;
+
+  echo json_encode($data);
+  exit;
+}
+
+
+
+
+
 
 ?>

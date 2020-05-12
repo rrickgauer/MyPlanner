@@ -909,13 +909,61 @@ function editItemChecklistItem(selector) {
 
   var item = $(selector).closest('li.list-group-item');
   var contentText = $(item).find('.content').html();
-  var inputHTML = '<input class="form-control" value="' + contentText + '">';
-  $(item).html(inputHTML);
+  var id = $(item).attr('data-item-checklist-item-id');
+
+  // add the input html
+  var inputHTML = '<input class="form-control edit-item-checklist-item-input" value="' + contentText + '">';
+  $(item).append(inputHTML);
+
+  $('.edit-item-checklist-item-input').select();
 
 
-  // when the user clicks enter or clicks off the input set the value of the 
+  // hide the html
+  $(item).find('.left').hide();
+  $(item).find('.right').hide();
 
+  // user clicks off the input set the value of the input
+  $(".edit-item-checklist-item-input").on('focusout', function(e) {
+
+    // get the new content from the input
+    var newContent = $(this).val();
+    updateItemChecklistItemContent(id, newContent);
+
+    $(this).remove();
+    $(item).find('.content').text(newContent);
+    $(item).find('.left').show();
+    $(item).find('.right').show();
+  });
+
+
+  // user clicks enter 
+  $(".edit-item-checklist-item-input").on('keypress', function(e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+
+      var newContent = $(this).val();
+      updateItemChecklistItemContent(id, newContent);
+
+      $(this).remove();
+      $(item).find('.content').text(newContent);
+      $(item).find('.left').show();
+      $(item).find('.right').show();
+    }
+  });
 }
+
+
+function updateItemChecklistItemContent(itemChecklistItemID, newContent) {
+  var data = {
+    'itemChecklistItemID': itemChecklistItemID,
+    'function': 'update-item-checklist-item-content',
+    'content': newContent,
+  }
+
+  // send request to the server
+  $.post(backendItemUrl, data);
+}
+
 
 
 

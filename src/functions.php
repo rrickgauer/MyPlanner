@@ -600,4 +600,20 @@ function deleteItemChecklistItem($itemChecklistItemID) {
   $sql->execute();
 }
 
+// update an item checklist item's content
+function updateItemChecklistItemContent($itemChecklistItemID, $content) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Item_Checklist_Items SET content=:content WHERE id=:itemChecklistItemID');
+
+  // sanitize id
+  $itemChecklistItemID = filter_var($itemChecklistItemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemChecklistItemID', $itemChecklistItemID, PDO::PARAM_INT);
+
+  // sanitize content
+  $content = filter_var($content, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':content', $content, PDO::PARAM_STR);
+
+  $sql->execute();
+}
+
 ?>

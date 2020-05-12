@@ -15,28 +15,19 @@ function addEventListeners() {
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
   $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
   $("#new-item-checklist-btn").on("click", addItemChecklist);
-
-  $("#item-modal").on("hide.bs.modal", clearItemModalHtml);
 }
 
 
-function clearItemModalHtml() {
-
-  var modal = $("#item-modal");
-
-
-
-
-
-
-
-
+// displays a toast alert
+function toastAlert(text) {
+  $.toast({
+    text: text,
+    position: 'top-right',
+    loader: false,
+    bgColor: '#3D3D3D',
+    textColor: 'white'
+  });
 }
-
-
-
-
-
 
 
 // executes addTodoItem when enter is pressed

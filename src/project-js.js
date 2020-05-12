@@ -537,9 +537,6 @@ function addProjectChecklist() {
 
     success: function(response) {
       setItemChecklistSidebar(JSON.parse(response));
-
-      // console.log(response);
-
     }
   });
 }

@@ -479,8 +479,6 @@ function openItemModal(itemID) {
       getItemChecklistSidebar(itemID);
       getAllOpenItemChecklists(itemID);
       $('#item-modal').modal('show');
-
-      console.log(item[0]);
     }
   });
 }
@@ -1061,9 +1059,23 @@ function deleteItem() {
 function updateItemInfo() {
 
   var itemID = getOpenItemModalID();
-  var newData = getEditItemFormData();
+  var itemData = getEditItemFormData();
 
-  
+  var data = {
+    'itemID': itemID,
+    'name': itemData.name,
+    'dateDue': itemData.dateDue,
+    'dateCreated': itemData.dateCreated,
+    'description': itemData.description,
+    'function': 'update-item',
+  }
+
+  $.post(backendItemUrl, data, function(response) {
+    openItemModal(itemID);        // update the item modal
+    toastAlert('Item updated!');  // send alert
+  });
+
+
 }
 
 
@@ -1075,12 +1087,15 @@ function getEditItemFormData() {
   var dateCreated = $("#edit-item-date-created").val();
   var description = $("#edit-item-description").val();
 
+  if (dateDue.length <= 0)
+    dateDue = null;
+
   var data =  {
     itemID: itemID,
     name: name,
     dateDue: dateDue,
     dateCreated: dateCreated,
-    description: description,d
+    description: description,
   }
 
   return data;

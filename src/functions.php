@@ -633,6 +633,38 @@ function deleteItem($itemID) {
   $sql->execute();
 }
 
+function updateItem($itemID, $name, $dateDue, $dateCreated, $description) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Items SET name=:name, date_created=:dateCreated, date_due=:dateDue, description=:description WHERE id=:itemID');
+
+  // sanitize item id
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+
+  // sanitize name
+  $name = filter_var($name, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':name', $name, PDO::PARAM_STR);
+
+  // sanitize date created
+  $dateCreated = filter_var($dateCreated, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
+
+
+  // sanitize date due
+  $dateDue = filter_var($dateDue, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':dateDue', $dateDue, PDO::PARAM_STR);
+
+  // sanitize description
+  $description = filter_var($description, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':description', $description, PDO::PARAM_STR);
+
+
+  $sql->execute();
+
+
+
+}
+
 
 
 

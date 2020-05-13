@@ -166,6 +166,19 @@ else if (isset($_POST['function'], $_POST['itemID']) && $_POST['function'] == 'd
 }
 
 
+// update item info
+else if (isset($_POST['function'], $_POST['itemID'], $_POST['name'], $_POST['dateDue'], $_POST['dateCreated'], $_POST['description']) && $_POST['function'] == 'update-item') {
+  $itemID      = $_POST['itemID'];
+  $name        = $_POST['name'];
+  $dateDue     = $_POST['dateDue'];
+  $dateCreated = $_POST['dateCreated'];
+  $description = $_POST['description'];
+
+  updateItem($itemID, $name, $dateDue, $dateCreated, $description);
+
+  echo 'updated';
+  exit;
+}
 
 
 

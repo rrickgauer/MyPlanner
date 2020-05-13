@@ -7,13 +7,6 @@ $(document).ready(function() {
   getChecklists();
   getProjectItems();
   addEventListeners();
-
-  // enableFlatpickr();
-
-
-
-
-
 });
 
 function addEventListeners() {
@@ -27,16 +20,21 @@ function addEventListeners() {
 
 
 function closeItemModal() {
+
+  // clear modal html
   $("#item-modal .modal-body .sidebar-item-checklists").html('');
   $("#item-checklists").html('');
   $('#item-modal .modal-title').html('');
+
+  // reload the project item cards
+  getProjectItems();
 }
 
 // displays a toast alert
 function toastAlert(text) {
   $.toast({
     text: text,
-    position: 'top-right',
+    position: 'bottom-center',
     loader: false,
     bgColor: '#3D3D3D',
     textColor: 'white'
@@ -581,6 +579,8 @@ function addItemChecklist() {
       // clear the input
       $("#new-item-checklist-name").val('');
       $("#new-item-checklist-btn").prop('disabled', true);
+
+      getProjectItems();
     }
   });
 }
@@ -833,6 +833,9 @@ function deleteItemChecklist(itemChecklistID) {
         // reload the item modal
         var itemID = getOpenItemModalID();
         loadItemModalChecklist(itemID);
+        getProjectItems();
+
+        toastAlert('Item checklist deleted.');
       }
     });
   }

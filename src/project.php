@@ -179,7 +179,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
 
                 <!-- project checklist dropdown menu items -->
                 <div class="dropdown-menu">
-                  <button class="dropdown-item">Rename</button>
+                  <button class="dropdown-item" data-toggle="modal">Rename</button>
                   <button class="dropdown-item" onclick="deleteChecklist()">Delete</button>
                 </div>
               </div>
@@ -221,6 +221,28 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
               <!-- submit button -->
               <input id="new-project-name-btn" type="submit" value="Save" class="btn btn-primary float-right" disabled>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- rename project checklist -->
+    <div class="modal" id="rename-project-checklist-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Rename checklist</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>

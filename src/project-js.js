@@ -15,7 +15,24 @@ function addEventListeners() {
   $("#new-checklist-name").on("keyup", updateNewChecklistButton);
   $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
   $("#new-item-checklist-btn").on("click", addItemChecklist);
+
+  $("#item-modal").on("hide.bs.modal", closeItemModal);
 }
+
+
+function closeItemModal() {
+  $("#item-modal .modal-body .sidebar-item-checklists").html('');
+  $("#item-checklists").html('');
+  $('#item-modal .modal-title').html('');
+}
+
+
+
+
+
+
+
+
 
 
 // displays a toast alert
@@ -453,8 +470,6 @@ function newProjectItem() {
 
 
 function openItemModal(itemID) {
-  
-  $("#item-checklists").html(''); // clear the current open item checklists
 
   $.ajax({
     type: "GET",
@@ -465,6 +480,7 @@ function openItemModal(itemID) {
     },
 
     success: function(response) {
+      // console.log(response);
       var item = JSON.parse(response);
       setItemModalData(item[0]);
       getItemChecklistSidebar(itemID);
@@ -492,36 +508,17 @@ function loadItemModalChecklist(itemID) {
   });
 }
 
-function getAllOpenItemChecklists(itemID) {
-  $.ajax({
-    type: "GET",
-    url: 'project-backend-items.php',
-    data: {
-      "function": 'get-open-item-checklists',
-      "itemID": itemID,
-    },
-
-    success: function(response) {
-      var openItemChecklists = JSON.parse(response);
-
-      console.log(openItemChecklists);
-
-      var size = openItemChecklists.length;
-
-      // display all open checklists
-      for (var count = 0; count < size; count++) {
-        openItemChecklist(openItemChecklists[count].id);       
-      }
-    }
-  });
-}
-
 function setItemModalData(item) {
   // set the title
   $("#item-modal .modal-title").html(item.name);
 
   // set the modal data-id
   $("#item-modal").attr("data-item-id", item.id);
+
+  // info tab set data
+  $("#item-pills-info .info-section.name .content").html(item.name);                // item name
+  $("#item-pills-info .info-section.date-due .content").html(item.date_due_date);   // date due
+  $("#item-pills-info .info-section.description .content").html(item.description);  // description
 }
 
 
@@ -616,6 +613,31 @@ function getItemChecklistSidebarHtml(checklist) {
   return html;
 }
 
+
+function getAllOpenItemChecklists(itemID) {
+  $.ajax({
+    type: "GET",
+    url: 'project-backend-items.php',
+    data: {
+      "function": 'get-open-item-checklists',
+      "itemID": itemID,
+    },
+
+    success: function(response) {
+      var openItemChecklists = JSON.parse(response);
+
+      console.log(openItemChecklists);
+
+      var size = openItemChecklists.length;
+
+      // display all open checklists
+      for (var count = 0; count < size; count++) {
+        openItemChecklist(openItemChecklists[count].id);       
+      }
+    }
+  });
+}
+
 // open an item checklist
 function openItemChecklist(itemChecklistID) {
   // var itemChecklistID = $(itemChecklist).closest(".nav-item").attr("data-item-checklist-id");
@@ -632,6 +654,7 @@ function openItemChecklist(itemChecklistID) {
       var html = getItemChecklistCardHtml(JSON.parse(response));  // server response
       $("#item-checklists").append(html);                         // add the checklist to the section
       disableItemChecklistSidebarItem(itemChecklistID);           // disable the checklist sidebar open button
+      console.log(html);
     }
   });
 

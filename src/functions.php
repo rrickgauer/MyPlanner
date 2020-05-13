@@ -420,7 +420,12 @@ function getMostRecentItem($projectID) {
 
 function getProjectItem($itemID) {
   $pdo = dbConnect($itemID);
-  $sql = $pdo->prepare('SELECT * FROM Items WHERE id=:itemID LIMIT 1');
+  // $sql = $pdo->prepare('SELECT * FROM Items WHERE id=:itemID LIMIT 1');
+
+
+  $sql = $pdo->prepare('SELECT Items.id, Items.name, Items.name, Items.description, Items.completed, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time FROM Items WHERE id=:itemID LIMIT 1');
+
+
   $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
   $sql->execute();

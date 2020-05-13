@@ -215,5 +215,8 @@ body {
   font-weight: bold;
   margin-left: 15px;
 }
+#item-pills-info .info-section .content {
+  margin-left: 53px;
+}
 
 /*# sourceMappingURL=mystyle.css.map */

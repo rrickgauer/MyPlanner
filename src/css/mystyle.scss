@@ -263,10 +263,8 @@ body {
 
 #item-pills-info {
 
-  .info-section {
-    
+  .info-section {    
     margin: 20px 0px 20px 0px;
-
 
     .heading {
       display: flex;
@@ -279,14 +277,15 @@ body {
         color: white;
       }
 
-
-      
-
       .description {
         font-size: 1.8em;
         font-weight: bold;
         margin-left: 15px;
       }
+    }
+
+    .content {
+      margin-left: 53px;
     }
   }
 

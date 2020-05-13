@@ -103,7 +103,7 @@
 
           <!-- notes -->
           <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
-            profile
+            notes
           </div>
 
           
@@ -112,15 +112,15 @@
 
             <button type="button" class="btn btn-secondary float-right"><i class='bx bx-cog'></i></button>
 
+
+
             <div class="info-section name">
               <div class="heading">
                 <div class="icon"><i class='bx bx-card'></i></div>
                 <div class="description">Item name</div>
               </div>
 
-              <div class="content">
-                <?php  ?>
-              </div>
+              <div class="content"></div>
  
             </div>
 
@@ -130,9 +130,7 @@
                 <div class="description">Date due</div>
               </div>
 
-              <div class="content">
-                
-              </div>
+              <div class="content"></div>
 
             </div>
 
@@ -142,9 +140,7 @@
                 <div class="description">Description</div>
               </div>
 
-              <div class="content">
-                
-              </div>
+              <div class="content"></div>
 
             </div>
 

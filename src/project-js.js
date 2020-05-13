@@ -115,7 +115,6 @@ function getChecklistItems(checklistID) {
     success: function(response) {
       var data = JSON.parse(response);
       displayChecklistItems(data);
-      // console.log(data);
     }
   });
 }
@@ -446,8 +445,6 @@ function newProjectItem() {
     },
 
     success: function(response) {
-      console.log(JSON.parse(response));
-
       var item = JSON.parse(response);
       setItemModalData(item[0]);
       getItemChecklistSidebar(item[0].id);
@@ -471,7 +468,6 @@ function openItemModal(itemID) {
     },
 
     success: function(response) {
-      // console.log(response);
       var item = JSON.parse(response);
       setItemModalData(item[0]);
       getItemChecklistSidebar(itemID);
@@ -616,9 +612,6 @@ function getAllOpenItemChecklists(itemID) {
 
     success: function(response) {
       var openItemChecklists = JSON.parse(response);
-
-      console.log(openItemChecklists);
-
       var size = openItemChecklists.length;
 
       // display all open checklists
@@ -645,7 +638,6 @@ function openItemChecklist(itemChecklistID) {
       var html = getItemChecklistCardHtml(JSON.parse(response));  // server response
       $("#item-checklists").append(html);                         // add the checklist to the section
       disableItemChecklistSidebarItem(itemChecklistID);           // disable the checklist sidebar open button
-      console.log(html);
     }
   });
 
@@ -863,8 +855,6 @@ function addItemChecklistItemFromButton(btn) {
     'function': 'add-item-checklist-item',
     'itemChecklistID': itemChecklistID,
   }
-
-  console.log(content);
 
   $.post(backendItemUrl, data, function(response) {
       var newItem = JSON.parse(response);

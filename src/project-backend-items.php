@@ -176,7 +176,8 @@ else if (isset($_POST['function'], $_POST['itemID'], $_POST['name'], $_POST['dat
 
   updateItem($itemID, $name, $dateDue, $dateCreated, $description);
 
-  echo 'updated';
+  $item = getProjectItem($itemID)->fetch(PDO::FETCH_ASSOC);
+  echo json_encode($item);
   exit;
 }
 

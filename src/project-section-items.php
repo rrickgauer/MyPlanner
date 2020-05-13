@@ -162,13 +162,13 @@
                       <!-- date due -->
                       <div class="form-group">
                         <label for="edit-item-date-due">Date due:</label>
-                        <input type="date" id="edit-item-date-due" class="form-control">
+                        <input type="text" id="edit-item-date-due" class="form-control">
                       </div>
 
                       <!-- date created -->
                       <div class="form-group">
                         <label for="edit-item-date-created">Date created:</label>
-                        <input type="date" id="edit-item-date-created" class="form-control">
+                        <input type="text" id="edit-item-date-created" class="form-control">
                       </div>
 
                       <!-- description -->

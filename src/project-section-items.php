@@ -110,14 +110,6 @@
           <!-- info -->
           <div class="tab-pane fade show active" id="item-pills-info" role="tabpanel">
 
-<!--             <div class="dropleft float-right">
-              <button type="button" class="btn btn-secondary" data-toggle="dropdown"><i class='bx bx-menu'></i></button>
-              <div class="dropdown-menu">
-                <button type="button" class="dropdown-item">Edit</button>
-                <button type="button" class="dropdown-item">Edit</button>
-              </div>
-            </div> -->
-
             <div class="row">
 
               <div class="col-9">
@@ -152,8 +144,57 @@
                 <h6>Actions</h6>
 
                 <div class="list-group list-group-flush">
-                  <button type="button" class="list-group-item list-group-item-action"><i class='bx bx-pencil'></i>&nbsp;Edit</button>
-                  <button type="button" class="list-group-item list-group-item-action" onclick="deleteItem()"><i class='bx bx-trash'></i>&nbsp;Delete</button>
+                  
+                  <div class="dropleft">
+                    <button type="button" class="list-group-item list-group-item-action" data-toggle="dropdown">
+                      <i class='bx bx-pencil'></i>&nbsp;Edit
+                    </button>
+
+                    <div class="dropdown-menu dropdown-form" id="edit-item-info-menu">
+                      <h5>Edit item info</h5>
+                      
+                      <!-- name -->
+                      <div class="form-group">
+                        <label for="edit-item-name">Name:</label>
+                        <input type="text" id="edit-item-name" class="form-control">
+                      </div>
+                      
+                      <!-- date due -->
+                      <div class="form-group">
+                        <label for="edit-item-date-due">Date due:</label>
+                        <input type="date" id="edit-item-date-due" class="form-control">
+                      </div>
+
+                      <!-- date created -->
+                      <div class="form-group">
+                        <label for="edit-item-date-created">Date created:</label>
+                        <input type="date" id="edit-item-date-created" class="form-control">
+                      </div>
+
+                      <!-- description -->
+                      <div class="form-group">
+                        <label for="edit-item-description">Description:</label>
+                        <textarea id="edit-item-description" class="form-control" rows="5"></textarea>
+                      </div>
+
+
+
+
+
+  
+
+
+                    </div>
+
+                  </div>
+
+                  
+
+                  <button type="button" class="list-group-item list-group-item-action" onclick="deleteItem()">
+                    <i class='bx bx-trash'></i>&nbsp;Delete
+                  </button>
+
+
                 </div>
               </div>
 

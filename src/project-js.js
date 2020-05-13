@@ -8,6 +8,12 @@ $(document).ready(function() {
   getProjectItems();
   addEventListeners();
 
+  enableFlatpickr();
+
+
+
+
+
 });
 
 function addEventListeners() {
@@ -1004,6 +1010,27 @@ function deleteItem() {
       location.reload();
     });
   }
+}
+
+
+
+function enableFlatpickr() {
+
+  // edit item date due 
+  flatpickr("#edit-item-date-due", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    altInput: true,
+    altFormat: "F j, Y H:i",
+  });
+
+  // edit item date created 
+  flatpickr("#edit-item-date-created", {
+     enableTime: true,
+     dateFormat: "Y-m-d H:i",
+     altInput: true,
+     altFormat: "F j, Y H:i",
+  });
 }
 
 

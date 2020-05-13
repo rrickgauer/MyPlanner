@@ -708,10 +708,7 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
 
   // dropdown button
-  html += '<div class="dropleft">';
-  html += '<button class="btn" type="button" data-toggle="dropdown">';
-  html += '<i class="bx bx-dots-vertical-rounded"></i>';
-  html += '</button>';
+  html += '<div class="dropleft"><button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
 
   // dropdown menu
   html += '<div class="dropdown-menu">';
@@ -725,9 +722,7 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
 
   // closing tags
-  html += '</div>';
-  html += '</div>';
-  html += '</li>';
+  html += '</div></div></li>';
 
   return html;
 }

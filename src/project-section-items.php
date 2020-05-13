@@ -118,7 +118,9 @@
                 <div class="description">Item name</div>
               </div>
 
-              <div class="content"></div>
+              <div class="content">
+                <?php  ?>
+              </div>
  
             </div>
 

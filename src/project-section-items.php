@@ -46,7 +46,7 @@
       
       <!-- body -->
       <div class="modal-body">
-        
+
         <!-- item modal navbar -->
         <ul class="nav nav-pills justify-content-center" role="tablist">
           <li class="nav-item">
@@ -110,55 +110,59 @@
           <!-- info -->
           <div class="tab-pane fade show active" id="item-pills-info" role="tabpanel">
 
-            <button type="button" class="btn btn-secondary float-right"><i class='bx bx-cog'></i></button>
+<!--             <div class="dropleft float-right">
+              <button type="button" class="btn btn-secondary" data-toggle="dropdown"><i class='bx bx-menu'></i></button>
+              <div class="dropdown-menu">
+                <button type="button" class="dropdown-item">Edit</button>
+                <button type="button" class="dropdown-item">Edit</button>
+              </div>
+            </div> -->
 
+            <div class="row">
 
+              <div class="col-9">
 
-            <div class="info-section name">
-              <div class="heading">
-                <div class="icon"><i class='bx bx-card'></i></div>
-                <div class="description">Item name</div>
+              <div class="info-section name">
+                <div class="heading">
+                  <div class="icon"><i class='bx bx-card'></i></div>
+                  <div class="description">Item name</div>
+                </div>
+                <div class="content"></div>
               </div>
 
-              <div class="content"></div>
- 
-            </div>
-
-            <div class="info-section date-due">
-              <div class="heading">
-                <div class="icon"><i class='bx bx-time'></i></div>
-                <div class="description">Date due</div>
+              <div class="info-section date-due">
+                <div class="heading">
+                  <div class="icon"><i class='bx bx-time'></i></div>
+                  <div class="description">Date due</div>
+                </div>
+                <div class="content"></div>
               </div>
 
-              <div class="content"></div>
-
-            </div>
-
-            <div class="info-section description">
-              <div class="heading">
-                <div class="icon"><i class='bx bx-detail'></i></div>
-                <div class="description">Description</div>
+              <div class="info-section description">
+                <div class="heading">
+                  <div class="icon"><i class='bx bx-detail'></i></div>
+                  <div class="description">Description</div>
+                </div>
+                <div class="content"></div>
               </div>
 
-              <div class="content"></div>
+              </div>
+
+              <div class="col-3">
+                <h6>Actions</h6>
+
+                <div class="list-group list-group-flush">
+                  <button type="button" class="list-group-item list-group-item-action"><i class='bx bx-pencil'></i>&nbsp;Edit</button>
+                  <button type="button" class="list-group-item list-group-item-action" onclick="deleteItem()"><i class='bx bx-trash'></i>&nbsp;Delete</button>
+                </div>
+              </div>
+
+
+
+
+
 
             </div>
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
 
           </div>
 

@@ -1006,6 +1006,27 @@ function updateItemChecklistItemContent(itemChecklistItemID, newContent) {
 
 
 
+function deleteItem() {
+
+  if (confirm('Are you sure you want to delete this item?')) {
+
+    var itemID = getOpenItemModalID();
+
+    var data = {
+      'function': 'delete-item',
+      'itemID': itemID,
+    }
+
+    // send request to the server
+    // reload the page after item has been deleted
+    $.post(backendItemUrl, data, function(response) {
+      location.reload();
+    });
+  }
+}
+
+
+
 
 
 

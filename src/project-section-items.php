@@ -177,6 +177,8 @@
                         <textarea id="edit-item-description" class="form-control" rows="5"></textarea>
                       </div>
 
+                      <button type="button" class="btn btn-primary float-right" onclick="updateItemInfo()">Save</button>
+
 
 
 

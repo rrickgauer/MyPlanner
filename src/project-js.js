@@ -8,7 +8,7 @@ $(document).ready(function() {
   getProjectItems();
   addEventListeners();
 
-  enableFlatpickr();
+  // enableFlatpickr();
 
 
 
@@ -479,6 +479,8 @@ function openItemModal(itemID) {
       getItemChecklistSidebar(itemID);
       getAllOpenItemChecklists(itemID);
       $('#item-modal').modal('show');
+
+      console.log(item[0]);
     }
   });
 }
@@ -512,6 +514,48 @@ function setItemModalData(item) {
   $("#item-pills-info .info-section.name .content").html(item.name);                // item name
   $("#item-pills-info .info-section.date-due .content").html(item.date_due_date);   // date due
   $("#item-pills-info .info-section.description .content").html(item.description);  // description
+
+
+  // set the edit item info form values
+  $("#edit-item-name").val(item.name);
+  $("#edit-item-description").val(item.description);
+  setFlatpickrDate($("#edit-item-date-created"), item.date_created);
+  setFlatpickrDate($("#edit-item-date-due"), item.date_due);
+
+
+}
+
+
+
+function setFlatpickrDate(element, date) {
+  flatpickr(element, {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    altInput: true,
+    altFormat: "F j, Y H:i",
+    defaultDate: date,
+  });
+}
+
+
+
+function enableFlatpickr() {
+
+  // edit item date due 
+  flatpickr("#edit-item-date-due", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    altInput: true,
+    altFormat: "F j, Y H:i",
+  });
+
+  // edit item date created 
+  flatpickr("#edit-item-date-created", {
+     enableTime: true,
+     dateFormat: "Y-m-d H:i",
+     altInput: true,
+     altFormat: "F j, Y H:i",
+  });
 }
 
 
@@ -1014,24 +1058,36 @@ function deleteItem() {
 
 
 
-function enableFlatpickr() {
+function updateItemInfo() {
 
-  // edit item date due 
-  flatpickr("#edit-item-date-due", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    altInput: true,
-    altFormat: "F j, Y H:i",
-  });
+  var itemID = getOpenItemModalID();
+  var newData = getEditItemFormData();
 
-  // edit item date created 
-  flatpickr("#edit-item-date-created", {
-     enableTime: true,
-     dateFormat: "Y-m-d H:i",
-     altInput: true,
-     altFormat: "F j, Y H:i",
-  });
+  
 }
+
+
+function getEditItemFormData() {
+
+  var itemID = getOpenItemModalID();
+  var name = $("#edit-item-name").val();
+  var dateDue = $("#edit-item-date-due").val();
+  var dateCreated = $("#edit-item-date-created").val();
+  var description = $("#edit-item-description").val();
+
+  var data =  {
+    itemID: itemID,
+    name: name,
+    dateDue: dateDue,
+    dateCreated: dateCreated,
+    description: description,d
+  }
+
+  return data;
+
+}
+
+
 
 
 

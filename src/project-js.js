@@ -26,15 +26,6 @@ function closeItemModal() {
   $('#item-modal .modal-title').html('');
 }
 
-
-
-
-
-
-
-
-
-
 // displays a toast alert
 function toastAlert(text) {
   $.toast({
@@ -351,7 +342,7 @@ function updateNewChecklistButton() {
 function getProjectItems() {
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-items',
       "projectID": projectID,
@@ -446,7 +437,7 @@ function newProjectItem() {
 
   $.ajax({
     type: "POST",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'insert-item',
       "projectID": projectID,
@@ -473,7 +464,7 @@ function openItemModal(itemID) {
 
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-item',
       "itemID": itemID,
@@ -493,7 +484,7 @@ function openItemModal(itemID) {
 function loadItemModalChecklist(itemID) {
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-item',
       "itemID": itemID,
@@ -539,7 +530,7 @@ function addItemChecklist() {
 
   $.ajax({
     type: "POST",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'insert-item-checklist',
       "itemID": itemID,
@@ -561,7 +552,7 @@ function addItemChecklist() {
 function getItemChecklistSidebar(itemID) {
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-item-checklists',
       "itemID": itemID,
@@ -617,7 +608,7 @@ function getItemChecklistSidebarHtml(checklist) {
 function getAllOpenItemChecklists(itemID) {
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-open-item-checklists',
       "itemID": itemID,
@@ -644,7 +635,7 @@ function openItemChecklist(itemChecklistID) {
 
   $.ajax({
     type: "GET",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'get-item-checklist-items',
       "itemChecklistID": itemChecklistID,
@@ -757,7 +748,7 @@ function closeItemChecklist(itemChecklist) {
 
   $.ajax({
     type: "POST",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'close-item-checklist',
       "itemChecklistID": itemChecklistID,
@@ -793,7 +784,7 @@ function deleteItemChecklist(itemChecklistID) {
 
     $.ajax({
       type: "POST",
-      url: 'project-backend-items.php',
+      url: backendItemUrl,
       data: {
         "function": 'delete-item-checklist',
         "itemChecklistID": itemChecklistID,
@@ -840,7 +831,7 @@ function updateItemChecklistItem(itemChecklistItem) {
 function setItemChecklistItemToIncomplete(itemChecklistItemID) {
   $.ajax({
     type: "POST",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'update-item-checklist-item-incomplete',
       "itemChecklistItemID": itemChecklistItemID
@@ -852,7 +843,7 @@ function setItemChecklistItemToIncomplete(itemChecklistItemID) {
 function setItemChecklistItemToComplete(itemChecklistItemID) {
   $.ajax({
     type: "POST",
-    url: 'project-backend-items.php',
+    url: backendItemUrl,
     data: {
       "function": 'update-item-checklist-item-complete',
       "itemChecklistItemID": itemChecklistItemID

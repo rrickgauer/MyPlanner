@@ -50,13 +50,13 @@
         <!-- item modal navbar -->
         <ul class="nav nav-pills justify-content-center" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="item-pills-checklists-tab" data-toggle="pill" href="#item-pills-checklists" role="tab">Checklists</a>
+            <a class="nav-link" id="item-pills-checklists-tab" data-toggle="pill" href="#item-pills-checklists" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
+            <a class="nav-link active" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
           </li>
         </ul>
 
@@ -65,7 +65,7 @@
         <div class="tab-content">
 
           <!-- checklists -->
-          <div class="tab-pane fade show active" id="item-pills-checklists" role="tabpanel">
+          <div class="tab-pane fade" id="item-pills-checklists" role="tabpanel">
 
             <br>
             <h1 class="custom-font">Checklists</h1><br>
@@ -108,8 +108,60 @@
 
           
           <!-- info -->
-          <div class="tab-pane fade" id="item-pills-info" role="tabpanel">
-            info part
+          <div class="tab-pane fade show active" id="item-pills-info" role="tabpanel">
+
+            <button type="button" class="btn btn-secondary float-right"><i class='bx bx-cog'></i></button>
+
+            <div class="info-section name">
+              <div class="heading">
+                <div class="icon"><i class='bx bx-card'></i></div>
+                <div class="description">Item name</div>
+              </div>
+
+              <div class="content"></div>
+ 
+            </div>
+
+            <div class="info-section date-due">
+              <div class="heading">
+                <div class="icon"><i class='bx bx-time'></i></div>
+                <div class="description">Date due</div>
+              </div>
+
+              <div class="content">
+                
+              </div>
+
+            </div>
+
+            <div class="info-section description">
+              <div class="heading">
+                <div class="icon"><i class='bx bx-detail'></i></div>
+                <div class="description">Description</div>
+              </div>
+
+              <div class="content">
+                
+              </div>
+
+            </div>
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
 
         </div>

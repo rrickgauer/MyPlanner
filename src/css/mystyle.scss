@@ -249,29 +249,51 @@ body {
           margin-left: 10px;
         }
       }
-
-
-
-
-
     }
-
-
-
-
-
-
-
   }
 }
 
 
 .dropdown-menu {
-
   form {
     padding: 10px;
   }
 }
+
+
+#item-pills-info {
+
+  .info-section {
+    .heading {
+      display: flex;
+      align-items: center;
+
+      .icon i {
+        background: $base-color-red;
+        border-radius: 50%;
+        padding: 10px;
+        color: white;
+      }
+
+
+      
+
+      .description {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-left: 25px;
+      }
+    }
+  }
+
+
+
+
+
+
+
+}
+
 
 
 

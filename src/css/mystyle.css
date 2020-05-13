@@ -197,4 +197,20 @@ body {
   padding: 10px;
 }
 
+#item-pills-info .info-section .heading {
+  display: flex;
+  align-items: center;
+}
+#item-pills-info .info-section .heading .icon i {
+  background: #bf3e43;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+}
+#item-pills-info .info-section .heading .description {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-left: 25px;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

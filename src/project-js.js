@@ -396,26 +396,29 @@ function getProjectItemCardHTML(item) {
   html += '<div class="card-body item-card-stats">';  
 
   // date due
-  if (item.date_due != null) {
-    html += '<div class="card"><div class="card-body">';
-    html += 'Date due: ' + item.date_due_date;
-    html += '</div></div>';
-  }
+  html += '<div class="card item-card-stat"><div class="card-body">';
+  html += '<div class="left"><i class="bx bx-time"></i></div>';
+  html += '<div class="right"><div class="description">Date due</div><div class="data">' + item.date_due_date + '</div></div>';
+  html += '</div></div>';  
 
   // checklists count
-  html += '<div class="card"><div class="card-body">';
-  html += item.count_checklists + ' checklists';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body">';
+  html += '<div class="left"><i class="bx bx-list-check"></i></div>';
+  html += '<div class="right"><div class="description">Checklists</div><div class="data">' + item.count_checklists + '</div></div>';
+  html += '</div></div>';  
 
   // notes count
-  html += '<div class="card"><div class="card-body">';
-  html += item.count_notes + ' notes';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body">';
+  html += '<div class="left"><i class="bx bx-note"></i></div>';
+  html += '<div class="right"><div class="description">Notes</div><div class="data">' + item.count_notes + '</div></div>';
+  html += '</div></div>';  
 
   // labels
-  html += '<div class="card"><div class="card-body">';
-  html += 'labels';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body">';
+  html += '<div class="left"><i class="bx bx-purchase-tag"></i></div>';
+  html += '<div class="right"><div class="description">Labels</div><div class="data">' + '</div></div>';
+  html += '</div></div>';  
+
 
   html += '</div>';
 

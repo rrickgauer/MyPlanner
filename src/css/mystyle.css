@@ -157,8 +157,31 @@ body {
 #items-deck .item-card .card-header .right i.hidden {
   display: none;
 }
-#items-deck .item-card .item-card-stats .card {
+#items-deck .item-card .item-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+#items-deck .item-card .item-card-stats .item-card-stat {
   margin: 2px;
+}
+#items-deck .item-card .item-card-stats .item-card-stat .card-body {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+#items-deck .item-card .item-card-stats .item-card-stat .card-body .right {
+  display: block;
+  margin-left: 20px;
+}
+#items-deck .item-card .item-card-stats .item-card-stat .card-body .right .description {
+  font-weight: bold;
+}
+#items-deck .item-card .item-card-stats .item-card-stat .card-body .left i {
+  background-color: darkblue;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
 }
 
 #item-checklists {
@@ -167,6 +190,8 @@ body {
 }
 #item-checklists .item-checklist {
   margin: 3px;
+  resize: both;
+  overflow: auto;
 }
 #item-checklists .item-checklist .card-header {
   display: flex;

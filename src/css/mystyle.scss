@@ -173,6 +173,7 @@ body {
   }
 
   .item-card {
+
     .card-header {
       background: $base-color-yellow;
       display: flex;
@@ -202,10 +203,55 @@ body {
       }
     }
 
+
+
     .item-card-stats {
-      .card {
+      
+      display: flex;
+      // justify-content: space-between;
+      flex-wrap: wrap;
+      flex-grow: 1;
+
+      
+      .item-card-stat {
+
         margin: 2px;
+
+        .card-body {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+
+          .right {
+            display: block;
+            margin-left: 20px;
+
+            .description {
+              font-weight: bold;
+            }
+          }
+
+
+          .left i {
+
+            // background: $base-color-red;
+            background-color: darkblue;
+            border-radius: 50%;
+            padding: 10px;
+            color: white;
+          }
+        
+
+        }
       }
+      
+
+
+
+
+
+
+
     }
 
 
@@ -219,7 +265,9 @@ body {
   
   .item-checklist {
     margin: 3px;
-
+    resize: both;
+    overflow: auto;
+  
     .card-header {
       display: flex;
       justify-content: space-between;

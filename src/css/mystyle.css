@@ -1,11 +1,3 @@
-#notifications {
-  position: fixed;
-}
-#notifications .toast {
-  float: right;
-  margin-top: 50px;
-}
-
 .custom-font {
   font-family: "Fredoka One", cursive;
 }
@@ -142,6 +134,9 @@ body {
   padding: 10px;
 }
 
+#items-deck .col {
+  margin-bottom: 10px;
+}
 #items-deck .item-card .card-header {
   background: #e5b622;
   display: flex;

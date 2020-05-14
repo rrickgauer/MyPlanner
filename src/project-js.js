@@ -393,7 +393,7 @@ function getProjectItemCardHTML(item) {
   html += '</div></div>';
 
   // card body
-  html += '<div class="card-body item-card-stats"><div class="row">';  
+  html += '<div class="card-body item-card-stats">';  
 
   // date due
   if (item.date_due != null) {
@@ -417,7 +417,7 @@ function getProjectItemCardHTML(item) {
   html += 'labels';
   html += '</div></div>';
 
-  html += '</div></div>';
+  html += '</div>';
 
 
   // card footer

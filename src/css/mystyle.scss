@@ -5,20 +5,6 @@ $base-color-red: #bf3e43;
 $base-color-yellow-hover: #f1d98b;
 
 
-#notifications {
-  position: fixed;
-  // width: 100%;
-  // float: right;
-
-  .toast {
-    float: right;
-
-    margin-top: 50px;
-  }
-
-
-}
-
 .custom-font {
   font-family: 'Fredoka One', cursive;
 }
@@ -181,6 +167,11 @@ body {
 }
 
 #items-deck {
+  
+  .col {
+    margin-bottom: 10px;
+  }
+
   .item-card {
     .card-header {
       background: $base-color-yellow;
@@ -216,6 +207,8 @@ body {
         margin: 2px;
       }
     }
+
+
   }
 }
 

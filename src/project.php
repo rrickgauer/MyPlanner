@@ -119,7 +119,21 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
 
         <!-- notes section -->
         <div class="tab-pane fade" id="project-pills-notes" role="tabpanel">
-          <h5>Notes</h5>
+          <h3>Notes</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
 

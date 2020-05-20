@@ -103,7 +103,19 @@
 
           <!-- notes -->
           <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
-            notes
+
+
+            <h3>Notes</h3>
+            
+
+
+
+
+
+
+
+
+
           </div>
 
           

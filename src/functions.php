@@ -394,7 +394,6 @@ function getProjectItemCount($projectID) {
     date_due_date
     date_created_date
     date_created_time
-
 ********************************************************************/
 function getProjectItems($projectID) {
   $pdo = dbConnect();

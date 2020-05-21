@@ -1105,11 +1105,8 @@ function getEditItemFormData() {
 
 function addItemNote() {
 
-  // get the content
-  var content = $("#new-item-note-input").val();
-
-  // get the item id
-  var itemID = getOpenItemModalID();
+  var content = $("#new-item-note-input").val();  // note content
+  var itemID = getOpenItemModalID();              // item id
 
 
   var data = {
@@ -1118,19 +1115,18 @@ function addItemNote() {
     'function': 'insert-item-note'
   }
 
-
   $.post(backendItemUrl, data, function(response) {
     console.log(response);
   });
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+

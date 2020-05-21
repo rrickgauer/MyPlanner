@@ -246,4 +246,10 @@ body {
   overflow: auto;
 }
 
+.split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

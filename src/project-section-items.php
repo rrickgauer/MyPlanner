@@ -105,7 +105,7 @@
           <div class="tab-pane fade show active" id="item-pills-notes" role="tabpanel">
             <h1 class="custom-font">Notes</h1>
 
-
+            <!-- new note input -->
             <form>
               <div class="form-group">
                 <label for="new-item-note-input">New note:</label>
@@ -114,6 +114,39 @@
 
               <button type="button" class="btn btn-primary" onclick="addItemNote()">Save</button>
             </form>
+
+            <br><br>
+
+
+            <!-- item note cards -->
+            <div id="item-notes-cards">
+
+
+
+              <div class="card item-note">
+                <div class="card-body">
+                  displauy the item conetnasj jkalsdfjalksd jflkal'
+                  asjfajskdflasdfjl;asd;fjas;dfa ajsdkfasldfjk jaskdlfjalsdfj asdjfa;lsdf
+                </div>
+                <div class="card-footer split">
+                  <div class="left">
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="editItemNote(this)">Edit</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="deleteItemNote(this)">Delete</button>
+                  </div>
+                  <div class="right">
+                    <div class="date">5/21/2020 at 8:10 PM</div>
+                  </div>
+                </div>
+              </div>
+        
+
+            </div>
+
+
+
+
+
+
             
 
           </div>

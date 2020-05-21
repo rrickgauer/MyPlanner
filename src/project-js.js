@@ -1075,11 +1075,6 @@ function updateItemInfo() {
     toastAlert('Item updated!');  // send alert
 
     setItemModalData(JSON.parse(response));
-
-    console.log(JSON.parse(response));
-
-
-    // setItemInfoTabData(data.name, data.description, data.dateCreated, data.dateDue);
   });
 
 
@@ -1106,9 +1101,27 @@ function getEditItemFormData() {
   }
 
   return data;
-
 }
 
+function addItemNote() {
+
+  // get the content
+  var content = $("#new-item-note-input").val();
+
+  // get the item id
+  var itemID = getOpenItemModalID();
+
+
+  var data = {
+    'itemID': itemID,
+    'content': content,
+    'function': 'insert-item-note'
+  }
+
+
+  $.post(backendItemUrl, data, function(response) {
+    console.log(response);
+  });
 
 
 
@@ -1120,6 +1133,4 @@ function getEditItemFormData() {
 
 
 
-
-
-
+}

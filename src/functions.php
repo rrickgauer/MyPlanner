@@ -659,11 +659,42 @@ function updateItem($itemID, $name, $dateDue, $dateCreated, $description) {
 
 
   $sql->execute();
+}
+
+
+function insertItemNote($itemID, $content) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('INSERT INTO Item_Notes (item_id, content, display_index, date_created) VALUES (:itemID, :content, :displayIndex, NOW())');
+
+  // sanitize item id
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+
+  // sanitize content
+  $content = filter_var($content, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':content', $content, PDO::PARAM_STR);
+
+  // get and sanitize the display index
+  $displayIndex = getItemNotesCount($itemID);
+  $displayIndex = filter_var($displayIndex, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':displayIndex', $displayIndex, PDO::PARAM_INT);
+
+  $sql->execute();
 
 
 
 }
 
+function getItemNotesCount($itemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT COUNT(id) AS count FROM Item_Notes WHERE item_id=:itemID');
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  $sql->execute();
+
+  $result = $sql->fetch(PDO::FETCH_ASSOC);
+  return $result['count'];
+}
 
 
 

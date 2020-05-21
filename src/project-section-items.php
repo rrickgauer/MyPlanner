@@ -53,10 +53,10 @@
             <a class="nav-link" id="item-pills-checklists-tab" data-toggle="pill" href="#item-pills-checklists" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
+            <a class="nav-link active" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
+            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
           </li>
         </ul>
 
@@ -102,25 +102,25 @@
 
 
           <!-- notes -->
-          <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
+          <div class="tab-pane fade show active" id="item-pills-notes" role="tabpanel">
+            <h1 class="custom-font">Notes</h1>
 
 
-            <h3>Notes</h3>
+            <form>
+              <div class="form-group">
+                <label for="new-item-note-input">New note:</label>
+                <textarea id="new-item-note-input" class="form-control" rows="1" placeholder="Write a note..."></textarea>
+              </div>
+
+              <button type="button" class="btn btn-primary" onclick="addItemNote()">Save</button>
+            </form>
             
-
-
-
-
-
-
-
-
 
           </div>
 
           
           <!-- info -->
-          <div class="tab-pane fade show active" id="item-pills-info" role="tabpanel">
+          <div class="tab-pane fade" id="item-pills-info" role="tabpanel">
 
             <div class="row">
 

@@ -182,6 +182,26 @@ else if (isset($_POST['function'], $_POST['itemID'], $_POST['name'], $_POST['dat
 }
 
 
+// insert item note
+else if (isset($_POST['itemID'], $_POST['content'], $_POST['function']) && $_POST['function'] == 'insert-item-note') {
+  $itemID = $_POST['itemID'];
+  $content = $_POST['content'];
+
+  // insert the item note
+  insertItemNote($itemID, $content);
+
+  echo 'inserted';
+  exit;
+
+}
+
+
+
+
+
+
+
+
 
 
 ?>

@@ -1210,18 +1210,18 @@ function updateItemCompleted() {
   var itemID = getOpenItemModalID();
 
   // item is incomplete
-  // set compleyed to y
   if ($("#item-modal").attr("data-item-completed") == 'n') {
     setItemToComplete(itemID);
     toastAlert('Item completed');
   }
 
   // item is complete
-  // set item completed to n
   else {
     setItemToIncomplete(itemID);
     toastAlert('Item incompleted');
   }
+
+  getProjectItems();
 }
 
 

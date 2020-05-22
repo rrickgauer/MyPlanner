@@ -1105,20 +1105,14 @@ function setItemNotes(itemNotes) {
 function getItemNoteCardHtml(itemNote) {
   var html = '';
   html += '<div class="card card-item-note" data-item-note-id="' + itemNote.id + '">';
-  html += '<div class="card-body">' + itemNote.content + '</div>';
+  html += '<div class="card-body content">' + itemNote.content + '</div>';
   html += '<div class="card-footer split"><div class="left">';
-  html += '<button type="button" class="btn btn-sm btn-secondary" onclick="editItemNote(this)">Edit</button>';
-  html += '<button type="button" class="btn btn-sm btn-danger" onclick="deleteItemNote(this)">Delete</button></div>';
+  html += '<button type="button" class="btn btn-sm btn-secondary edit-item-note-btn" onclick="editItemNote(this)">Edit</button>';
+  html += '<button type="button" class="btn btn-sm btn-danger delete-item-note-btn" onclick="deleteItemNote(this)">Delete</button></div>';
   html += '<div class="right"><div class="date">' + itemNote.date_created_display + '</div></div></div></div>';
 
   return html;
 }
-
-
-function editItemNote(btn) {
-  console.log('editItemNote()');
-}
-
 
 function deleteItemNote(btn) {
 
@@ -1146,6 +1140,54 @@ function clearItemNotesSection() {
   $("#new-item-note-input").val('');                                          // clear the new note input
   enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input"));  // disable the save button
 }
+
+function editItemNote(btn) {
+  
+  var itemNote = $(btn).closest(".card-item-note");
+  var itemNoteID = $(itemNote).attr("data-item-note-id");
+  var oldContent = $(itemNote).find(".content").html();
+
+  // html for the textarea to edit the note
+  var textAreaHtml = '<div class="edit-item-note">';
+  textAreaHtml += '<textarea class="form-control edit-item-note-input">' + oldContent + '</textarea>';
+  textAreaHtml += '<button type="button" class="btn btn-sm btn-primary" onclick="updateItemNote(this)">Save</button>';
+  textAreaHtml += '<button type="button" class="btn btn-sm btn-danger" onclick="resetItemNote(this)">Reset</button>';
+  textAreaHtml += '</div>';
+  $(itemNote).find(".content").html(textAreaHtml);
+
+  // disable the edit button
+  $(itemNote).find(".edit-item-note-btn").prop('disabled', true);
+}
+
+
+function updateItemNote(btn) {
+
+  var newContent = $(btn).closest(".edit-item-note").find(".edit-item-note-input").val();
+  var itemNote = $(btn).closest(".card-item-note");
+  var itemNoteID = $(itemNote).attr("data-item-note-id");
+
+  var data = {
+    content: newContent,
+    itemNoteID: itemNoteID,
+    function: 'update-item-note',
+  }
+
+  $.post(backendItemUrl, data, function(response) {
+    var updatedItemNote = JSON.parse(response);
+
+    // get the new item card html
+    var html = getItemNoteCardHtml(updatedItemNote);
+
+    // replace the old item note card html with the new html
+    $(itemNote).replaceWith(html);
+
+
+    // send confirmation alert
+    toastAlert('Note updated');
+
+  });
+}
+
 
 
 

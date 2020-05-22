@@ -175,7 +175,6 @@ else if (isset($_POST['function'], $_POST['itemID'], $_POST['name'], $_POST['dat
   $description = $_POST['description'];
 
   updateItem($itemID, $name, $dateDue, $dateCreated, $description);
-
   $item = getProjectItem($itemID)->fetch(PDO::FETCH_ASSOC);
   echo json_encode($item);
   exit;
@@ -186,11 +185,7 @@ else if (isset($_POST['function'], $_POST['itemID'], $_POST['name'], $_POST['dat
 else if (isset($_POST['itemID'], $_POST['content'], $_POST['function']) && $_POST['function'] == 'insert-item-note') {
   $itemID = $_POST['itemID'];
   $content = $_POST['content'];
-
-  // insert the item note
   insertItemNote($itemID, $content);
-
-  echo 'inserted';
   exit;
 }
 
@@ -198,10 +193,7 @@ else if (isset($_POST['itemID'], $_POST['content'], $_POST['function']) && $_POS
 // return an item's notes
 else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-item-notes') {
   $itemID = $_GET['itemID'];
-
-  // get the item notes
   $itemNotes = getItemNotes($itemID)->fetchAll(PDO::FETCH_ASSOC);
-
   echo json_encode($itemNotes);
   exit;
 }
@@ -210,16 +202,26 @@ else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-
 // delete an item note 
 else if (isset($_POST['itemNoteID'], $_POST['function']) && $_POST['function'] == 'delete-item-note') {
   $itemNoteID = $_POST['itemNoteID'];
-
   deleteItemNote($itemNoteID);
-
-  echo 'deleted';
   exit;
-
 }
 
 
+// update an item note
+else if (isset($_POST['itemNoteID'], $_POST['function'], $_POST['content']) && $_POST['function'] == 'update-item-note') {
+  $itemNoteID = $_POST['itemNoteID'];
+  $content = $_POST['content'];
 
+  // update the note
+  updateItemNote($itemNoteID, $content);
+
+  // retrieve the new note
+  $updatedItemNote = getItemNote($itemNoteID)->fetch(PDO::FETCH_ASSOC);
+
+  // return the new note
+  echo json_encode($updatedItemNote);
+  exit;
+}
 
 
 

@@ -706,6 +706,18 @@ function getItemNotes($itemID) {
   return $sql;
 }
 
+// get an item note by it's id
+function getItemNote($itemNoteID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT Item_Notes.id, Item_Notes.content, Item_Notes.display_index, Item_Notes.date_created, date_format(Item_Notes.date_created, "%M %D, %Y at %l:%i %p") as date_created_display from Item_Notes WHERE id=:itemNoteID LIMIT 1');
+  $itemNoteID = filter_var($itemNoteID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemNoteID', $itemNoteID, PDO::PARAM_INT);
+  $sql->execute();
+  return $sql;
+}
+
+
+
 function deleteItemNote($itemNoteID) {
   $pdo = dbConnect();
   $sql = $pdo->prepare('DELETE FROM Item_Notes WHERE id=:itemNoteID');
@@ -715,6 +727,23 @@ function deleteItemNote($itemNoteID) {
 }
 
 
+// update an item note
+function updateItemNote($itemNoteID, $content) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Item_Notes SET content=:content WHERE id=:itemNoteID');
+
+  // filter, sanitize, and bind the id
+  $itemNoteID = filter_var($itemNoteID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemNoteID', $itemNoteID, PDO::PARAM_INT);
+
+  // filter, sanitize, and bind the content
+  $content = filter_var($content, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':content', $content, PDO::PARAM_STR);
+
+  $sql->execute();
+  $sql = null;
+  $pdo = null;
+}
 
 
 

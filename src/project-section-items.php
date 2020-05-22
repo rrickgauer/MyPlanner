@@ -122,12 +122,6 @@
             <div id="item-notes-cards"></div>
 
 
-
-
-
-
-            
-
           </div>
 
           

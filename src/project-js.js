@@ -1156,7 +1156,29 @@ function editItemNote(btn) {
 
 
 function deleteItemNote(btn) {
-  console.log('deleteItemNote()');
+
+  if (!confirm('Are you sure you want delete this note?'))
+    return;
+  
+  var itemNote = $(btn).closest(".card-item-note");
+  var itemNoteID = $(itemNote).attr("data-item-note-id");
+
+  var data = {
+    'itemNoteID': itemNoteID,
+    'function': 'delete-item-note',
+  }
+
+  $.post(backendItemUrl, data, function(response) {
+    $(itemNote).remove();
+    toastAlert('Note removed')
+  });
+
+
+
+
+
+
+
 }
 
 

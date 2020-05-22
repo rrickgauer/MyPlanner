@@ -706,6 +706,14 @@ function getItemNotes($itemID) {
   return $sql;
 }
 
+function deleteItemNote($itemNoteID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('DELETE FROM Item_Notes WHERE id=:itemNoteID');
+  $itemNoteID = filter_var($itemNoteID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemNoteID', $itemNoteID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
 
 
 

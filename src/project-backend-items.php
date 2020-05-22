@@ -207,6 +207,17 @@ else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-
 }
 
 
+// delete an item note 
+else if (isset($_POST['itemNoteID'], $_POST['function']) && $_POST['function'] == 'delete-item-note') {
+  $itemNoteID = $_POST['itemNoteID'];
+
+  deleteItemNote($itemNoteID);
+
+  echo 'deleted';
+  exit;
+
+}
+
 
 
 

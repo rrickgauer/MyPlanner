@@ -238,40 +238,6 @@ body {background-color: $base-color-grey;}
 
 .dropdown-menu form {padding: 10px;}
 
-#item-pills-info {
-
-  button.completed {
-    text-decoration: none;
-  }
-
-  .info-section {    
-    margin: 20px 0px 20px 0px;
-
-    .heading {
-      display: flex;
-      align-items: center;
-
-      .icon i {
-        background: $base-color-red;
-        border-radius: 50%;
-        padding: 10px;
-        color: white;
-      }
-
-      .description {
-        font-size: 1.8em;
-        font-weight: bold;
-        margin-left: 15px;
-      }
-    }
-
-    .content {
-      margin-left: 53px;
-    }
-  }
-}
-
-
 #edit-item-info-menu {
 
   width: 500px;
@@ -319,3 +285,33 @@ body {background-color: $base-color-grey;}
 }
 
 #new-item-note-input {margin-top: 15px;}
+
+
+.info-section {    
+  margin: 20px 0px 20px 0px;
+
+  .heading {
+    display: flex;
+    align-items: center;
+
+    .icon i {
+      background: $base-color-red;
+      border-radius: 50%;
+      padding: 10px;
+      color: white;
+    }
+
+    .description {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-left: 15px;
+    }
+  }
+
+
+}
+
+#item-pills-info {
+  .content {margin-left: 53px;}
+  button.completed {text-decoration: none;}
+}

@@ -38,7 +38,7 @@
 
       <!-- header -->
       <div class="modal-header">
-        <h5 class="modal-title">Item</h5>
+        <h2 class="modal-title custom-font">Item</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -84,10 +84,10 @@
               <h6>Actions</h6>
 
               <div class="list-group list-group-flush">
-                
+
                 <!-- set item to complete or incomplete -->
                 <button type="button" class="list-group-item list-group-item-action" id="complete-item-modal-button" onclick="updateItemCompleted()"></button>
-                
+
                 <!-- edit item info button -->
                 <div class="dropleft">
                   <button type="button" class="list-group-item list-group-item-action" data-toggle="dropdown">
@@ -95,13 +95,13 @@
                   </button>
                   <div class="dropdown-menu dropdown-form" id="edit-item-info-menu">
                     <h5>Edit item info</h5>
-                    
+
                     <!-- name -->
                     <div class="form-group">
                       <label for="edit-item-name">Name:</label>
                       <input type="text" id="edit-item-name" class="form-control update-button" data-button-id="#edit-item-description-btn">
                     </div>
-                    
+
                     <!-- date due -->
                     <div class="form-group">
                       <label for="edit-item-date-due">Date due:</label>
@@ -119,12 +119,12 @@
                       <label for="edit-item-description">Description:</label>
                       <textarea id="edit-item-description" class="form-control" rows="5"></textarea>
                     </div>
-                    
+
                     <!-- update item info button -->
                     <button type="button" class="btn btn-primary float-right" id="edit-item-description-btn" onclick="updateItemInfo()">Save</button>
                   </div>
                 </div>
-                
+
                 <!-- delete item button -->
                 <button type="button" class="list-group-item list-group-item-action" onclick="deleteItem()">
                   <i class='bx bx-trash'></i>&nbsp;Delete
@@ -140,64 +140,71 @@
 
         <!-- checklists -->
         <div id="item-pills-checklists">
-
-          <br>
-          <h1 class="custom-font">Checklists</h1><br>
-
-          <div class="row">
-            <div class="col-2">
-
-              <b>Current lists</b><br>
-              <!-- side bar of item checklists -->
-              <ul class="nav nav-pills flex-column sidebar-item-checklists">
-              </ul>
-              
-              <!-- new project checklist dropdown -->
-              <div class="dropright">
-                <button class="btn btn-secondary btn-sm" type="button" data-toggle="dropdown">Add checklist</button>
-                <div class="dropdown-menu">
-                  <form>
-                    <div class="form-group">
-                      <label for="new-project-checklist-name">Name:</label>
-                      <input type="text" id="new-item-checklist-name" class="form-control update-button" data-button-id="#new-item-checklist-btn">
-                    </div>
-                    <button id="new-item-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
-                  </form>
-                </div>
-              </div>
-
+          
+          <!-- title and header -->
+          <div class="info-section checklists">
+            <div class="heading">
+              <div class="icon"><i class='bx bx-list-check'></i></div>
+              <div class="description">Checklists</div>
             </div>
 
-            <!-- open checklists go here -->
-            <div class="col-10" id="item-checklists">
+            <!-- content -->
+            <div class="content">
+              <div class="row">
+                <div class="col-2">
+
+                  <b>Current lists</b><br>
+                  <!-- side bar of item checklists -->
+                  <ul class="nav nav-pills flex-column sidebar-item-checklists"></ul>
+
+                  <!-- new project checklist dropdown -->
+                  <div class="dropright">
+                    <button class="btn btn-secondary btn-sm" type="button" data-toggle="dropdown">Add checklist</button>
+                    <div class="dropdown-menu">
+                      <form>
+                        <div class="form-group">
+                          <label for="new-project-checklist-name">Name:</label>
+                          <input type="text" id="new-item-checklist-name" class="form-control update-button" data-button-id="#new-item-checklist-btn">
+                        </div>
+                        <button id="new-item-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- open checklists go here -->
+                <div class="col-10" id="item-checklists"></div>
+              </div>
             </div>
           </div>
+
         </div>
 
 
         <!-- notes -->
         <div id="item-pills-notes">
-          <h1 class="custom-font">Notes</h1>
-
-          <!-- new note input -->
-          <form>
-            <div class="form-group">
-              <!-- <label for="new-item-note-input">New note:</label> -->
-              <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="5" placeholder="Write a note..."></textarea>
+          <div class="info-section notes">
+            <div class="heading">
+              <div class="icon"><i class='bx bx-note'></i></div>
+              <div class="description">Notes</div>
             </div>
+            <div class="content">
 
-            <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()" disabled>Save</button>
-          </form>
+              <!-- new note input -->
+              <form>
+                <div class="form-group">
+                  <!-- <label for="new-item-note-input">New note:</label> -->
+                  <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="5" placeholder="Write a note..."></textarea>
+                </div>
 
-          <!-- item note cards -->
-          <div id="item-notes-cards"></div>
+                <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()" disabled>Save</button>
+              </form>
+
+              <!-- item note cards -->
+              <div id="item-notes-cards"></div>
+            </div>
+          </div>
         </div>
-
-        
-
-
-        
-
       </div>
       
 

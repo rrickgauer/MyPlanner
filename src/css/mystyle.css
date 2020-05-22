@@ -217,31 +217,6 @@ body {
   padding: 10px;
 }
 
-#item-pills-info button.completed {
-  text-decoration: none;
-}
-#item-pills-info .info-section {
-  margin: 20px 0px 20px 0px;
-}
-#item-pills-info .info-section .heading {
-  display: flex;
-  align-items: center;
-}
-#item-pills-info .info-section .heading .icon i {
-  background: #bf3e43;
-  border-radius: 50%;
-  padding: 10px;
-  color: white;
-}
-#item-pills-info .info-section .heading .description {
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-left: 15px;
-}
-#item-pills-info .info-section .content {
-  margin-left: 53px;
-}
-
 #edit-item-info-menu {
   width: 500px;
   height: 600px;
@@ -285,6 +260,32 @@ body {
 
 #new-item-note-input {
   margin-top: 15px;
+}
+
+.info-section {
+  margin: 20px 0px 20px 0px;
+}
+.info-section .heading {
+  display: flex;
+  align-items: center;
+}
+.info-section .heading .icon i {
+  background: #bf3e43;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+}
+.info-section .heading .description {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+#item-pills-info .content {
+  margin-left: 53px;
+}
+#item-pills-info button.completed {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

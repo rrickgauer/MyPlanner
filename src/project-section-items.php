@@ -172,7 +172,7 @@
                     <div class="dropdown-menu">
                       <form>
                         <div class="form-group">
-                          <label for="new-project-checklist-name">Name:</label>
+                          <label for="new-item-checklist-name">Name:</label>
                           <input type="text" id="new-item-checklist-name" class="form-control update-button" data-button-id="#new-item-checklist-btn">
                         </div>
                         <button id="new-item-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>

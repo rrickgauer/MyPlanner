@@ -35,13 +35,18 @@ function enableButtonFromInput(button, input) {
 
 function closeItemModal() {
 
+  // reload the project item cards
+  getProjectItems();
+
   // clear modal html
   $("#item-modal .modal-body .sidebar-item-checklists").html('');
   $("#item-checklists").html('');
   $('#item-modal .modal-title').html('');
 
-  // reload the project item cards
-  getProjectItems();
+  // clear the item notes section
+  clearItemNotesSection();
+
+
 }
 
 // displays a toast alert
@@ -1172,16 +1177,15 @@ function deleteItemNote(btn) {
     $(itemNote).remove();
     toastAlert('Note removed')
   });
-
-
-
-
-
-
-
 }
 
 
+// clears the item notes section
+function clearItemNotesSection() {
+  $("#item-notes-cards").html('');                                            // clear the item note cards
+  $("#new-item-note-input").val('');                                          // clear the new note input
+  enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input"));  // disable the save button
+}
 
 
 

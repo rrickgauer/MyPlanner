@@ -109,7 +109,7 @@
             <form>
               <div class="form-group">
                 <label for="new-item-note-input">New note:</label>
-                <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="1" placeholder="Write a note..."></textarea>
+                <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="5" placeholder="Write a note..."></textarea>
               </div>
 
               <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()" disabled>Save</button>

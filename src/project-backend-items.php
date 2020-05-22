@@ -192,7 +192,18 @@ else if (isset($_POST['itemID'], $_POST['content'], $_POST['function']) && $_POS
 
   echo 'inserted';
   exit;
+}
 
+
+// return an item's notes
+else if (isset($_GET['itemID'], $_GET['function']) && $_GET['function'] == 'get-item-notes') {
+  $itemID = $_GET['itemID'];
+
+  // get the item notes
+  $itemNotes = getItemNotes($itemID)->fetchAll(PDO::FETCH_ASSOC);
+
+  echo json_encode($itemNotes);
+  exit;
 }
 
 

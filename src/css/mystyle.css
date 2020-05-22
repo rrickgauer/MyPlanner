@@ -252,4 +252,18 @@ body {
   align-items: center;
 }
 
+#item-notes-cards {
+  margin-top: 30px;
+}
+#item-notes-cards .card-item-note {
+  margin-bottom: 20px;
+}
+#item-notes-cards .card-item-note .card-body {
+  resize: vertical;
+  overflow: auto;
+}
+#item-notes-cards .card-item-note .card-footer .btn {
+  margin-right: 3px;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

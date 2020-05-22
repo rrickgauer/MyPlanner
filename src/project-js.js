@@ -324,9 +324,9 @@ function updateRenameProjectButton() {
   var newProjectName = $("#new-project-name").val();
 
   if (newProjectName.length > 0) {
-    $("#new-project-name-btn").prop('disabled', false);
+    $("#new-project-name-btn").prop('disabled', false); // set to enabled
   } else {
-    $("#new-project-name-btn").prop('disabled', true);
+    $("#new-project-name-btn").prop('disabled', true);  // set to disabled
   }
 }
 
@@ -479,7 +479,15 @@ function openItemModal(itemID) {
       setItemModalData(item[0]);
       getItemChecklistSidebar(itemID);
       getAllOpenItemChecklists(itemID);
+
+      getItemNotes(itemID);
+
+
+
       $('#item-modal').modal('show');
+
+
+      
     }
   });
 }
@@ -683,6 +691,7 @@ function openItemChecklist(itemChecklistID) {
       var html = getItemChecklistCardHtml(JSON.parse(response));  // server response
       $("#item-checklists").append(html);                         // add the checklist to the section
       disableItemChecklistSidebarItem(itemChecklistID);           // disable the checklist sidebar open button
+
     }
   });
 
@@ -1055,7 +1064,6 @@ function deleteItem() {
 }
 
 
-
 function updateItemInfo() {
 
   var itemID = getOpenItemModalID();
@@ -1076,7 +1084,6 @@ function updateItemInfo() {
 
     setItemModalData(JSON.parse(response));
   });
-
 
 }
 
@@ -1108,24 +1115,71 @@ function addItemNote() {
   var content = $("#new-item-note-input").val();  // note content
   var itemID = getOpenItemModalID();              // item id
 
-
   var data = {
     'itemID': itemID,
     'content': content,
-    'function': 'insert-item-note'
+    'function': 'insert-item-note',
   }
 
   $.post(backendItemUrl, data, function(response) {
-    console.log(response);
+    getItemNotes(itemID);                             // update the item notes
+    $("#new-item-note-input").val('');                // clear the input
+    toastAlert('Note added');                         // send success alert
+    $("#new-item-note-btn").prop('disabled', true);   // disable the save button
   });
 }
 
 
+function getItemNotes(itemID) {
+  var data = {
+    'itemID': itemID,
+    'function': 'get-item-notes'
+  }
+
+  $.get(backendItemUrl, data, function(response) {
+    var itemNotes = JSON.parse(response);
+    setItemNotes(itemNotes);
+  });
+
+}
+
+function setItemNotes(itemNotes) {
+
+  var size = itemNotes.length;  // number of notes
+  var html = '';                // empty html string to place into the notes section
+
+  // generate all the html
+  for (var count = 0; count < size; count++)
+    html += getItemNoteCardHtml(itemNotes[count]);
+
+  // set the item notes section to the generated html
+  $("#item-notes-cards").html(html);
 
 
+}
 
 
+function getItemNoteCardHtml(itemNote) {
+  var html = '';
+  html += '<div class="card card-item-note" data-item-note-id="' + itemNote.id + '">';
+  html += '<div class="card-body">' + itemNote.content + '</div>';
+  html += '<div class="card-footer split"><div class="left">';
+  html += '<button type="button" class="btn btn-sm btn-secondary" onclick="editItemNote(this)">Edit</button>';
+  html += '<button type="button" class="btn btn-sm btn-danger" onclick="deleteItemNote(this)">Delete</button></div>';
+  html += '<div class="right"><div class="date">' + itemNote.date_created_display + '</div></div></div></div>';
 
+  return html;
+}
+
+
+function editItemNote(btn) {
+  console.log('editItemNote()');
+}
+
+
+function deleteItemNote(btn) {
+  console.log('deleteItemNote()');
+}
 
 
 

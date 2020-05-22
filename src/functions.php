@@ -696,6 +696,16 @@ function getItemNotesCount($itemID) {
   return $result['count'];
 }
 
+function getItemNotes($itemID) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('SELECT Item_Notes.id, Item_Notes.content, Item_Notes.display_index, Item_Notes.date_created, date_format(Item_Notes.date_created, "%M %D, %Y at %l:%i %p") as date_created_display from Item_Notes WHERE item_id=:itemID ORDER BY id DESC');
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+  $sql->execute();
+
+  return $sql;
+}
+
 
 
 

@@ -335,6 +335,26 @@ body {
 }
 
 
+#item-notes-cards {
+
+  margin-top: 30px;
+
+  .card-item-note {
+    margin-bottom: 20px;
+
+    .card-body {
+      resize: vertical;
+      overflow: auto;
+    }
+    
+    .card-footer {
+      .btn {margin-right: 3px;}
+    }
+
+  }
+}
+
+
 
 
 

@@ -1129,7 +1129,8 @@ function deleteItemNote(btn) {
 
   $.post(backendItemUrl, data, function(response) {
     $(itemNote).remove();
-    toastAlert('Note removed')
+    toastAlert('Note removed');
+    getProjectItems();
   });
 }
 
@@ -1150,10 +1151,17 @@ function editItemNote(btn) {
   // html for the textarea to edit the note
   var textAreaHtml = '<div class="edit-item-note">';
   textAreaHtml += '<textarea class="form-control edit-item-note-input">' + oldContent + '</textarea>';
+  textAreaHtml += '<div class="action-buttons">';
   textAreaHtml += '<button type="button" class="btn btn-sm btn-primary" onclick="updateItemNote(this)">Save</button>';
-  textAreaHtml += '<button type="button" class="btn btn-sm btn-danger" onclick="resetItemNote(this)">Reset</button>';
-  textAreaHtml += '</div>';
+  textAreaHtml += '<button type="button" class="btn btn-sm btn-danger" onclick="resetItemNote(this)">Cancel</button>';
+  textAreaHtml += '</div></div>';
   $(itemNote).find(".content").html(textAreaHtml);
+
+  // hide the footer
+  $(itemNote).find(".card-footer").hide();
+
+  // make the body not able to be resized
+  $(itemNote).find(".content").addClass("resize-false");
 
   // disable the edit button
   $(itemNote).find(".edit-item-note-btn").prop('disabled', true);
@@ -1202,6 +1210,7 @@ function resetItemNote(btn) {
     $(itemNote).replaceWith(html);
   });
 }
+
 
 
 

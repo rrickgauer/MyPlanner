@@ -108,7 +108,7 @@
             <!-- new note input -->
             <form>
               <div class="form-group">
-                <label for="new-item-note-input">New note:</label>
+                <!-- <label for="new-item-note-input">New note:</label> -->
                 <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="5" placeholder="Write a note..."></textarea>
               </div>
 

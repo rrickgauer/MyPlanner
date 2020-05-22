@@ -730,7 +730,7 @@ function deleteItemNote($itemNoteID) {
 // update an item note
 function updateItemNote($itemNoteID, $content) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('UPDATE Item_Notes SET content=:content WHERE id=:itemNoteID');
+  $sql = $pdo->prepare('UPDATE Item_Notes SET content=:content, date_created=NOW() WHERE id=:itemNoteID');
 
   // filter, sanitize, and bind the id
   $itemNoteID = filter_var($itemNoteID, FILTER_SANITIZE_NUMBER_INT);

@@ -262,8 +262,26 @@ body {
   resize: vertical;
   overflow: auto;
 }
+#item-notes-cards .card-item-note .card-body .edit-item-note .action-buttons {
+  float: right;
+}
+#item-notes-cards .card-item-note .card-body .edit-item-note .action-buttons .btn {
+  margin-right: 5px;
+}
+#item-notes-cards .card-item-note .card-body .edit-item-note .edit-item-note-input {
+  margin-bottom: 10px;
+}
 #item-notes-cards .card-item-note .card-footer .btn {
   margin-right: 3px;
+}
+
+.resize-false {
+  resize: none !important;
+  overflow: auto;
+}
+
+#new-item-note-input {
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

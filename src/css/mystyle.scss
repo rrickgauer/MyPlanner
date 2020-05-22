@@ -5,19 +5,11 @@ $base-color-red: #bf3e43;
 $base-color-yellow-hover: #f1d98b;
 
 
-.custom-font {
-  font-family: 'Fredoka One', cursive;
-}
+.custom-font {font-family: 'Fredoka One', cursive;}
 
-body {
-  background-color: $base-color-grey; 
-}
+body {background-color: $base-color-grey;}
 
-.form-group {
-  label {
-    font-weight: bold;
-  }
-}
+.form-group label {font-weight: bold;}
 
 .card-project {
   .card-header {
@@ -30,16 +22,11 @@ body {
     justify-content: space-between;
     background: white;
     border: none;
-    
     padding: 5px 0px 0px 0px;
   }
 }
 
-#projects {
-  .row {
-    margin-bottom: 20px;
-  }
-}
+#projects .row {margin-bottom: 20px;}
 
 
 // styles for the sidebar
@@ -90,17 +77,12 @@ body {
     align-items: center;
     padding: 5px;
 
-    i {
-      font-size: 1.5em;
-    }
+    i {font-size: 1.5em;}
 
   }
 }
 
-#sidebar.active {
-  margin-left: -250px;
-}
-
+#sidebar.active {margin-left: -250px;}
 
 #content {
   width: 100%;
@@ -130,10 +112,7 @@ body {
 
 .project-buttons {
   display: flex;
-
-  button {
-    margin: 0px 3px 0px 3px;
-  }
+  button {margin: 0px 3px 0px 3px;}
 }
 
 #navbar {
@@ -146,31 +125,18 @@ body {
     font-weight: bold;
   }
 
-  a:hover {
-    background: $base-color-yellow-hover;
-  }
+  a:hover {background: $base-color-yellow-hover;}
 }
 
 .modal {
-
-  .modal-header {
-    background: $base-color-yellow;
-  }
-
-  .modal-body {
-    background: $base-color-grey;
-  }
+  .modal-header {background: $base-color-yellow;}
+  .modal-body {background: $base-color-grey;}
 }
 
-.dropdown-form {
-  padding: 10px;
-}
+.dropdown-form {padding: 10px;}
 
 #items-deck {
-  
-  .col {
-    margin-bottom: 10px;
-  }
+  .col {margin-bottom: 10px;}
 
   .item-card {
 
@@ -185,9 +151,7 @@ body {
           color: #585858;
         }
 
-        h5 {
-          line-height: 20px;
-        }
+        h5 {line-height: 20px;}
       }
 
       .right {
@@ -197,24 +161,18 @@ body {
           color: green;
         }
 
-        i.hidden {
-          display: none;
-        }
+        i.hidden {display: none;}
       }
     }
 
 
 
-    .item-card-stats {
-      
+    .item-card-stats {      
       display: flex;
-      // justify-content: space-between;
       flex-wrap: wrap;
       flex-grow: 1;
 
-      
       .item-card-stat {
-
         margin: 2px;
 
         .card-body {
@@ -226,14 +184,10 @@ body {
             display: block;
             margin-left: 20px;
 
-            .description {
-              font-weight: bold;
-            }
+            .description {font-weight: bold;}
           }
 
           .left i {
-
-            // background: $base-color-red;
             background-color: darkblue;
             border-radius: 50%;
             padding: 10px;
@@ -282,12 +236,7 @@ body {
 }
 
 
-.dropdown-menu {
-  form {
-    padding: 10px;
-  }
-}
-
+.dropdown-menu form {padding: 10px;}
 
 #item-pills-info {
 
@@ -327,7 +276,6 @@ body {
   overflow: auto;
 }
 
-
 .split {
   display: flex;
   justify-content: space-between;
@@ -336,7 +284,6 @@ body {
 
 
 #item-notes-cards {
-
   margin-top: 30px;
 
   .card-item-note {
@@ -345,46 +292,26 @@ body {
     .card-body {
       resize: vertical;
       overflow: auto;
+
+      .edit-item-note {
+        .action-buttons {
+          float: right;
+          .btn {margin-right: 5px;}
+
+        }
+        .edit-item-note-input {margin-bottom: 10px;}
+      }
     }
     
     .card-footer {
       .btn {margin-right: 3px;}
     }
-
   }
 }
 
+.resize-false {
+  resize: none !important;
+  overflow: auto;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#new-item-note-input {margin-top: 15px;}

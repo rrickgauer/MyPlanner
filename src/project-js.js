@@ -14,35 +14,22 @@ function addEventListeners() {
   $("#new-item-checklist-btn").on("click", addItemChecklist);
   $("#item-modal").on("hide.bs.modal", closeItemModal);
 
-
-  // $("#new-item-note-input").on("keyup", function() {
-  //   enableButtonFromInput($("#new-item-note-btn"), this);
-  // });
-
-
-  // $("#new-project-name").on("keyup", updateRenameProjectButton);
-  // $("#new-project-name").on("keyup", function() {
-  //   enableButtonFromInput($("#new-project-name-btn"), this);
-  // });
-
-
-  // $("#new-checklist-name").on("keyup", updateNewChecklistButton);
-  // $("#new-checklist-name").on("keyup", function() {
-  //   enableButtonFromInput($("#new-checklist-modal-btn"), this);
-  // });
-
-
-  // $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
-  // $("#new-item-checklist-name").on("keyup", function() {
-  //   enableButtonFromInput($("#new-item-checklist-btn"), this);
-  // });
-
-
+  // disable a button if an input is empty
   $(".update-button").on("keyup", function() {
     var buttonID = $(this).attr("data-button-id");
     enableButtonFromInput($(buttonID), this)
   });
+}
 
+
+function enableButtonFromInput(button, input) {
+  var inputLength = $(input).val().length;
+
+  if (inputLength > 0) {
+    $(button).prop('disabled', false); // set to enabled
+  } else {
+    $(button).prop('disabled', true);  // set to disabled
+  }
 }
 
 
@@ -346,28 +333,6 @@ function deleteProject() {
     window.location.href = 'delete-project.php?projectID=' + projectID;
 }
 
-// rename a project
-function updateRenameProjectButton() {
-  var newProjectName = $("#new-project-name").val();
-
-  if (newProjectName.length > 0) {
-    $("#new-project-name-btn").prop('disabled', false); // set to enabled
-  } else {
-    $("#new-project-name-btn").prop('disabled', true);  // set to disabled
-  }
-}
-
-// sets the new checklist button to disabled/enabled if there is text in the input
-function updateNewChecklistButton() {
-  var newChecklistName = $("#new-checklist-name").val();
-
-  if (newChecklistName.length > 0) {
-    $("#new-checklist-modal-btn").prop('disabled', false);
-  } else {
-    $("#new-checklist-modal-btn").prop('disabled', true);
-  }
-}
-
 // returns the project items
 function getProjectItems() {
   $.ajax({
@@ -583,18 +548,6 @@ function setFlatpickrDate(element, date) {
     altFormat: "F j, Y H:i",
     defaultDate: date,
   });
-}
-
-
-
-function updateNewItemChecklistButton() {
-  var newProjectChecklistName = $("#new-item-checklist-name").val();
-
-  if (newProjectChecklistName.length > 0) {
-    $("#new-item-checklist-btn").prop('disabled', false);
-  } else {
-    $("#new-item-checklist-btn").prop('disabled', true);
-  }
 }
 
 
@@ -1150,10 +1103,10 @@ function addItemNote() {
   }
 
   $.post(backendItemUrl, data, function(response) {
-    getItemNotes(itemID);                             // update the item notes
-    $("#new-item-note-input").val('');                // clear the input
-    toastAlert('Note added');                         // send success alert
-    updateNewItemNoteButton();                        // disable the save button
+    getItemNotes(itemID);                                                       // update the item notes
+    $("#new-item-note-input").val('');                                          // clear the input
+    toastAlert('Note added');                                                   // send success alert
+    enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input"));  // disable the save button
   });
 }
 
@@ -1184,16 +1137,6 @@ function setItemNotes(itemNotes) {
   $("#item-notes-cards").html(html);
 }
 
-function updateNewItemNoteButton() {
-
-  if ($("#new-item-note-input").val().length > 0) {
-    $("#new-item-note-btn").prop('disabled', false); // set to enabled
-  } else {
-    $("#new-item-note-btn").prop('disabled', true);  // set to disabled
-  }
-}
-
-
 function getItemNoteCardHtml(itemNote) {
   var html = '';
   html += '<div class="card card-item-note" data-item-note-id="' + itemNote.id + '">';
@@ -1216,16 +1159,7 @@ function deleteItemNote(btn) {
   console.log('deleteItemNote()');
 }
 
-function enableButtonFromInput(button, input) {
 
-  var inputLength = $(input).val().length;
-
-  if (inputLength > 0) {
-    $(button).prop('disabled', false); // set to enabled
-  } else {
-    $(button).prop('disabled', true);  // set to disabled
-  }
-}
 
 
 

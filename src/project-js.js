@@ -10,12 +10,39 @@ $(document).ready(function() {
 });
 
 function addEventListeners() {
-  $("#new-project-name").on("keyup", updateRenameProjectButton);
-  $("#new-checklist-name").on("keyup", updateNewChecklistButton);
-  $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
-  $("#new-item-checklist-btn").on("click", addItemChecklist);
 
+  $("#new-item-checklist-btn").on("click", addItemChecklist);
   $("#item-modal").on("hide.bs.modal", closeItemModal);
+
+
+  // $("#new-item-note-input").on("keyup", function() {
+  //   enableButtonFromInput($("#new-item-note-btn"), this);
+  // });
+
+
+  // $("#new-project-name").on("keyup", updateRenameProjectButton);
+  // $("#new-project-name").on("keyup", function() {
+  //   enableButtonFromInput($("#new-project-name-btn"), this);
+  // });
+
+
+  // $("#new-checklist-name").on("keyup", updateNewChecklistButton);
+  // $("#new-checklist-name").on("keyup", function() {
+  //   enableButtonFromInput($("#new-checklist-modal-btn"), this);
+  // });
+
+
+  // $("#new-item-checklist-name").on("keyup", updateNewItemChecklistButton);
+  // $("#new-item-checklist-name").on("keyup", function() {
+  //   enableButtonFromInput($("#new-item-checklist-btn"), this);
+  // });
+
+
+  $(".update-button").on("keyup", function() {
+    var buttonID = $(this).attr("data-button-id");
+    enableButtonFromInput($(buttonID), this)
+  });
+
 }
 
 
@@ -1110,6 +1137,7 @@ function getEditItemFormData() {
   return data;
 }
 
+
 function addItemNote() {
 
   var content = $("#new-item-note-input").val();  // note content
@@ -1125,7 +1153,7 @@ function addItemNote() {
     getItemNotes(itemID);                             // update the item notes
     $("#new-item-note-input").val('');                // clear the input
     toastAlert('Note added');                         // send success alert
-    $("#new-item-note-btn").prop('disabled', true);   // disable the save button
+    updateNewItemNoteButton();                        // disable the save button
   });
 }
 
@@ -1154,8 +1182,15 @@ function setItemNotes(itemNotes) {
 
   // set the item notes section to the generated html
   $("#item-notes-cards").html(html);
+}
 
+function updateNewItemNoteButton() {
 
+  if ($("#new-item-note-input").val().length > 0) {
+    $("#new-item-note-btn").prop('disabled', false); // set to enabled
+  } else {
+    $("#new-item-note-btn").prop('disabled', true);  // set to disabled
+  }
 }
 
 
@@ -1180,6 +1215,18 @@ function editItemNote(btn) {
 function deleteItemNote(btn) {
   console.log('deleteItemNote()');
 }
+
+function enableButtonFromInput(button, input) {
+
+  var inputLength = $(input).val().length;
+
+  if (inputLength > 0) {
+    $(button).prop('disabled', false); // set to enabled
+  } else {
+    $(button).prop('disabled', true);  // set to disabled
+  }
+}
+
 
 
 

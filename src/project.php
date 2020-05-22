@@ -121,19 +121,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
         <div class="tab-pane fade" id="project-pills-notes" role="tabpanel">
           <h3>Notes</h3>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
       </div>
 
@@ -159,7 +146,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             <form method="post">
               <div class="form-group">
                 <label>Name:</label>
-                <input type="text" class="form-control" id="new-checklist-name" name="new-checklist-name">
+                <input type="text" class="form-control update-button" id="new-checklist-name" name="new-checklist-name" data-button-id="#new-checklist-modal-btn">
               </div>
               <button type="button" id="new-checklist-modal-btn" class="btn btn-primary float-right" onclick="createChecklist()" disabled>Create checklist</button>
             </form>
@@ -229,7 +216,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
               <!-- new project name input -->
               <div class="form-group">
                 <label for="project-name">New project name:</label>
-                <input type="text" class="form-control" name="new-project-name" id="new-project-name" maxlength="50">
+                <input type="text" class="form-control update-button" name="new-project-name" id="new-project-name" maxlength="50" data-button-id="#new-project-name-btn">
               </div>
 
               <!-- submit button -->

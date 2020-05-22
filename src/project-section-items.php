@@ -11,7 +11,7 @@
     <!-- name -->
     <div class="form-group">
       <label for="new-item-name">Name:</label>
-      <input type="text" id="new-item-name" class="form-control">
+      <input type="text" id="new-item-name" class="form-control update-button" data-button-id="#new-item-btn">
     </div>
     
     <!-- description -->
@@ -21,7 +21,7 @@
     </div>
     
     <!-- create item submit button -->
-    <button class="btn btn-primary float-right" type="button" onclick="newProjectItem()">Create</button>
+    <button class="btn btn-primary float-right" id="new-item-btn" type="button" onclick="newProjectItem()" disabled>Create</button>
   </div>
 </div>
 
@@ -85,7 +85,7 @@
                     <form>
                       <div class="form-group">
                         <label for="new-project-checklist-name">Name:</label>
-                        <input type="text" id="new-item-checklist-name" class="form-control">
+                        <input type="text" id="new-item-checklist-name" class="form-control update-button" data-button-id="#new-item-checklist-btn">
                       </div>
                       <button id="new-item-checklist-btn" type="button" class="btn btn-primary float-right" disabled>Add</button>
                     </form>
@@ -109,10 +109,10 @@
             <form>
               <div class="form-group">
                 <label for="new-item-note-input">New note:</label>
-                <textarea id="new-item-note-input" class="form-control" rows="1" placeholder="Write a note..."></textarea>
+                <textarea id="new-item-note-input" class="form-control update-button" data-button-id="#new-item-note-btn" rows="1" placeholder="Write a note..."></textarea>
               </div>
 
-              <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()">Save</button>
+              <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()" disabled>Save</button>
             </form>
 
             

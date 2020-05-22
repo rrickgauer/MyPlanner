@@ -32,7 +32,7 @@
 
 
 <!-- item modal -->
-<div class="modal" id="item-modal" tabindex="-1" role="dialog">
+<div class="modal fade" id="item-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
 
@@ -59,7 +59,7 @@
                   <div class="icon"><i class='bx bx-card'></i></div>
                   <div class="description">Item name</div>
                 </div>
-                <div class="content"></div>
+                <div class="panel content"></div>
               </div>
 
               <div class="info-section date-due">
@@ -67,7 +67,7 @@
                   <div class="icon"><i class='bx bx-time'></i></div>
                   <div class="description">Date due</div>
                 </div>
-                <div class="content"></div>
+                <div class="panel content"></div>
               </div>
 
               <div class="info-section description">
@@ -75,7 +75,7 @@
                   <div class="icon"><i class='bx bx-detail'></i></div>
                   <div class="description">Description</div>
                 </div>
-                <div class="content"></div>
+                <div class="panel content"></div>
               </div>
 
             </div>
@@ -143,13 +143,22 @@
           
           <!-- title and header -->
           <div class="info-section checklists">
-            <div class="heading">
-              <div class="icon"><i class='bx bx-list-check'></i></div>
-              <div class="description">Checklists</div>
+            
+            <!-- heading -->
+            <div class="split">
+              <div class="left">
+                <div class="heading">
+                  <div class="icon"><i class='bx bx-list-check'></i></div>
+                  <div class="description">Checklists</div>
+                </div>
+              </div>
+              <div class="right">
+                <button type="button" class="btn btn-sm btn-secondary btn-show-details">Show details</button>
+              </div>
             </div>
 
-            <!-- content -->
-            <div class="content">
+            <!-- panel -->
+            <div class="panel d-none">
               <div class="row">
                 <div class="col-2">
 
@@ -183,12 +192,22 @@
 
         <!-- notes -->
         <div id="item-pills-notes">
+
           <div class="info-section notes">
-            <div class="heading">
-              <div class="icon"><i class='bx bx-note'></i></div>
-              <div class="description">Notes</div>
+
+            <div class="split">
+              <div class="left">
+                <div class="heading">
+                  <div class="icon"><i class='bx bx-note'></i></div>
+                  <div class="description">Notes</div>
+                </div>
+              </div>
+              <div class="right">
+                <button type="button" class="btn btn-sm btn-secondary btn-show-details">Show details</button>
+              </div>
             </div>
-            <div class="content">
+
+            <div class="panel d-none">
 
               <!-- new note input -->
               <form>

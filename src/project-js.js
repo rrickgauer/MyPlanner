@@ -46,8 +46,17 @@ function closeItemModal() {
   // clear the item notes section
   clearItemNotesSection();
 
+  // collapse the checklist and notes content
+  collapseAllItemModalSections();
 
 }
+
+
+function collapseAllItemModalSections() {
+  $("#item-pills-notes .panel").addClass("d-none");
+  $("#item-pills-checklists .panel").addClass("d-none");
+}
+
 
 // displays a toast alert
 function toastAlert(text) {
@@ -1259,3 +1268,9 @@ function setItemModalCompleteButtonToIncomplete() {
   $("#item-modal").attr("data-item-completed", 'n');
 }
 
+// hide a section of the item modal from show details button
+$(document).ready(function() {
+  $(".btn-show-details").on("click", function() {
+    $(this).closest(".info-section").find(".panel").toggleClass('d-none');
+  });
+});

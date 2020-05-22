@@ -4,8 +4,22 @@ $base-color-grey: #efecec;
 $base-color-red: #bf3e43;
 $base-color-yellow-hover: #f1d98b;
 
+$custom-font: 'Fredoka One', cursive;
 
-.custom-font {font-family: 'Fredoka One', cursive;}
+
+.btn-secondary {
+  background: #dcd5d5;
+  color: #1a1a1a;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: #c5baba;
+  color: #1a1a1a;
+}
+
+
+.custom-font {font-family: $custom-font;}
 
 body {background-color: $base-color-grey;}
 
@@ -303,15 +317,12 @@ body {background-color: $base-color-grey;}
 
     .description {
       font-size: 1.8em;
-      font-weight: bold;
       margin-left: 15px;
+      font-family: $custom-font;
     }
   }
 
-
+  .panel {margin-left: 53px;}
 }
 
-#item-pills-info {
-  .content {margin-left: 53px;}
-  button.completed {text-decoration: none;}
-}
+#item-pills-info button.completed {text-decoration: none;}

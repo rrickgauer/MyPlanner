@@ -1,6 +1,6 @@
 const queryString = window.location.search;
 const URL_PARAMS = new URLSearchParams(queryString);
-const PROJECT_ID = URL_PARAMS.get('PROJECT_ID');
+const PROJECT_ID = URL_PARAMS.get('projectID');
 const BACKEND_ITEM_URL = 'project-backend-items.php';
 
 $(document).ready(function () {
@@ -237,7 +237,7 @@ function getChecklists() {
     type: "GET",
     url: 'project-backend.php',
     data: {
-      "PROJECT_ID": PROJECT_ID
+      "projectID": PROJECT_ID
     },
 
     success: function (response) {
@@ -262,7 +262,7 @@ function deleteChecklist() {
       url: 'project-backend.php',
       data: {
         "checklistID": checklistID,
-        "PROJECT_ID": PROJECT_ID,
+        "projectID": PROJECT_ID,
         "action": 'delete',
       },
 
@@ -343,7 +343,7 @@ function setChecklistItemComplete(checklistItemID) {
 // see delete-project.php
 function deleteProject() {
   if (confirm('Are you sure you want to delete this project?'))
-    window.location.href = 'delete-project.php?PROJECT_ID=' + PROJECT_ID;
+    window.location.href = 'delete-project.php?projectID=' + PROJECT_ID;
 }
 
 // returns the project items
@@ -353,7 +353,7 @@ function getProjectItems() {
     url: BACKEND_ITEM_URL,
     data: {
       "function": 'get-items',
-      "PROJECT_ID": PROJECT_ID,
+      "projectID": PROJECT_ID,
     },
 
     success: function (response) {
@@ -451,7 +451,7 @@ function newProjectItem() {
     url: BACKEND_ITEM_URL,
     data: {
       "function": 'insert-item',
-      "PROJECT_ID": PROJECT_ID,
+      "projectID": PROJECT_ID,
       "name": itemName,
       "description": itemDescription,
     },
@@ -467,6 +467,14 @@ function newProjectItem() {
     }
   });
 }
+
+
+
+
+
+
+
+
 
 
 function openItemModal(itemID) {
@@ -486,8 +494,12 @@ function openItemModal(itemID) {
       getAllOpenItemChecklists(itemID);
       getItemNotes(itemID);
       $('#item-modal').modal('show');
+
+      console.log(item);
     }
   });
+
+
 }
 
 function loadItemModalChecklist(itemID) {
@@ -707,8 +719,6 @@ function getItemChecklistCardHtml(data) {
 function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
   var html = '';
-
-
   html += '<li class="list-group-item" data-item-checklist-item-id="' + itemChecklistItem.id + '">';
 
   // left portion: checkbox and content

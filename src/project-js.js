@@ -1181,10 +1181,25 @@ function updateItemNote(btn) {
     // replace the old item note card html with the new html
     $(itemNote).replaceWith(html);
 
-
     // send confirmation alert
     toastAlert('Note updated');
+  });
+}
 
+// resets the item note card back to its orginal version
+function resetItemNote(btn) {
+  var itemNote = $(btn).closest(".card-item-note");
+  var itemNoteID = $(itemNote).attr("data-item-note-id");
+
+  var data = {
+    itemNoteID: itemNoteID,
+    function: 'get-item-note',
+  }
+
+  $.get(backendItemUrl, data, function(response) {
+    var oldItemNote = JSON.parse(response);
+    var html = getItemNoteCardHtml(oldItemNote);
+    $(itemNote).replaceWith(html);
   });
 }
 

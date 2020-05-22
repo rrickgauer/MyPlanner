@@ -521,6 +521,13 @@ function setItemModalData(item) {
   $("#edit-item-description").val(item.description);
   setFlatpickrDate($("#edit-item-date-created"), item.date_created);
   setFlatpickrDate($("#edit-item-date-due"), item.date_due);
+
+  // determine correct data for complete item button
+  if (item.completed == 'n') 
+    setItemModalCompleteButtonToIncomplete(); // set to incompleted
+  else 
+    setItemModalCompleteButtonToComplete();   // set to completed
+  
 }
 
 function setFlatpickrDate(element, date) {
@@ -1199,8 +1206,56 @@ function resetItemNote(btn) {
 }
 
 
+function updateItemCompleted() {
+  var itemID = getOpenItemModalID();
+
+  // item is incomplete
+  // set compleyed to y
+  if ($("#item-modal").attr("data-item-completed") == 'n') {
+    setItemToComplete(itemID);
+    toastAlert('Item completed');
+  }
+
+  // item is complete
+  // set item completed to n
+  else {
+    setItemToIncomplete(itemID);
+    toastAlert('Item incompleted');
+  }
+}
 
 
 
+function setItemToComplete(itemID) {
+  var data = {
+    itemID: itemID,
+    function: 'update-item-to-complete',
+  }
 
+  $.post(backendItemUrl, data, setItemModalCompleteButtonToComplete);
+}
+
+function setItemToIncomplete(itemID) {
+  var data = {
+    itemID: itemID,
+    function: 'update-item-to-incomplete',
+  }
+
+  $.post(backendItemUrl, data, setItemModalCompleteButtonToIncomplete);
+}
+
+
+// sets the complete item modal button to complete
+function setItemModalCompleteButtonToComplete() {
+  var html = '<i class="bx bx-check-circle"></i>&nbsp;Mark incomplete'
+  $("#complete-item-modal-button").addClass('completed').removeClass('incompleted').html(html);
+  $("#item-modal").attr("data-item-completed", 'y');
+}
+
+// sets the complete item modal button to incomplete
+function setItemModalCompleteButtonToIncomplete() {
+  var html = '<i class="bx bx-check-circle"></i>&nbsp;Mark complete'
+  $("#complete-item-modal-button").addClass('incompleted').removeClass('completed').html(html);
+  $("#item-modal").attr("data-item-completed", 'n');
+}
 

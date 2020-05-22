@@ -745,6 +745,29 @@ function updateItemNote($itemNoteID, $content) {
   $pdo = null;
 }
 
+// update an item's complete
+function updateItemCompleted($itemID, $completed = 'y') {
+  
+  // if the completed argument is not y or n then exit function
+  if ($completed != 'y' && $completed != 'n')
+    return;
+
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Items SET completed=:completed WHERE id=:itemID');
+
+  // filter and bind item id
+  $itemID = filter_var($itemID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':itemID', $itemID, PDO::PARAM_INT);
+
+  // filter and bind completed
+  $completed = filter_var($completed, FILTER_SANITIZE_STRING);
+  $sql->bindParam(':completed', $completed, PDO::PARAM_STR);
+
+  $sql->execute();
+  $pdo = null;
+  $sql = null;
+}
+
 
 
 

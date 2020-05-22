@@ -53,10 +53,10 @@
             <a class="nav-link" id="item-pills-checklists-tab" data-toggle="pill" href="#item-pills-checklists" role="tab">Checklists</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
+            <a class="nav-link" id="item-pills-notes-tab" data-toggle="pill" href="#item-pills-notes" role="tab">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
+            <a class="nav-link active" id="item-pills-info-tab" data-toggle="pill" href="#item-pills-info" role="tab">Info</a>
           </li>
         </ul>
 
@@ -102,7 +102,7 @@
 
 
           <!-- notes -->
-          <div class="tab-pane fade show active" id="item-pills-notes" role="tabpanel">
+          <div class="tab-pane fade" id="item-pills-notes" role="tabpanel">
             <h1 class="custom-font">Notes</h1>
 
             <!-- new note input -->
@@ -115,46 +115,41 @@
               <button type="button" class="btn btn-primary" id="new-item-note-btn" onclick="addItemNote()" disabled>Save</button>
             </form>
 
-            
-
-
             <!-- item note cards -->
             <div id="item-notes-cards"></div>
-
-
           </div>
 
           
           <!-- info -->
-          <div class="tab-pane fade" id="item-pills-info" role="tabpanel">
+          <div class="tab-pane fade show active" id="item-pills-info" role="tabpanel">
 
             <div class="row">
 
               <div class="col-9">
 
-              <div class="info-section name">
-                <div class="heading">
-                  <div class="icon"><i class='bx bx-card'></i></div>
-                  <div class="description">Item name</div>
+                <div class="info-section name">
+                  <div class="heading">
+                    <div class="icon"><i class='bx bx-card'></i></div>
+                    <div class="description">Item name</div>
+                  </div>
+                  <div class="content"></div>
                 </div>
-                <div class="content"></div>
-              </div>
 
-              <div class="info-section date-due">
-                <div class="heading">
-                  <div class="icon"><i class='bx bx-time'></i></div>
-                  <div class="description">Date due</div>
+                <div class="info-section date-due">
+                  <div class="heading">
+                    <div class="icon"><i class='bx bx-time'></i></div>
+                    <div class="description">Date due</div>
+                  </div>
+                  <div class="content"></div>
                 </div>
-                <div class="content"></div>
-              </div>
 
-              <div class="info-section description">
-                <div class="heading">
-                  <div class="icon"><i class='bx bx-detail'></i></div>
-                  <div class="description">Description</div>
+                <div class="info-section description">
+                  <div class="heading">
+                    <div class="icon"><i class='bx bx-detail'></i></div>
+                    <div class="description">Description</div>
+                  </div>
+                  <div class="content"></div>
                 </div>
-                <div class="content"></div>
-              </div>
 
               </div>
 
@@ -163,11 +158,14 @@
 
                 <div class="list-group list-group-flush">
                   
+                  <!-- set item to complete or incomplete -->
+                  <button type="button" class="list-group-item list-group-item-action" id="complete-item-modal-button" onclick="updateItemCompleted()"></button>
+                  
+                  <!-- edit item info button -->
                   <div class="dropleft">
                     <button type="button" class="list-group-item list-group-item-action" data-toggle="dropdown">
                       <i class='bx bx-pencil'></i>&nbsp;Edit
                     </button>
-
                     <div class="dropdown-menu dropdown-form" id="edit-item-info-menu">
                       <h5>Edit item info</h5>
                       
@@ -198,7 +196,6 @@
                       <!-- update item info button -->
                       <button type="button" class="btn btn-primary float-right" id="edit-item-description-btn" onclick="updateItemInfo()">Save</button>
                     </div>
-
                   </div>
                   
                   <!-- delete item button -->

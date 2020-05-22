@@ -231,6 +231,20 @@ else if (isset($_GET['itemNoteID'], $_GET['function']) && $_GET['function'] == '
   exit;
 }
 
+// set item to complete
+else if (isset($_POST['itemID'], $_POST['function']) && $_POST['function'] == 'update-item-to-complete') {
+  $itemID = $_POST['itemID'];
+  updateItemCompleted($itemID, 'y');
+  exit;
+}
+
+// set item to incomplete
+else if (isset($_POST['itemID'], $_POST['function']) && $_POST['function'] == 'update-item-to-incomplete') {
+  $itemID = $_POST['itemID'];
+  updateItemCompleted($itemID, 'n');
+  exit;
+}
+
 
 
 

@@ -180,7 +180,7 @@
                       <!-- name -->
                       <div class="form-group">
                         <label for="edit-item-name">Name:</label>
-                        <input type="text" id="edit-item-name" class="form-control">
+                        <input type="text" id="edit-item-name" class="form-control update-button" data-button-id="#edit-item-description-btn">
                       </div>
                       
                       <!-- date due -->
@@ -200,22 +200,14 @@
                         <label for="edit-item-description">Description:</label>
                         <textarea id="edit-item-description" class="form-control" rows="5"></textarea>
                       </div>
-
-                      <button type="button" class="btn btn-primary float-right" onclick="updateItemInfo()">Save</button>
-
-
-
-
-
-  
-
-
+                      
+                      <!-- update item info button -->
+                      <button type="button" class="btn btn-primary float-right" id="edit-item-description-btn" onclick="updateItemInfo()">Save</button>
                     </div>
 
                   </div>
-
                   
-
+                  <!-- delete item button -->
                   <button type="button" class="list-group-item list-group-item-action" onclick="deleteItem()">
                     <i class='bx bx-trash'></i>&nbsp;Delete
                   </button>
@@ -223,11 +215,6 @@
 
                 </div>
               </div>
-
-
-
-
-
 
             </div>
 

@@ -476,15 +476,8 @@ function openItemModal(itemID) {
       setItemModalData(item[0]);
       getItemChecklistSidebar(itemID);
       getAllOpenItemChecklists(itemID);
-
       getItemNotes(itemID);
-
-
-
       $('#item-modal').modal('show');
-
-
-      
     }
   });
 }
@@ -525,8 +518,6 @@ function setItemModalData(item) {
   $("#edit-item-description").val(item.description);
   setFlatpickrDate($("#edit-item-date-created"), item.date_created);
   setFlatpickrDate($("#edit-item-date-due"), item.date_due);
-
-  // setItemInfoTabData(item.name, item.description, item.date_created, item.date_due);
 }
 
 function setItemInfoTabData(name, description, dateCreated, dateDue) {
@@ -691,23 +682,9 @@ function getItemChecklistCardHtml(data) {
   html += '<div class="card item-checklist" data-item-checklist-id="' + checklistData.id + '">';
   html += '<div class="card-header">';
   html += '<h6>' + checklistData.name + '</h6>';
-  html += '<div class="dropdown">';
-  html += '<button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i></button>';
-  html += '<div class="dropdown-menu">';
-  html += '<a class="dropdown-item" href="#" onclick="closeItemChecklist(this)">Close</a>';
-  html += '<a class="dropdown-item" href="#">Rename</a>';
+  html += '<div class="dropdown"><button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i></button><div class="dropdown-menu"><a class="dropdown-item" href="#" onclick="closeItemChecklist(this)">Close</a><a class="dropdown-item" href="#">Rename</a>';
   html += '<a class="dropdown-item" href="#" onclick="deleteItemChecklist(' + checklistData.id + ')">Delete</a>';
-  html += '</div>';
-  html += '</div>';
-  html += '</div>';
-  html += '<div class="card-body">';
-  html += '<div class="input-group mb-3">';
-  html += '<input type="text" class="form-control new-item-checklist-item-input">';
-  html += '<div class="input-group-append">';
-  html += '<button class="btn btn-outline-secondary" type="button" onclick="addItemChecklistItemFromButton(this)">+</button>';
-  html += '</div>';
-  html += '</div>';
-  html += '<ul class="list-group list-group-flush">';
+  html += '</div></div></div><div class="card-body"><div class="input-group mb-3"><input type="text" class="form-control new-item-checklist-item-input"><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" onclick="addItemChecklistItemFromButton(this)">+</button></div></div><ul class="list-group list-group-flush">';
 
   // get the html for the checklist items
   for (var count = 0; count < items.length; count++) {
@@ -734,14 +711,11 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
 
   // item is completed
   if (itemChecklistItem.completed == 'n') {
-    // html += '<input class="form-check-input position-static" type="checkbox" onclick="updateItemChecklistItem(' + itemChecklistItem.id + ')">';
-
     html += '<input class="form-check-input position-static" type="checkbox" onclick="updateItemChecklistItem(this)">';
     html += '<div class="content">' + itemChecklistItem.content + '</div>';
 
   // item is incomplete
   } else {
-    // html += '<input class="form-check-input position-static" type="checkbox" checked onclick="updateItemChecklistItem(' + itemChecklistItem.id + ')">';
     html += '<input class="form-check-input position-static" type="checkbox" checked onclick="updateItemChecklistItem(this)">';
     html += '<div class="content completed">' + itemChecklistItem.content + '</div>';
   }
@@ -756,14 +730,7 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
   html += '<div class="dropleft"><button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
 
   // dropdown menu
-  html += '<div class="dropdown-menu">';
-  html += '<button class="dropdown-item" type="button" onclick="editItemChecklistItem(this)">Edit</button>';
-  html += '<div class="dropdown-divider"></div>';
-  html += '<button class="dropdown-item" type="button">Move up</button>';
-  html += '<button class="dropdown-item" type="button">Move down</button>';
-  html += '<div class="dropdown-divider"></div>';
-  html += '<button class="dropdown-item" type="button" onclick="deleteItemChecklistItem(this)">Delete</button>';
-  html += '</div>';
+  html += '<div class="dropdown-menu"><button class="dropdown-item" type="button" onclick="editItemChecklistItem(this)">Edit</button><div class="dropdown-divider"></div><button class="dropdown-item" type="button">Move up</button><button class="dropdown-item" type="button">Move down</button><div class="dropdown-divider"></div><button class="dropdown-item" type="button" onclick="deleteItemChecklistItem(this)">Delete</button></div>';
 
 
   // closing tags
@@ -832,6 +799,7 @@ function deleteItemChecklist(itemChecklistID) {
         loadItemModalChecklist(itemID);
         getProjectItems();
 
+        // send alert
         toastAlert('Item checklist deleted.');
       }
     });
@@ -887,7 +855,6 @@ function setItemChecklistItemToComplete(itemChecklistItemID) {
 
 
 function addItemChecklistItemFromButton(btn) {
-
   var itemChecklistID = $(btn).closest(".item-checklist").attr("data-item-checklist-id");
   var content = $(btn).closest(".item-checklist").find(".new-item-checklist-item-input").val();
   var itemChecklist = getItemChecklistCard(itemChecklistID);
@@ -955,7 +922,6 @@ function deleteItemChecklistItem(item) {
     'function': 'delete-item-checklist-item',
   }
 
-
   // post the data
   $.post(backendItemUrl, data, function(response) {
     $(itemChecklistItem).remove();  // remove the item
@@ -965,7 +931,6 @@ function deleteItemChecklistItem(item) {
 
 
 function editItemChecklistItem(selector) {
-
   var item = $(selector).closest('li.list-group-item');
   var contentText = $(item).find('.content').html();
   var id = $(item).attr('data-item-checklist-item-id');
@@ -1032,9 +997,7 @@ function updateItemChecklistItemContent(itemChecklistItemID, newContent) {
 function deleteItem() {
 
   if (confirm('Are you sure you want to delete this item?')) {
-
     var itemID = getOpenItemModalID();
-
     var data = {
       'function': 'delete-item',
       'itemID': itemID,
@@ -1064,9 +1027,7 @@ function updateItemInfo() {
   }
 
   $.post(backendItemUrl, data, function(response) {
-    // openItemModal(itemID);        // update the item modal
-    toastAlert('Item updated!');  // send alert
-
+    toastAlert('Item updated!');     // send alert
     setItemModalData(JSON.parse(response));
   });
 
@@ -1074,7 +1035,6 @@ function updateItemInfo() {
 
 
 function getEditItemFormData() {
-
   var itemID = getOpenItemModalID();
   var name = $("#edit-item-name").val();
   var dateDue = $("#edit-item-date-due").val();

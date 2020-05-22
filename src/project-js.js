@@ -501,6 +501,9 @@ function loadItemModalChecklist(itemID) {
 }
 
 function setItemModalData(item) {
+
+  console.log(item);
+
   // set the title
   $("#item-modal .modal-title").html(item.name);
 
@@ -519,22 +522,6 @@ function setItemModalData(item) {
   setFlatpickrDate($("#edit-item-date-created"), item.date_created);
   setFlatpickrDate($("#edit-item-date-due"), item.date_due);
 }
-
-function setItemInfoTabData(name, description, dateCreated, dateDue) {
-
-  // display data
-  $("#item-pills-info .info-section.name .content").html(name);                // item name
-  $("#item-pills-info .info-section.date-due .content").html(item.date_due_date);   // date due
-  $("#item-pills-info .info-section.description .content").html(item.description);  // description
-
-  // edit info dropdown menu form
-  $("#edit-item-name").val(name);
-  $("#edit-item-description").val(description);
-  setFlatpickrDate($("#edit-item-date-created"), dateCreated);
-  setFlatpickrDate($("#edit-item-date-due"), dateDue);
-}
-
-
 
 function setFlatpickrDate(element, date) {
   flatpickr(element, {

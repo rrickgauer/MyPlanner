@@ -18,6 +18,13 @@ $custom-font: 'Fredoka One', cursive;
   color: #1a1a1a;
 }
 
+.btn-secondary:active, .btn-secondary:focus {
+  color: #1a1a1a; 
+  background-color: #dcd5d5; 
+  // border-color: #494F57;
+ box-shadow: none;
+}
+
 
 .custom-font {font-family: $custom-font;}
 
@@ -326,3 +333,20 @@ body {background-color: $base-color-grey;}
 }
 
 #item-pills-info button.completed {text-decoration: none;}
+
+
+.sidebar-item-checklists {
+  margin-bottom: 20px;
+  
+  .nav-item {
+    // background: white;
+    // border-bottom: 1px solid #a6a6a6;
+  
+    
+    .nav-link {      
+      padding: 5px;
+    }
+  }
+
+  .nav-item:hover {background-color: #f2f2f2;}
+}

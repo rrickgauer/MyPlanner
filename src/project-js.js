@@ -470,13 +470,6 @@ function newProjectItem() {
 
 
 
-
-
-
-
-
-
-
 function openItemModal(itemID) {
 
   $.ajax({
@@ -495,7 +488,7 @@ function openItemModal(itemID) {
       getItemNotes(itemID);
       $('#item-modal').modal('show');
 
-      console.log(item);
+      // console.log(item);
     }
   });
 
@@ -522,7 +515,7 @@ function loadItemModalChecklist(itemID) {
 
 function setItemModalData(item) {
 
-  console.log(item);
+  // console.log(item);
 
   // set the title
   $("#item-modal .modal-title").html(item.name);
@@ -657,6 +650,8 @@ function getAllOpenItemChecklists(itemID) {
     success: function (response) {
       var openItemChecklists = JSON.parse(response);
       var size = openItemChecklists.length;
+
+      console.log(openItemChecklists);
 
       // display all open checklists
       for (var count = 0; count < size; count++) {

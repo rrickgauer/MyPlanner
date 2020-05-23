@@ -9,6 +9,12 @@
   color: #1a1a1a;
 }
 
+.btn-secondary:active, .btn-secondary:focus {
+  color: #1a1a1a;
+  background-color: #dcd5d5;
+  box-shadow: none;
+}
+
 .custom-font {
   font-family: "Fredoka One", cursive;
 }
@@ -297,6 +303,16 @@ body {
 
 #item-pills-info button.completed {
   text-decoration: none;
+}
+
+.sidebar-item-checklists {
+  margin-bottom: 20px;
+}
+.sidebar-item-checklists .nav-item .nav-link {
+  padding: 5px;
+}
+.sidebar-item-checklists .nav-item:hover {
+  background-color: #f2f2f2;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

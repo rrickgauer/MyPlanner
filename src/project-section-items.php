@@ -160,9 +160,9 @@
             <!-- panel -->
             <div class="panel d-none">
               <div class="row">
-                <div class="col-2">
+                <div class="col-3">
 
-                  <b>Current lists</b><br>
+                  <!-- <h6>Current lists</h6> -->
                   <!-- side bar of item checklists -->
                   <ul class="nav nav-pills flex-column sidebar-item-checklists"></ul>
 
@@ -182,7 +182,7 @@
                 </div>
 
                 <!-- open checklists go here -->
-                <div class="col-10" id="item-checklists"></div>
+                <div class="col-9" id="item-checklists"></div>
               </div>
             </div>
           </div>

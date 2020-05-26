@@ -397,7 +397,7 @@ function getProjectItemCount($projectID) {
 ********************************************************************/
 function getProjectItems($projectID) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT Items.id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, count(Item_Checklists.id) as count_checklists, count(Item_Notes.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID GROUP by Items.id');
+  $sql = $pdo->prepare('SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID GROUP by Items.id');
 
   $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);

@@ -526,7 +526,7 @@ function setItemModalData(item) {
   // info tab set data
   $("#item-pills-info .info-section.name .content").html(item.name); // item name
   $("#item-pills-info .info-section.date-due .content").html(item.date_due_date); // date due
-  $("#item-pills-info .info-section.description .content").html(item.description); // description
+  $("#item-pills-info .info-section.description .content").html(renderMarkdown(item.description)); // description
 
 
   // set the edit item info form values
@@ -1107,15 +1107,11 @@ function setItemNotes(itemNotes) {
 }
 
 function getItemNoteCardHtml(itemNote) {
-
-
-  // var renderedContent = renderMarkdown
-
   var content = renderMarkdown(itemNote.content);
 
   var html = '';
   html += '<div class="card card-item-note" data-item-note-id="' + itemNote.id + '">';
-  html += '<div class="card-body content">' + content + '</div>';
+  html += '<div class="card-body content github-css">' + content + '</div>';
   html += '<div class="card-footer split"><div class="left">';
   html += '<button type="button" class="btn btn-sm btn-secondary edit-item-note-btn" onclick="editItemNote(this)">Edit</button>';
   html += '<button type="button" class="btn btn-sm btn-danger delete-item-note-btn" onclick="deleteItemNote(this)">Delete</button></div>';
@@ -1294,8 +1290,5 @@ $(document).ready(function () {
 
 
 function renderMarkdown(input) {
-  var result = MD_RENDER.render(input);
-  // console.log(result);
-
-  return result;
+  return MD_RENDER.render(input);
 }

@@ -20,11 +20,21 @@ $projects = getProjects($_SESSION['userID']);
   
   <!-- project selection -->
   <div id="projects">
-    <h3>Your projects</h3>
+    <h2>Your projects</h2>
 
     <!-- project cards go here -->
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      
+
+    
+    <div class="col">
+
+      <a class="btn btn-lg btn-primary" href="new-project.php" id="new-project-btn">New project</a>
+
     </div>
+
+    </div>
+
   </div>
 
 

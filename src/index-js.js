@@ -1,4 +1,4 @@
-const phpFile = 'index-backend.php';
+const PHP_FILE = 'index-backend.php';
 
 $(document).ready(function() {
   getUserProjects();  // get all the projects
@@ -6,24 +6,20 @@ $(document).ready(function() {
 
 
 function getUserProjects() {
-  $.ajax({  
-    type: "GET",
-    url: phpFile,
-    data: {
-      function: 'getProjects',
-    },
 
-    success: function(response) {
-      displayProjects(JSON.parse(response));
-      console.log(JSON.parse(response));
-    },
+  var data = {
+    function: 'getProjects',
+  };
+
+  $.get(PHP_FILE, data, function(response) {
+    displayProjects(JSON.parse(response));
+    console.log(JSON.parse(response));
   });
 }
 
 
 function displayProjects(data) {
-  // empty html
-  html = '';
+  var html = '';  // empty html
 
   // create html for the project cards
   for (var count = 0; count < data.length; count++) {    
@@ -37,13 +33,13 @@ function displayProjects(data) {
   }
 
   // set the new html
-  $("#projects div").html(html);
+  $("#projects .row").prepend(html);
 }
 
 
 function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
-  html = '';
-  html += '<div class="card card-project" data-project-id="' + id + '">';
+  var html = '';
+  html += '<div class="col"><div class="card card-project" data-project-id="' + id + '">';
   html += '<div class="card-header"><h5>' + name + '</h5></div>';
   html += '<div class="card-body">';
   html += '<span class="badge badge-secondary">' + countChecklists + '&nbsp;checklists</span>';
@@ -51,7 +47,7 @@ function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
   html += '<div class="card-project-date">' + dateDue + '</div>';
   html += '<a href="project.php?projectID=' + id + '">View</a>';
   html += '</div>';
-  html += '</div></div>';
+  html += '</div></div></div>';
 
   return html;
 }

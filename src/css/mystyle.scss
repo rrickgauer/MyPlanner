@@ -33,6 +33,9 @@ body {background-color: $base-color-grey;}
 .form-group label {font-weight: bold;}
 
 .card-project {
+  
+  margin-bottom: 20px;
+
   .card-header {
     background-color: white;
     border: none; 
@@ -345,6 +348,14 @@ body {background-color: $base-color-grey;}
 
   .nav-item:hover, .nav-item.open {background-color: #f2f2f2;}
 }
+
+
+
+#new-project-btn {
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
 
 .github-css {
   body {

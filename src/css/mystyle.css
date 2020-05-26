@@ -312,7 +312,7 @@ body {
 .sidebar-item-checklists .nav-item .nav-link {
   padding: 5px;
 }
-.sidebar-item-checklists .nav-item:hover {
+.sidebar-item-checklists .nav-item .nav-item:hover, .sidebar-item-checklists .nav-item.open {
   background-color: #f2f2f2;
 }
 

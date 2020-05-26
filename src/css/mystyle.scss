@@ -338,17 +338,12 @@ body {background-color: $base-color-grey;}
 .sidebar-item-checklists {
   margin-bottom: 20px;
   
-  .nav-item {
-    // background: white;
-    // border-bottom: 1px solid #a6a6a6;
-  
-    
-    .nav-link {      
-      padding: 5px;
-    }
-  }
+  .nav-item .nav-link {padding: 5px;}
 
-  .nav-item:hover {background-color: #f2f2f2;}
+  .nav-item
+  
+
+  .nav-item:hover, .nav-item.open {background-color: #f2f2f2;}
 }
 
 .github-css {

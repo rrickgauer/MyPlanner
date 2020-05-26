@@ -101,4 +101,20 @@ else if (isset($_POST['projectChecklistItemID']) && isset($_POST['action']) && i
   echo json_encode($items);
   exit;
 }
+
+
+// get an item note
+else if (isset($_GET['itemNoteID'], $_GET['function']) && $_GET['function'] == 'get-item-note') {
+  $itemNoteID = $_GET['itemNoteID'];
+  $itemNote = getItemNote($itemNoteID)->fetch(PDO::FETCH_ASSOC);
+  echo json_encode($itemNote);
+  exit;
+}
+
+
+
+
+
+
+
 ?>

@@ -2,8 +2,10 @@ const queryString = window.location.search;
 const URL_PARAMS = new URLSearchParams(queryString);
 const PROJECT_ID = URL_PARAMS.get('projectID');
 const BACKEND_ITEM_URL = 'project-backend-items.php';
+const MD_RENDER = window.markdownit();
 
-$(document).ready(function () {
+
+$(document).ready(function() {
   getChecklists();
   getProjectItems();
   addEventListeners();
@@ -487,8 +489,6 @@ function openItemModal(itemID) {
       getAllOpenItemChecklists(itemID);
       getItemNotes(itemID);
       $('#item-modal').modal('show');
-
-      // console.log(item);
     }
   });
 
@@ -1107,9 +1107,15 @@ function setItemNotes(itemNotes) {
 }
 
 function getItemNoteCardHtml(itemNote) {
+
+
+  // var renderedContent = renderMarkdown
+
+  var content = renderMarkdown(itemNote.content);
+
   var html = '';
   html += '<div class="card card-item-note" data-item-note-id="' + itemNote.id + '">';
-  html += '<div class="card-body content">' + itemNote.content + '</div>';
+  html += '<div class="card-body content">' + content + '</div>';
   html += '<div class="card-footer split"><div class="left">';
   html += '<button type="button" class="btn btn-sm btn-secondary edit-item-note-btn" onclick="editItemNote(this)">Edit</button>';
   html += '<button type="button" class="btn btn-sm btn-danger delete-item-note-btn" onclick="deleteItemNote(this)">Delete</button></div>';
@@ -1150,25 +1156,35 @@ function editItemNote(btn) {
 
   var itemNote = $(btn).closest(".card-item-note");
   var itemNoteID = $(itemNote).attr("data-item-note-id");
-  var oldContent = $(itemNote).find(".content").html();
 
-  // html for the textarea to edit the note
-  var textAreaHtml = '<div class="edit-item-note">';
-  textAreaHtml += '<textarea class="form-control edit-item-note-input">' + oldContent + '</textarea>';
-  textAreaHtml += '<div class="action-buttons">';
-  textAreaHtml += '<button type="button" class="btn btn-sm btn-primary" onclick="updateItemNote(this)">Save</button>';
-  textAreaHtml += '<button type="button" class="btn btn-sm btn-danger" onclick="resetItemNote(this)">Cancel</button>';
-  textAreaHtml += '</div></div>';
-  $(itemNote).find(".content").html(textAreaHtml);
+  // get the old content from the server
+  var data = {
+    itemNoteID: itemNoteID,
+    function: 'get-item-note',
+  };
 
-  // hide the footer
-  $(itemNote).find(".card-footer").hide();
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    var oldContent = JSON.parse(response).content;
 
-  // make the body not able to be resized
-  $(itemNote).find(".content").addClass("resize-false");
+    // html for the textarea to edit the note
+    var textAreaHtml = '<div class="edit-item-note">';
+    textAreaHtml += '<textarea class="form-control edit-item-note-input">' + oldContent + '</textarea>';
+    textAreaHtml += '<div class="action-buttons">';
+    textAreaHtml += '<button type="button" class="btn btn-sm btn-primary" onclick="updateItemNote(this)">Save</button>';
+    textAreaHtml += '<button type="button" class="btn btn-sm btn-danger" onclick="resetItemNote(this)">Cancel</button>';
+    textAreaHtml += '</div></div>';
+    $(itemNote).find(".content").html(textAreaHtml);
 
-  // disable the edit button
-  $(itemNote).find(".edit-item-note-btn").prop('disabled', true);
+    // hide the footer
+    $(itemNote).find(".card-footer").hide();
+
+    // make the body not able to be resized
+    $(itemNote).find(".content").addClass("resize-false");
+
+    // disable the edit button
+    $(itemNote).find(".edit-item-note-btn").prop('disabled', true);
+  });
+
 }
 
 
@@ -1274,3 +1290,12 @@ $(document).ready(function () {
     $(this).closest(".info-section").find(".panel").toggleClass('d-none');
   });
 });
+
+
+
+function renderMarkdown(input) {
+  var result = MD_RENDER.render(input);
+  // console.log(result);
+
+  return result;
+}

@@ -256,6 +256,10 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
   
   <?php include('footer.php'); ?>
 
+  <!-- markdown-it -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.0/markdown-it.min.js"></script>
+  
+  <!-- personal javascript page -->
   <script src="project-js.js"></script>
 
 </body>

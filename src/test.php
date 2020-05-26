@@ -8,8 +8,7 @@ include('session.php');
 <head>
   <?php include('header.php'); ?>
   
-  <!-- markdown-it -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.0/markdown-it.min.js"></script>
+
 
   <title>Test</title>
 </head>

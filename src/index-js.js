@@ -1,36 +1,32 @@
 const PHP_FILE = 'index-backend.php';
 
 $(document).ready(function() {
-  getUserProjects();  // get all the projects
-
-  $("#nav-item-home").addClass("active");
+  getUserProjects();                        // get all the projects
+  $("#nav-item-home").addClass("active");   // set the navbar link to active
 });
 
-
+// gets the project cards from the server and displays them on success
 function getUserProjects() {
-
   var data = {
     function: 'getProjects',
   };
 
   $.get(PHP_FILE, data, function(response) {
     displayProjects(JSON.parse(response));
-    console.log(JSON.parse(response));
   });
 }
 
-
+// displays all the project cards 
 function displayProjects(data) {
   var html = '';  // empty html
 
   // create html for the project cards
   for (var count = 0; count < data.length; count++) {    
-    const id              = data[count].id;
-    const name            = data[count].name;
-    const dateDue         = data[count].date_due_display_date;
-    const timeDue         = data[count].timeDue;
-    const countChecklists = data[count].count_checklists;
-
+    var id              = data[count].id;
+    var name            = data[count].name;
+    var dateDue         = data[count].date_due_display_date;
+    var timeDue         = data[count].timeDue;
+    var countChecklists = data[count].count_checklists;
     html += getProjectCard(id, name, dateDue, timeDue, countChecklists);
   }
 
@@ -38,7 +34,7 @@ function displayProjects(data) {
   $("#projects .row").prepend(html);
 }
 
-
+// returns the html for a project card
 function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
   var html = '';
   html += '<div class="col"><div class="card card-project" data-project-id="' + id + '">';

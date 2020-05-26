@@ -2,6 +2,7 @@ const queryString = window.location.search;
 const URL_PARAMS = new URLSearchParams(queryString);
 const PROJECT_ID = URL_PARAMS.get('projectID');
 const BACKEND_ITEM_URL = 'project-backend-items.php';
+const BACKEND_PROJECT_URL = BACKEND_PROJECT_URL;
 const MD_RENDER = window.markdownit();
 
 
@@ -11,8 +12,8 @@ $(document).ready(function() {
   addEventListeners();
 });
 
+// adds event listeners to some elements
 function addEventListeners() {
-
   $("#new-item-checklist-btn").on("click", addItemChecklist);
   $("#item-modal").on("hide.bs.modal", closeItemModal);
 
@@ -23,7 +24,7 @@ function addEventListeners() {
   });
 }
 
-
+// enables-disables a button based on if the specified input is empty
 function enableButtonFromInput(button, input) {
   var inputLength = $(input).val().length;
 
@@ -35,29 +36,22 @@ function enableButtonFromInput(button, input) {
   }
 }
 
-
+// actions taken when the item modal is closed
 function closeItemModal() {
+  getProjectItems();                                              // reload the project item cards
 
-  // reload the project item cards
-  getProjectItems();
-
-  // clear modal html
-  $("#item-modal .modal-body .sidebar-item-checklists").html('');
-  $("#item-checklists").html('');
-  $('#item-modal .modal-title').html('');
-
-  // clear the item notes section
-  clearItemNotesSection();
-
-  // collapse the checklist and notes content
-  collapseAllItemModalSections();
-
+  $("#item-modal .modal-body .sidebar-item-checklists").html(''); // clear item checklist sidebar
+  $("#item-checklists").html('');                                 // clear the item checklists
+  $('#item-modal .modal-title').html('');                         // clear the item modal title
+  
+  clearItemNotesSection();                                        // clear the item notes section
+  collapseAllItemModalSections();                                 // collapse the checklist and notes content
 }
 
-
+// collapses all the item modal sections 
 function collapseAllItemModalSections() {
-  $("#item-pills-notes .panel").addClass("d-none");
-  $("#item-pills-checklists .panel").addClass("d-none");
+  $("#item-pills-notes .panel").addClass("d-none");       // notes
+  $("#item-pills-checklists .panel").addClass("d-none");  // checklists
 }
 
 
@@ -73,7 +67,7 @@ function toastAlert(text) {
 }
 
 
-// executes addTodoItem when enter is pressed
+// executes addTodoItem when enter is pressed and the user is focused on the #new-project-checklist-item-input
 $(document).on("keypress", "#new-project-checklist-item-input", function (e) {
   if (e.keyCode == 13) {
     e.preventDefault();
@@ -89,7 +83,7 @@ function addChecklistItem() {
 
   $.ajax({
     type: "POST",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "checklistID": checklistID,
       "content": content
@@ -139,7 +133,7 @@ function clearNewChecklistInput() {
 function getChecklistItems(checklistID) {
   $.ajax({
     type: "GET",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "checklistID": checklistID,
       "data": 'items',
@@ -200,7 +194,7 @@ function createChecklist() {
 
   $.ajax({
     type: "POST",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "projectID": PROJECT_ID,
       "name"     : name,
@@ -236,7 +230,7 @@ function setChecklistSidebar(data) {
 function getChecklists() {
   $.ajax({
     type: "GET",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "projectID": PROJECT_ID
     },
@@ -260,7 +254,7 @@ function deleteChecklist() {
 
     $.ajax({
       type: "POST",
-      url: 'project-backend.php',
+      url: BACKEND_PROJECT_URL,
       data: {
         "checklistID": checklistID,
         "projectID": PROJECT_ID,
@@ -281,7 +275,7 @@ function deleteChecklistItem(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
   $.ajax({
     type: "POST",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "projectChecklistItemID": checklistItemID,
       "checklistID": checklistID,
@@ -311,7 +305,7 @@ function setChecklistItemIncomplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
   $.ajax({
     type: "POST",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "projectChecklistItemID": checklistItemID,
       "checklistID": checklistID,
@@ -329,7 +323,7 @@ function setChecklistItemComplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
   $.ajax({
     type: "POST",
-    url: 'project-backend.php',
+    url: BACKEND_PROJECT_URL,
     data: {
       "projectChecklistItemID": checklistItemID,
       "checklistID": checklistID,
@@ -1290,7 +1284,7 @@ $(document).ready(function () {
 });
 
 
-
+// returns rendered markdown
 function renderMarkdown(input) {
   return MD_RENDER.render(input);
 }

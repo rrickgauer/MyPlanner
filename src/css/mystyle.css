@@ -324,6 +324,10 @@ body {
   margin-left: 100px;
 }
 
+.card {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+}
+
 .github-css body {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;

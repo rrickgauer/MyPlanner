@@ -180,22 +180,23 @@ body {
   flex-grow: 1;
 }
 #items-deck .item-card .item-card-stats .item-card-stat {
-  margin: 2px;
+  margin: 5px;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px 10px;
+  background-color: #efecec;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body .right {
   display: block;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body .right .description {
   font-weight: bold;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body .left i {
-  background-color: darkblue;
+  background-color: #bf3e43;
   border-radius: 50%;
   padding: 10px;
   color: white;

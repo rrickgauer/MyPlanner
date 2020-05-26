@@ -148,7 +148,7 @@ body {background-color: $base-color-grey;}
     font-weight: bold;
   }
 
-  a:hover {background: $base-color-yellow-hover;}
+  a:hover, a.active {background: $base-color-yellow-hover;}
 }
 
 .modal {

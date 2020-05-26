@@ -65,6 +65,7 @@ if (isset($_POST['new-project-name'])) {
 
   $(document).ready(function() {
    enableFlatpickrDates();
+   $("#nav-item-new-project").addClass('active');
  });
 
   function enableFlatpickrDates() {

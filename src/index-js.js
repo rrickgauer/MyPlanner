@@ -2,6 +2,8 @@ const PHP_FILE = 'index-backend.php';
 
 $(document).ready(function() {
   getUserProjects();  // get all the projects
+
+  $("#nav-item-home").addClass("active");
 });
 
 

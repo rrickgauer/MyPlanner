@@ -139,7 +139,7 @@ body {
   color: black;
   font-weight: bold;
 }
-#navbar a:hover {
+#navbar a:hover, #navbar a.active {
   background: #f1d98b;
 }
 

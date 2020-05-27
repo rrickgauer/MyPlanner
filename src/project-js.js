@@ -488,9 +488,7 @@ function addItemChecklist() {
   };
 
   $.post(BACKEND_ITEM_URL, data, function(response) {
-    // setItemChecklistSidebar(JSON.parse(response));
-
-    console.log(response);
+    setItemChecklistSidebar(JSON.parse(response));
 
     // clear the input
     $("#new-item-checklist-name").val('');
@@ -511,6 +509,7 @@ function getItemChecklistSidebar(itemID) {
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     setItemChecklistSidebar(JSON.parse(response));
+    // console.log(response);
   });
 }
 
@@ -565,6 +564,8 @@ function getAllOpenItemChecklists(itemID) {
   $.get(BACKEND_ITEM_URL, data, function(response) {
     var openItemChecklists = JSON.parse(response);
     var size = openItemChecklists.length;
+
+    // console.log(response);
 
     // display all open checklists
     for (var count = 0; count < size; count++) {

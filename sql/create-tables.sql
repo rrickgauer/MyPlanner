@@ -94,6 +94,7 @@ create table Item_Notes (
 	item_id int unsigned not null,
 	content text,
 	display_index int unsigned not null,
+	date_created datetime not null,
 	primary key (id),
 	foreign key (item_id) references Items(id) on update cascade on delete cascade
 ) ENGINE=InnoDB;
@@ -103,6 +104,7 @@ create table Item_Checklists (
 	item_id int unsigned not null,
 	name varchar(50) not null,
 	display_index int unsigned not null,
+	open enum('n', 'y') not null default 'n',
 	primary key (id),
 	foreign key (item_id) references Items(id) on update cascade on delete cascade
 ) ENGINE=InnoDB;

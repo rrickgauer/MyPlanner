@@ -22,7 +22,6 @@ function echoResponse($data) {
 }
 
 function insertUser($email, $password) {
-
    // connect to db
    $pdo = dbConnect();
 
@@ -74,13 +73,29 @@ function getUserID($email) {
 function getUserInfo($id) {
   $pdo = dbConnect();
   $sql = $pdo->prepare('SELECT * FROM Users WHERE id=:id LIMIT 1');
-
   $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':id', $id, PDO::PARAM_INT);
+  $sql->execute();
+  return $sql;
+}
+
+function updateUserEmail($userID, $email) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Users SET email=:email WHERE id=:userID');
+
+  $email  = filter_var($email, FILTER_SANITIZE_EMAIL);
+  $sql->bindParam(':email', $email, PDO::PARAM_STR);
+
+  $userID  = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
 
   $sql->execute();
 
   return $sql;
+
+  $pdo = null;
+  $sql = null;
+
 }
 
 function insertProject($userID, $name, $description = NULL, $dateDue = NULL, $dateCreated = NULL, $displayIndex = NULL) {
@@ -759,7 +774,10 @@ function updateItemCompleted($itemID, $completed = 'y') {
   $sql = null;
 }
 
-
+function getAlert($message, $type = 'success') {
+  $html = "<div class=\"alert alert-$type alert-dismissible fade show\" role=\"alert\">$message" . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+  return $html;
+}
 
 
 

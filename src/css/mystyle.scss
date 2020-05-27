@@ -358,6 +358,21 @@ body {background-color: $base-color-grey;}
 
 .card {box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);}
 
+.passwords-must-match-text {
+  color: red;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+
+input.green {
+  border: 2px solid green;
+}
+
+input.red, input.red:focus {
+  border: 2px solid red;
+}
+
 
 .github-css {
   body {

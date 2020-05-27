@@ -117,7 +117,7 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
       <div class="form-group">
         <label for="confirm-password">Confirm password:</label>
         <input type="password" name="confirm-password" class="form-control update-password-input" id="confirm-password" required>
-        <span class="passwords-must-match-text d-none">&nbsp; Passwords must match</span>
+        <div class="passwords-must-match-text d-none">&nbsp; Passwords must match</div>
       </div>
 
       <input type="submit" class="btn btn-primary" id="new-password-btn" value="Save password" disabled>

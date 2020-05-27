@@ -30,6 +30,8 @@ function updatePasswordActions() {
   $("#new-password-btn").prop('disabled', false);
   $("#confirm-password").closest(".form-group").find(".passwords-must-match-text").addClass("d-none");
 
+  $(".update-password-input").removeClass("red");
+
   // check if all three inputs have values
   if (($("#old-password")).val().length == 0 || $("#new-password").val().length == 0 || $("#confirm-password").val().length == 0) {
     $("#new-password-btn").prop('disabled', true);
@@ -39,6 +41,9 @@ function updatePasswordActions() {
   else if ($("#new-password").val() != $("#confirm-password").val()) {
     $("#new-password-btn").prop('disabled', true);
     $("#confirm-password").closest(".form-group").find(".passwords-must-match-text").removeClass("d-none");
+
+    $("#new-password").addClass("red");
+    $("#confirm-password").addClass("red");
   }
 }
 

@@ -32,11 +32,11 @@ function insertUser($email, $password) {
    // filter, sanitize, and hash email and password
    $email    = filter_var($email, FILTER_SANITIZE_EMAIL);
    $password = filter_var($password, FILTER_SANITIZE_STRING);
-   // $password = password_hash($password, PASSWORD_DEFAULT);
+   $hashPassword = password_hash($password, PASSWORD_DEFAULT);
 
    // bind parameters to the prepared sql statement
    $sql->bindParam(':email', $email, PDO::PARAM_STR);
-   $sql->bindParam(':password', $password, PDO::PARAM_STR);
+   $sql->bindParam(':password', $hashPassword, PDO::PARAM_STR);
 
    // execute statement and close the connections
    $sql->execute();
@@ -52,14 +52,10 @@ function validateLogin($email, $password) {
    $sql->bindParam(':email', $email, PDO::PARAM_STR);
    $sql->execute();
 
-   $storedPassword = $sql->fetch(PDO::FETCH_ASSOC);
-   $storedPassword = $storedPassword['password'];
+   $userPassword = $sql->fetch(PDO::FETCH_ASSOC);
+   $hash = $userPassword['password'];
 
-   if ($storedPassword == $password) {
-      return true;
-   } else {
-      return false;
-   }
+   return password_verify($password, $hash);
 
 }
 

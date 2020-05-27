@@ -37,9 +37,9 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
     ?>
     
 
-    <h1 class="custom-font text-center">Settings</h1>
+    <h1 class="custom-font text-center">Settings</h1><br>
 
-    <h5>Update email</h5>
+    <h5>Update email</h5><br>
     <form method="post">
 
       <!-- old email -->
@@ -54,46 +54,59 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
         <input type="email" class="form-control update-button" name="new-email-input" id="new-email-input" data-button-id="#new-email-btn" required>
       </div>
 
-      <input type="submit" class="btn btn-primary" id="new-email-btn" value="Update" disabled>
+      <input type="submit" class="btn btn-primary" id="new-email-btn" value="Save email" disabled>
       <input type="reset" class="btn btn-secondary" value="Clear">
     </form>
- 
+
+
+
+    <br><br><br>
+
+    <h5>Update password</h5><br>
+    
+    <form>
+
+      <div class="form-group">
+        <label for="old-password">Current password:</label>
+        <input type="password" class="form-control update-password-input" name="old-password" id="old-password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="new-password">New password:</label>
+        <input type="password" class="form-control update-password-input" name="new-password" id="new-password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm password:
+          
+        </label>
+        <input type="password" name="confirm-password" class="form-control update-password-input" id="confirm-password" required>
+        <span class="passwords-must-match-text d-none">&nbsp; Passwords must match</span>
+      </div>
+
+      <input type="submit" class="btn btn-primary" id="new-password-btn" value="Save password" disabled>
+      <button type="button" class="btn btn-secondary" onclick="clearPasswordInputs()">Clear</button>
+
+    </form>
+
   </div>
 
 
   
+
+
+
+
+
+
+
+
+
+
+
+  
   <?php include('footer.php'); ?>
-
-
-  <script>
-    
-    $(document).ready(function() {
-      $("#nav-item-settings").addClass('active');
-
-      addEventListeners();
-    });
-
-    function addEventListeners() {
-      $(".update-button").on("keyup", function () {
-        var buttonID = $(this).attr("data-button-id");
-        enableButtonFromInput($(buttonID), this);
-      });
-    }
-
-    // enables-disables a button based on if the specified input is empty
-    function enableButtonFromInput(button, input) {
-      var inputLength = $(input).val().length;
-
-      if (inputLength > 0) {
-        $(button).prop('disabled', false); // set to enabled
-      }
-      else {
-        $(button).prop('disabled', true); // set to disabled
-      }
-    }
-
-
-  </script>
+  <script src="settings-js.js"></script>
 
 
 

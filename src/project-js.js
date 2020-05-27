@@ -2,7 +2,7 @@ const queryString = window.location.search;
 const URL_PARAMS = new URLSearchParams(queryString);
 const PROJECT_ID = URL_PARAMS.get('projectID');
 const BACKEND_ITEM_URL = 'project-backend-items.php';
-const BACKEND_PROJECT_URL = BACKEND_PROJECT_URL;
+const BACKEND_PROJECT_URL = 'project-backend.php';
 const MD_RENDER = window.markdownit();
 
 

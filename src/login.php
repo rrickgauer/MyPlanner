@@ -2,47 +2,51 @@
 include('functions.php'); 
 
 // user created a new account
-  if (isset($_POST['new-email']) && isset($_POST['new-password1']) && isset($_POST['new-password2'])) {
-    if ($_POST['new-password1'] == $_POST['new-password2']) {
-      insertUser($_POST['new-email'], $_POST['new-password1']);
-      session_start();
-      $_SESSION['userID'] = getUserID($_POST['new-email']);
-      header('Location: index.php');
-    }
+if (isset($_POST['new-email']) && isset($_POST['new-password1']) && isset($_POST['new-password2'])) {
+  if ($_POST['new-password1'] == $_POST['new-password2']) {
+    insertUser($_POST['new-email'], $_POST['new-password1']);
+    session_start();
+    $_SESSION['userID'] = getUserID($_POST['new-email']);
+    header('Location: index.php');
   }
+}
 
 // log in attempt
-  if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
-    if (validateLogin($_POST['login-email'], $_POST['login-password'])) {
-      session_start();
-      $_SESSION['userID'] = getUserID($_POST['login-email']);
-      header('Location: index.php');
-      exit;
-    }
+if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
+  if (validateLogin($_POST['login-email'], $_POST['login-password'])) {
+    session_start();
+    $_SESSION['userID'] = getUserID($_POST['login-email']);
+    header('Location: index.php');
+    exit;
   }
+}
 
-  ?>
+?>
 
 
-  <!DOCTYPE html>
-  <html lang="en" dir="ltr">
-  <head>
-   <?php include('header.php'); ?>
-   <title>Login to MyPlanner</title>
- </head>
- <body>
-   <div class="container">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+ <?php include('header.php'); ?>
+ <title>Login to MyPlanner</title>
+</head>
+<body>
+ <div class="container">
+   <h1 class="custom-font text-center m-5">MyPlanner</h1>
 
-     <h1>Login to MyPlanner</h1>
-     <div class="row">
-       <div class="col-sm-6">
+   <div class="row">
 
-         <!-- Log In Form -->
-         <form method="post">
+     <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">            
+          <h2 class="custom-font text-center mb-4">Login</h2>
+
+          <!-- Log In Form -->
+          <form method="post">
            <!-- email -->
            <div class="form-group">
             <label for="exampleInputPassword1">Email:</label>
-            <input type="email" class="form-control" id="login-email" name="login-email" required>
+            <input type="email" class="form-control" id="login-email" name="login-email" required autofocus>
           </div>
 
           <!-- password -->
@@ -55,10 +59,18 @@ include('functions.php');
           <input type="submit" value="Log in" class="btn btn-primary">
         </form>
       </div>
+    </div>
+  </div>
 
-      <div class="col-sm-6">
-       <!-- create account form -->
-       <form method="post">
+  <div class="col-sm-6">
+
+    <div class="card">
+      <div class="card-body">
+
+        <h2 class="custom-font text-center mb-4">Create account</h2>
+
+        <!-- create account form -->
+        <form method="post">
          <!-- email -->
          <div class="form-group">
            <label for="exampleInputPassword1">Email:</label>
@@ -81,10 +93,12 @@ include('functions.php');
          <input type="submit" value="Create account" class="btn btn-primary">
        </form>
      </div>
-
    </div>
-
  </div>
- <?php include('footer.php'); ?>
+
+</div>
+
+</div>
+<?php include('footer.php'); ?>
 </body>
 </html>

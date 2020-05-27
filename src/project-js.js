@@ -488,7 +488,9 @@ function addItemChecklist() {
   };
 
   $.post(BACKEND_ITEM_URL, data, function(response) {
-    setItemChecklistSidebar(JSON.parse(response));
+    // setItemChecklistSidebar(JSON.parse(response));
+
+    console.log(response);
 
     // clear the input
     $("#new-item-checklist-name").val('');

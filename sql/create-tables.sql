@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS
 create table Users (
 	id int unsigned not null unique auto_increment,
 	email varchar(50) not null unique,
-	password char(30) not null,
+	password char(255) not null,
 	primary key (id)
 ) ENGINE=InnoDB;
 

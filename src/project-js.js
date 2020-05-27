@@ -81,46 +81,30 @@ function addChecklistItem() {
   var content = $("#new-project-checklist-item-input").val();
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
 
-  $.ajax({
-    type: "POST",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "checklistID": checklistID,
-      "content": content
-    },
+  var data = {
+    checklistID: checklistID,
+    content: content,
+  };
 
-    success: function (response) {
-      var data = JSON.parse(response);
-
-      // get the updated data
-      displayChecklistItems(data);
-
-      // clear the input
-      $("#new-project-checklist-item-input").val('');
-
-    },
+  $.post(BACKEND_PROJECT_URL, data, function(response){
+    var checklistItems = JSON.parse(response);      // parse the response
+    displayChecklistItems(checklistItems);          // display the checklistItems
+    $("#new-project-checklist-item-input").val(''); // clear the input
   });
 }
 
 
 // opens a checklist modal from the seletced option on the sidebar
 function openProjectChecklist(checklist) {
+  var checklistID = $(checklist).data("id");                            // get the id of the sidebar item selected
+  $("#project-checklist-modal").attr('data-checklist-id', checklistID); // add this id to the modal
 
-  // get the id of the sidebar item selected
-  const checklistID = $(checklist).data("id");
+  getChecklistItems(checklistID);                                       // retrieve the new checklist items
 
-  // add this id to the modal
-  $("#project-checklist-modal").attr('data-checklist-id', checklistID);
+  var listName = $(checklist).html();                                   // get the list name
+  $("#project-checklist-modal .modal-title").html(listName);            // set the modal title to the list name
 
-  // retrieve the new checklist items
-  getChecklistItems(checklistID);
-
-  // set the modal title to the list name
-  var listName = $(checklist).html();
-  $("#project-checklist-modal .modal-title").html(listName);
-
-  // show the checklist
-  $('#project-checklist-modal').modal('show');
+  $('#project-checklist-modal').modal('show');                          // show the checklist
 }
 
 // clears the new checklist input in the modal
@@ -131,29 +115,26 @@ function clearNewChecklistInput() {
 
 // retrieves the checklist modal from the server
 function getChecklistItems(checklistID) {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "checklistID": checklistID,
-      "data": 'items',
-    },
+  var data = {
+    checklistID: checklistID,
+    data: 'items',
+  };
 
-    success: function (response) {
-      var data = JSON.parse(response);
-      displayChecklistItems(data);
-    }
+  // send the request to the server
+  $.get(BACKEND_PROJECT_URL, data, function(response) {
+      displayChecklistItems(JSON.parse(response));
   });
 }
 
 // displays the retrieved checklist modal
 function displayChecklistItems(data) {
-  const size = data.length;
+  var size = data.length;
   var html = '';
 
   // create new table html
-  for (var count = 0; count < size; count++)
+  for (var count = 0; count < size; count++) {
     html += getChecklistTableRow(data[count].id, data[count].content, data[count].completed);
+  }
 
   // set the table to the new html
   $("#project-checklist-modal-items tbody").html(html);
@@ -188,26 +169,18 @@ function activateSidebar() {
 
 // creates a new project checklist
 function createChecklist() {
+  var name = $("#new-checklist-name").val();  // get the name of the checklist
 
-  // get the name of the checklist
-  var name = $("#new-checklist-name").val();
+  var data = {
+    projectID: PROJECT_ID,
+    name: name,
+  };
 
-  $.ajax({
-    type: "POST",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "projectID": PROJECT_ID,
-      "name"     : name,
-    },
-
-    success: function (response) {
-      var data = JSON.parse(response);
-      setChecklistSidebar(data);
-    }
+  $.post(BACKEND_PROJECT_URL, data, function(response) {
+    setChecklistSidebar(JSON.parse(response));
+    $('#new-checklist-modal').modal('hide');
+    clearNewChecklistInput();
   });
-
-  $('#new-checklist-modal').modal('hide');
-  clearNewChecklistInput();
 }
 
 // displays the sidebar project checklist data
@@ -228,16 +201,10 @@ function setChecklistSidebar(data) {
 
 // retrieves the project checklists from the server
 function getChecklists() {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "projectID": PROJECT_ID
-    },
+  var data = {projectID: PROJECT_ID};
 
-    success: function (response) {
-      setChecklistSidebar(JSON.parse(response));
-    }
+  $.get(BACKEND_PROJECT_URL, data, function(response) {
+    setChecklistSidebar(JSON.parse(response));
   });
 }
 
@@ -249,42 +216,37 @@ function setProjectChecklistModalTitle(title) {
 // deletes a checklist
 function deleteChecklist() {
 
-  if (confirm('Are you sure you want to delete?')) {
-    var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+  // exit function is user cancels deleteion
+  if (!confirm('Are you sure you want to delete?'))
+    return;
 
-    $.ajax({
-      type: "POST",
-      url: BACKEND_PROJECT_URL,
-      data: {
-        "checklistID": checklistID,
-        "projectID": PROJECT_ID,
-        "action": 'delete',
-      },
+  var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
+  var data = {
+    checklistID: checklistID,
+    projectID: PROJECT_ID,
+    action: 'delete',
+  };
 
-      success: function (response) {
-        getChecklists();
-        $('#project-checklist-modal').modal('hide');
-
-        toastAlert('Checklist deleted');
-      }
-    });
-  }
+  $.post(BACKEND_PROJECT_URL, data, function(response) {
+    getChecklists();
+    $('#project-checklist-modal').modal('hide');
+    toastAlert('Checklist deleted');
+  });
+  
 }
 
+// deletes a checklist item
 function deleteChecklistItem(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
-  $.ajax({
-    type: "POST",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "projectChecklistItemID": checklistItemID,
-      "checklistID": checklistID,
-      "action": 'delete',
-    },
 
-    success: function (response) {
-      displayChecklistItems(JSON.parse(response));
-    }
+  var data = {
+    projectChecklistItemID: checklistItemID,
+    checklistID: checklistID,
+    action: 'delete',
+  };
+
+  $.post(BACKEND_PROJECT_URL, data, function(response) {
+    displayChecklistItems(JSON.parse(response));
   });
 }
 
@@ -303,37 +265,32 @@ function updateChecklistItem(checkbox) {
 // sets a project checklist item to incomplete
 function setChecklistItemIncomplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
-  $.ajax({
-    type: "POST",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "projectChecklistItemID": checklistItemID,
-      "checklistID": checklistID,
-      "action": 'incomplete',
-    },
 
-    success: function (response) {
-      displayChecklistItems(JSON.parse(response));
-    }
+  var data = {
+    projectChecklistItemID: checklistItemID,
+    checklistID: checklistID,
+    action: 'incomplete',
+  };
+
+  $.post(BACKEND_PROJECT_URL, data, function(response) {
+    displayChecklistItems(JSON.parse(response));
   });
 }
 
 // sets a project checklist item to complete
 function setChecklistItemComplete(checklistItemID) {
   var checklistID = $("#project-checklist-modal").attr('data-checklist-id');
-  $.ajax({
-    type: "POST",
-    url: BACKEND_PROJECT_URL,
-    data: {
-      "projectChecklistItemID": checklistItemID,
-      "checklistID": checklistID,
-      "action": 'complete',
-    },
 
-    success: function (response) {
-      displayChecklistItems(JSON.parse(response));
-    }
+  var data = {
+    projectChecklistItemID: checklistItemID,
+    checklistID: checklistID,
+    action: 'complete',
+  };
+
+  $.post(BACKEND_PROJECT_URL, data, function(response) {
+    displayChecklistItems(JSON.parse(response));
   });
+
 }
 
 // deletes a project
@@ -345,25 +302,20 @@ function deleteProject() {
 
 // returns the project items
 function getProjectItems() {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-items',
-      "projectID": PROJECT_ID,
-    },
 
-    success: function (response) {
-      displayProjectItems(JSON.parse(response));
-    }
+  var data = {
+    function: 'get-items',
+    projectID: PROJECT_ID,
+  }
+
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    displayProjectItems(JSON.parse(response));
   });
 }
 
 // displays a project item
 function displayProjectItems(data) {
-
-  const size = data.length;
-
+  var size = data.length;
   var html = '';
 
   for (var count = 0; count < size; count++) {
@@ -398,31 +350,22 @@ function getProjectItemCardHTML(item) {
   html += '<div class="card-body item-card-stats">';
 
   // date due
-  html += '<div class="card item-card-stat"><div class="card-body">';
-  html += '<div class="left"><i class="bx bx-time"></i></div>';
-  html += '<div class="right"><div class="description">Date due</div><div class="data">' + item.date_due_date + '</div></div>';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body"><div class="left"><i class="bx bx-time"></i></div>';
+  html += '<div class="right"><div class="description">Date due</div><div class="data">' + item.date_due_date + '</div></div></div></div>';
 
   // checklists count
-  html += '<div class="card item-card-stat"><div class="card-body">';
-  html += '<div class="left"><i class="bx bx-list-check"></i></div>';
-  html += '<div class="right"><div class="description">Checklists</div><div class="data">' + item.count_checklists + '</div></div>';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body"><div class="left"><i class="bx bx-list-check"></i></div>';
+  html += '<div class="right"><div class="description">Checklists</div><div class="data">' + item.count_checklists + '</div></div></div></div>';
 
   // notes count
-  html += '<div class="card item-card-stat"><div class="card-body">';
-  html += '<div class="left"><i class="bx bx-note"></i></div>';
-  html += '<div class="right"><div class="description">Notes</div><div class="data">' + item.count_notes + '</div></div>';
-  html += '</div></div>';
+  html += '<div class="card item-card-stat"><div class="card-body"><div class="left"><i class="bx bx-note"></i></div>';
+  html += '<div class="right"><div class="description">Notes</div><div class="data">' + item.count_notes + '</div></div></div></div>';
 
   // labels
   html += '<div class="card item-card-stat"><div class="card-body">';
   html += '<div class="left"><i class="bx bx-purchase-tag"></i></div>';
   html += '<div class="right"><div class="description">Labels</div><div class="data">' + '</div></div>';
-  html += '</div></div>';
-
-
-  html += '</div>';
+  html += '</div></div></div>';
 
 
   // card footer
@@ -443,75 +386,59 @@ function newProjectItem() {
   const itemName = $("#new-item-name").val();
   const itemDescription = $("#new-item-description").val();
 
-  $.ajax({
-    type: "POST",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'insert-item',
-      "projectID": PROJECT_ID,
-      "name": itemName,
-      "description": itemDescription,
-    },
+  var data = {
+    function: 'insert-item',
+    projectID: PROJECT_ID,
+    name: itemName,
+    description: itemDescription,
+  };
 
-    success: function (response) {
-      var item = JSON.parse(response);
-      setItemModalData(item[0]);
-      getItemChecklistSidebar(item[0].id);
-      getProjectItems();
+  $.post(BACKEND_ITEM_URL, data, function(response) {
+    var item = JSON.parse(response);
+    setItemModalData(item[0]);
+    getItemChecklistSidebar(item[0].id);
+    getProjectItems();
 
-      // display the modal
-      $('#item-modal').modal('show');
-    }
+    // display the modal
+    $('#item-modal').modal('show');
   });
 }
 
 
-
+// opens an item modal and loads the item's data
 function openItemModal(itemID) {
+  var data = {
+    itemID: itemID,
+    function: 'get-item',
+  };
 
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-item',
-      "itemID": itemID,
-    },
-
-    success: function (response) {
-      var item = JSON.parse(response);
-      setItemModalData(item[0]);
-      getItemChecklistSidebar(itemID);
-      getAllOpenItemChecklists(itemID);
-      getItemNotes(itemID);
-      $('#item-modal').modal('show');
-    }
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    var item = JSON.parse(response);
+    setItemModalData(item[0]);
+    getItemChecklistSidebar(itemID);
+    getAllOpenItemChecklists(itemID);
+    getItemNotes(itemID);
+    $('#item-modal').modal('show');
   });
-
-
 }
 
+// loads the item modal checklist data
 function loadItemModalChecklist(itemID) {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-item',
-      "itemID": itemID,
-    },
 
-    success: function (response) {
-      var item = JSON.parse(response);
-      setItemModalData(item[0]);
-      getItemChecklistSidebar(itemID);
-      getAllOpenItemChecklists(itemID);
-    }
+  var data = {
+    function: 'get-item',
+    itemID: itemID
+  };
+
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    var item = JSON.parse(response);
+    setItemModalData(item[0]);
+    getItemChecklistSidebar(itemID);
+    getAllOpenItemChecklists(itemID);
   });
 }
 
 function setItemModalData(item) {
-
-  // console.log(item);
-
   // set the title
   $("#item-modal .modal-title").html(item.name);
 
@@ -538,6 +465,7 @@ function setItemModalData(item) {
 
 }
 
+// sets the flatpickr dates
 function setFlatpickrDate(element, date) {
   flatpickr(element, {
     enableTime: true,
@@ -548,47 +476,39 @@ function setFlatpickrDate(element, date) {
   });
 }
 
-
+// adds an item checklist to the database
 function addItemChecklist() {
   var itemID = $("#item-modal").attr('data-item-id');
   var checklistName = $("#new-item-checklist-name").val();
 
-  $.ajax({
-    type: "POST",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'insert-item-checklist',
-      "itemID": itemID,
-      "checklistName": checklistName,
-    },
+  var data = {
+    itemID: itemID,
+    function: 'insert-item-checklist',
+    checklistName: checklistName,
+  };
 
-    success: function (response) {
-      setItemChecklistSidebar(JSON.parse(response));
+  $.post(BACKEND_ITEM_URL, data, function(response) {
+    setItemChecklistSidebar(JSON.parse(response));
 
-      // clear the input
-      $("#new-item-checklist-name").val('');
-      $("#new-item-checklist-btn").prop('disabled', true);
+    // clear the input
+    $("#new-item-checklist-name").val('');
+    $("#new-item-checklist-btn").prop('disabled', true);
 
-      getProjectItems();
-    }
+    getProjectItems();
   });
 }
 
 
 // populate the item modal checklist sidebar 
 function getItemChecklistSidebar(itemID) {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-item-checklists',
-      "itemID": itemID,
-    },
 
-    success: function (response) {
-      var checklists = JSON.parse(response);
-      setItemChecklistSidebar(checklists);
-    }
+  var data = {
+    function: 'get-item-checklists',
+    itemID: itemID,
+  };
+
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    setItemChecklistSidebar(JSON.parse(response));
   });
 }
 
@@ -632,26 +552,21 @@ function getItemChecklistSidebarHtml(checklist) {
   return html;
 }
 
-
+// opens all the item checklists that are currently save
 function getAllOpenItemChecklists(itemID) {
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-open-item-checklists',
-      "itemID": itemID,
-    },
 
-    success: function (response) {
-      var openItemChecklists = JSON.parse(response);
-      var size = openItemChecklists.length;
+  var data = {
+    function: 'get-open-item-checklists',
+    itemID: itemID,
+  };
 
-      console.log(openItemChecklists);
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    var openItemChecklists = JSON.parse(response);
+    var size = openItemChecklists.length;
 
-      // display all open checklists
-      for (var count = 0; count < size; count++) {
-        openItemChecklist(openItemChecklists[count].id);
-      }
+    // display all open checklists
+    for (var count = 0; count < size; count++) {
+      openItemChecklist(openItemChecklists[count].id);
     }
   });
 }

@@ -25,7 +25,7 @@ function enableButtonFromInput(button, input) {
   }
 }
 
-
+// disables or enables the save password button based on some conditions
 function updatePasswordActions() {
   $("#new-password-btn").prop('disabled', false);
   $("#confirm-password").closest(".form-group").find(".passwords-must-match-text").addClass("d-none");
@@ -42,7 +42,7 @@ function updatePasswordActions() {
   }
 }
 
-
+// checks if an input is empty
 function isInputEmpty(input) {
   var length = $(input).length;
   if (length == 0)
@@ -51,10 +51,17 @@ function isInputEmpty(input) {
     return false;
 }
 
-
 // clears the password inputs and disables the save button
 function clearPasswordInputs() {
   $(".update-password-input").val('');
   updatePasswordActions();
   $("#new-password-btn").prop('disabled', true);
 }
+
+
+
+
+
+
+
+

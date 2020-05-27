@@ -2,7 +2,7 @@
 session_start();
 include('functions.php');
 
-
+// user attempted to update email
 if (isset($_POST['new-email-input'])) {
   $result = updateUserEmail($_SESSION['userID'], $_POST['new-email-input'])->rowCount();
   $emailUpdated = false;
@@ -10,6 +10,36 @@ if (isset($_POST['new-email-input'])) {
     $emailUpdated = true;
   }
 }
+
+// user attempted to update password
+else if (isset($_POST['old-password'], $_POST['new-password'], $_POST['confirm-password'])) {
+  $passwordUpdated = true;
+  $oldPassword    = $_POST['old-password'];
+  $newPassword     = $_POST['new-password'];
+  $confirmPassword = $_POST['confirm-password'];
+
+  // new password and confirm password do not match
+  if ($newPassword != $confirmPassword) {
+    $passwordUpdated = false;
+  }
+
+  else {
+    $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
+    $currentUserPassword = $userInfo['password'];
+
+    // the submitted old password does not match with the one in the database
+    if (!password_verify($oldPassword, $currentUserPassword)) {
+      $passwordUpdated = false;
+    } 
+
+    // update the password
+    else {
+      updateUserPassword($_SESSION['userID'], $newPassword);
+      $passwordUpdated = true;
+    }
+  }
+}
+
 
 $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
 
@@ -25,21 +55,34 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
   <?php include('navbar.php'); ?>
 
   <div class="container">
-    
+
     <?php
-      if (isset($_POST['new-email-input'], $emailUpdated)) {
-        if ($emailUpdated) {
-          echo getAlert('Email updated successfully');
-        } else {
-          echo getAlert('Email not updated', 'danger');
-        }
+
+      // update email attempt
+    if (isset($_POST['new-email-input'], $emailUpdated)) {
+      if ($emailUpdated) {
+        echo getAlert('Email updated successfully');
+      } else {
+        echo getAlert('Email not updated', 'danger');
       }
+    }
+
+      // update password attempt
+    else if (isset($_POST['old-password'], $_POST['new-password'], $_POST['confirm-password'])) {
+      if ($passwordUpdated) {
+        echo getAlert('Password updated successfully');
+      }
+
+      else {
+        echo getAlert('<b>Error!</b> Password not updated', 'danger');
+      }
+    }
     ?>
     
 
-    <h1 class="custom-font text-center">Settings</h1><br>
+    <h1 class="custom-font text-center">Settings</h1>
 
-    <h5>Update email</h5><br>
+    <h5 class="mb-3 mt-5">Update email</h5>
     <form method="post">
 
       <!-- old email -->
@@ -47,7 +90,7 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
         <label for="old-email-input">Old email:</label>
         <input type="email" class="form-control" name="new-email-old" id="old-email-input" value="<?php echo $userInfo['email']; ?>" readonly>
       </div>
-  
+
       <!-- new email input -->
       <div class="form-group">
         <label for="new-email-input">New email:</label>
@@ -58,14 +101,9 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
       <input type="reset" class="btn btn-secondary" value="Clear">
     </form>
 
-
-
-    <br><br><br>
-
-    <h5>Update password</h5><br>
+    <h5 class="mb-3 mt-5">Update password</h5>
     
-    <form>
-
+    <form method="post">
       <div class="form-group">
         <label for="old-password">Current password:</label>
         <input type="password" class="form-control update-password-input" name="old-password" id="old-password" required>
@@ -77,9 +115,7 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
       </div>
 
       <div class="form-group">
-        <label for="confirm-password">Confirm password:
-          
-        </label>
+        <label for="confirm-password">Confirm password:</label>
         <input type="password" name="confirm-password" class="form-control update-password-input" id="confirm-password" required>
         <span class="passwords-must-match-text d-none">&nbsp; Passwords must match</span>
       </div>
@@ -90,27 +126,9 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
     </form>
 
   </div>
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
   
   <?php include('footer.php'); ?>
   <script src="settings-js.js"></script>
-
-
-
-
 
 </body>
 </html>

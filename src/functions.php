@@ -88,15 +88,24 @@ function updateUserEmail($userID, $email) {
 
   $userID  = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
-
   $sql->execute();
-
   return $sql;
-
-  $pdo = null;
-  $sql = null;
-
 }
+
+function updateUserPassword($userID, $password) {
+  $pdo = dbConnect();
+  $sql = $pdo->prepare('UPDATE Users SET password=:password WHERE id=:userID');
+
+  $password = filter_var($password, FILTER_SANITIZE_STRING);
+  $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+  $sql->bindParam(':password', $hashPassword, PDO::PARAM_STR);
+
+  $userID  = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
+  $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
+  $sql->execute();
+}
+
+
 
 function insertProject($userID, $name, $description = NULL, $dateDue = NULL, $dateCreated = NULL, $displayIndex = NULL) {
   $pdo = dbConnect();

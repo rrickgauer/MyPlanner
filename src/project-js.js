@@ -573,32 +573,23 @@ function getAllOpenItemChecklists(itemID) {
 
 // open an item checklist
 function openItemChecklist(itemChecklistID) {
-  // var itemChecklistID = $(itemChecklist).closest(".nav-item").attr("data-item-checklist-id");
 
-  $.ajax({
-    type: "GET",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'get-item-checklist-items',
-      "itemChecklistID": itemChecklistID,
-    },
+  var data = {
+    function: 'get-item-checklist-items',
+    itemChecklistID: itemChecklistID,
+  };
 
-    success: function (response) {
-      var html = getItemChecklistCardHtml(JSON.parse(response)); // server response
-      $("#item-checklists").append(html); // add the checklist to the section
-      disableItemChecklistSidebarItem(itemChecklistID); // disable the checklist sidebar open button
-    }
+  $.get(BACKEND_ITEM_URL, data, function(response) {
+    var html = getItemChecklistCardHtml(JSON.parse(response));  // server response
+    $("#item-checklists").append(html);                         // add the checklist to the section
+    disableItemChecklistSidebarItem(itemChecklistID);           // disable the checklist sidebar open button
   });
-
 }
 
-
+// returns the html of an item checklist card
 function getItemChecklistCardHtml(data) {
-  // var checklistData = data['Item_Checklists'];
-  // var items = data['Item_Checklist_Items'];
-
-  var checklistData = data.Item_Checklists;
-  var items = data.Item_Checklist_Items;
+  var checklistData = data.Item_Checklists; // item checklist data
+  var items = data.Item_Checklist_Items;    // item checklist items
 
   var html = '';
   html += '<div class="card item-checklist" data-item-checklist-id="' + checklistData.id + '">';
@@ -613,16 +604,13 @@ function getItemChecklistCardHtml(data) {
     html += getItemChecklistCardBodyHtml(items[count]);
   }
 
-  html += '</ul>';
-  html += '</div>';
-  html += '</div>';
+  html += '</ul></div></div>';
 
   return html;
 }
 
-
+// generates and returns the html for the card body of an item checklist card
 function getItemChecklistCardBodyHtml(itemChecklistItem) {
-
   var html = '';
   html += '<li class="list-group-item" data-item-checklist-item-id="' + itemChecklistItem.id + '">';
 
@@ -646,13 +634,11 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
   // right portion: dropdown menu
   html += '<div class="right">';
 
-
   // dropdown button
   html += '<div class="dropleft"><button class="btn" type="button" data-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>';
 
   // dropdown menu
   html += '<div class="dropdown-menu"><button class="dropdown-item" type="button" onclick="editItemChecklistItem(this)">Edit</button><div class="dropdown-divider"></div><button class="dropdown-item" type="button">Move up</button><button class="dropdown-item" type="button">Move down</button><div class="dropdown-divider"></div><button class="dropdown-item" type="button" onclick="deleteItemChecklistItem(this)">Delete</button></div>';
-
 
   // closing tags
   html += '</div></div></li>';
@@ -660,70 +646,65 @@ function getItemChecklistCardBodyHtml(itemChecklistItem) {
   return html;
 }
 
-
+// closes an item checklist
 function closeItemChecklist(itemChecklist) {
-  var itemChecklistID = $(itemChecklist).closest(".item-checklist").attr("data-item-checklist-id");
+  var itemChecklistID = $(itemChecklist).closest(".item-checklist").attr("data-item-checklist-id"); // id if the parent item checklist
 
-  $.ajax({
-    type: "POST",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'close-item-checklist',
-      "itemChecklistID": itemChecklistID,
-    },
+  // data to be sent to the server
+  var data = {
+    function: 'close-item-checklist',
+    itemChecklistID: itemChecklistID,
+  };
 
-    success: function (response) {
-      $(itemChecklist).closest(".item-checklist").remove(); // remove the checklist
-      enableItemChecklistSidebarItem(itemChecklistID);
-    }
+  $.post(BACKEND_ITEM_URL, data, function(response) {
+    $(itemChecklist).closest(".item-checklist").remove(); // remove the checklist
+    enableItemChecklistSidebarItem(itemChecklistID);
   });
 }
 
-
+// returns the id of the item modal that is currently open
 function getOpenItemModalID() {
   return $("#item-modal").attr("data-item-id");
 }
 
-
+// allows the specified item checklist sidebar item to be opened
 function enableItemChecklistSidebarItem(itemChecklistID) {
   var element = '#item-pills-checklists .sidebar-item-checklists li[data-item-checklist-id="' + itemChecklistID + '"] .open-item-checklist-btn';
   $(element).prop('disabled', false); // disable the open checklist button
 }
 
+// disallows the specified item checklist sidebar item to be opened
 function disableItemChecklistSidebarItem(itemChecklistID) {
   var element = '#item-pills-checklists .sidebar-item-checklists li[data-item-checklist-id="' + itemChecklistID + '"] .open-item-checklist-btn';
   $(element).prop('disabled', true); // disable the open checklist button
 
 }
 
+// deletes an item checklist
 function deleteItemChecklist(itemChecklistID) {
 
-  if (confirm('Are you sure you want to delete this item checklist?')) {
+  // exit function if user elects to not delete the item checklist
+  if (!confirm('Are you sure you want to delete this item checklist?'))
+    return;
 
-    $.ajax({
-      type: "POST",
-      url: BACKEND_ITEM_URL,
-      data: {
-        "function": 'delete-item-checklist',
-        "itemChecklistID": itemChecklistID,
-      },
+  var data = {
+    function: 'delete-item-checklist',
+    itemChecklistID: itemChecklistID,
+  };
 
-      success: function (response) {
+  $.post(BACKEND_ITEM_URL, data, function(response) {
+    // remove checklist card
+    var checklist = getItemChecklistCard(itemChecklistID);
+    $(checklist).remove();
 
-        // remove checklist card
-        var checklist = getItemChecklistCard(itemChecklistID);
-        $(checklist).remove();
+    // reload the item modal
+    var itemID = getOpenItemModalID();
+    loadItemModalChecklist(itemID);
+    getProjectItems();
 
-        // reload the item modal
-        var itemID = getOpenItemModalID();
-        loadItemModalChecklist(itemID);
-        getProjectItems();
-
-        // send alert
-        toastAlert('Item checklist deleted.');
-      }
-    });
-  }
+    // send confirmation alert
+    toastAlert('Item checklist deleted.');
+  });  
 }
 
 function getItemChecklistCard(itemChecklistID) {
@@ -735,7 +716,6 @@ function getItemChecklistCard(itemChecklistID) {
 function updateItemChecklistItem(itemChecklistItem) {
 
   var id = $(itemChecklistItem).closest(".list-group-item").attr("data-item-checklist-item-id");
-  // var itemChecklist = $(itemChecklistItem).closest(".item-checklist");
 
   // check if item is completed or not
   if (itemChecklistItem.checked) {
@@ -745,76 +725,54 @@ function updateItemChecklistItem(itemChecklistItem) {
     setItemChecklistItemToIncomplete(id);
   }
 
-  $(itemChecklistItem).next().toggleClass('completed');
-
-
+  $(itemChecklistItem).next().toggleClass('completed'); // toggle the class to completed
 }
 
 // set the item checklist item to incomplete
 function setItemChecklistItemToIncomplete(itemChecklistItemID) {
-  $.ajax({
-    type: "POST",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'update-item-checklist-item-incomplete',
-      "itemChecklistItemID": itemChecklistItemID
-    },
-  });
+  var data = {
+    function: 'update-item-checklist-item-incomplete',
+    itemChecklistItemID: itemChecklistItemID,
+  };
+
+  $.post(BACKEND_ITEM_URL, data);
 }
 
 // set the item checklist item to complete
 function setItemChecklistItemToComplete(itemChecklistItemID) {
-  $.ajax({
-    type: "POST",
-    url: BACKEND_ITEM_URL,
-    data: {
-      "function": 'update-item-checklist-item-complete',
-      "itemChecklistItemID": itemChecklistItemID
-    },
-  });
+  var data = {
+    function: 'update-item-checklist-item-complete',
+    itemChecklistItemID: itemChecklistItemID,
+  };
+
+  $.post(BACKEND_ITEM_URL, data);
 }
 
-
+// adds and item checklist item when the add button is clicked
 function addItemChecklistItemFromButton(btn) {
   var itemChecklistID = $(btn).closest(".item-checklist").attr("data-item-checklist-id");
   var content = $(btn).closest(".item-checklist").find(".new-item-checklist-item-input").val();
-  var itemChecklist = getItemChecklistCard(itemChecklistID);
-
-  var data = {
-    'content': content,
-    'function': 'add-item-checklist-item',
-    'itemChecklistID': itemChecklistID,
-  };
-
-  $.post(BACKEND_ITEM_URL, data, function (response) {
-    var newItem = JSON.parse(response);
-    appendNewItemChecklistItem(newItem, itemChecklist);
-
-    // clear the input
-    $(".new-item-checklist-item-input").val('');
-  });
+  addItemChecklistItem(content, itemChecklistID);
 }
 
-
+// adds and item checklist to the database
 function addItemChecklistItem(content, itemChecklistID) {
   var itemChecklist = getItemChecklistCard(itemChecklistID);
 
   var data = {
-    'content': content,
-    'function': 'add-item-checklist-item',
-    'itemChecklistID': itemChecklistID,
+    content: content,
+    function: 'add-item-checklist-item',
+    itemChecklistID: itemChecklistID,
   };
 
   $.post(BACKEND_ITEM_URL, data, function (response) {
     var newItem = JSON.parse(response);
     appendNewItemChecklistItem(newItem, itemChecklist);
-
-    // clear the input
-    $(".new-item-checklist-item-input").val('');
+    $(".new-item-checklist-item-input").val('');  // clear the input
   });
 }
 
-
+// appends an item to the item checklist
 function appendNewItemChecklistItem(item, itemChecklist) {
   var html = getItemChecklistCardBodyHtml(item);
   $(itemChecklist).find("ul.list-group").append(html);
@@ -830,15 +788,15 @@ $(document).on("keypress", ".new-item-checklist-item-input", function (e) {
   }
 });
 
+// delete an item checklist item
 function deleteItemChecklistItem(item) {
-
-  var itemChecklistItem = $(item).closest('li.list-group-item'); // item checklist item
-  var id = $(itemChecklistItem).attr('data-item-checklist-item-id'); // item checklist item id
+  var itemChecklistItem = $(item).closest('li.list-group-item');      // item checklist item
+  var id = $(itemChecklistItem).attr('data-item-checklist-item-id');  // item checklist item id
 
   // data to pass to the server
   var data = {
-    'itemChecklistItemID': id,
-    'function': 'delete-item-checklist-item',
+    itemChecklistItemID: id,
+    function: 'delete-item-checklist-item',
   };
 
   // post the data
@@ -850,16 +808,15 @@ function deleteItemChecklistItem(item) {
 
 
 function editItemChecklistItem(selector) {
-  var item = $(selector).closest('li.list-group-item');
-  var contentText = $(item).find('.content').html();
-  var id = $(item).attr('data-item-checklist-item-id');
+  var item = $(selector).closest('li.list-group-item');   // item elements
+  var contentText = $(item).find('.content').html();      // the content text
+  var id = $(item).attr('data-item-checklist-item-id');   // id of the item checklist item
 
   // add the input html
   var inputHTML = '<input class="form-control edit-item-checklist-item-input" value="' + contentText + '">';
   $(item).append(inputHTML);
 
   $('.edit-item-checklist-item-input').select();
-
 
   // hide the html
   $(item).find('.left').hide();
@@ -880,7 +837,7 @@ function editItemChecklistItem(selector) {
   });
 
 
-  // user clicks enter 
+  // user clicks enter to update an item checklist item
   $(".edit-item-checklist-item-input").on('keypress', function (e) {
     if (e.keyCode == 13) {
       e.preventDefault();
@@ -897,7 +854,7 @@ function editItemChecklistItem(selector) {
   });
 }
 
-
+// updates the item checklist item content
 function updateItemChecklistItemContent(itemChecklistItemID, newContent) {
   var data = {
     'itemChecklistItemID': itemChecklistItemID,
@@ -909,37 +866,37 @@ function updateItemChecklistItemContent(itemChecklistItemID, newContent) {
   $.post(BACKEND_ITEM_URL, data);
 }
 
-
+// deletes an item
 function deleteItem() {
+  // exit function if user does not confirm deletion
+  if (!confirm('Are you sure you want to delete this item?'))
+    return;
 
-  if (confirm('Are you sure you want to delete this item?')) {
-    var itemID = getOpenItemModalID();
-    var data = {
-      'function': 'delete-item',
-      'itemID': itemID,
-    };
+  var itemID = getOpenItemModalID();
+  var data = {
+    function: 'delete-item',
+    itemID: itemID,
+  };
 
-    // send request to the server
-    // reload the page after item has been deleted
-    $.post(BACKEND_ITEM_URL, data, function (response) {
-      location.reload();
-    });
-  }
+  // send request to the server
+  // reload the page after item has been deleted
+  $.post(BACKEND_ITEM_URL, data, function (response) {
+    location.reload();
+  });
 }
 
-
+// updates an item's info
 function updateItemInfo() {
-
   var itemID = getOpenItemModalID();
   var itemData = getEditItemFormData();
 
   var data = {
-    'itemID': itemID,
-    'name': itemData.name,
-    'dateDue': itemData.dateDue,
-    'dateCreated': itemData.dateCreated,
-    'description': itemData.description,
-    'function': 'update-item',
+    itemID     : itemID,
+    name       : itemData.name,
+    dateDue    : itemData.dateDue,
+    dateCreated: itemData.dateCreated,
+    description: itemData.description,
+    function   : 'update-item',
   };
 
   $.post(BACKEND_ITEM_URL, data, function (response) {
@@ -949,11 +906,11 @@ function updateItemInfo() {
 
 }
 
-
+// returns the edit item form data
 function getEditItemFormData() {
-  var itemID = getOpenItemModalID();
-  var name = $("#edit-item-name").val();
-  var dateDue = $("#edit-item-date-due").val();
+  var itemID      = getOpenItemModalID();
+  var name        = $("#edit-item-name").val();
+  var dateDue     = $("#edit-item-date-due").val();
   var dateCreated = $("#edit-item-date-created").val();
   var description = $("#edit-item-description").val();
 
@@ -961,9 +918,9 @@ function getEditItemFormData() {
     dateDue = null;
 
   var data = {
-    itemID: itemID,
-    name: name,
-    dateDue: dateDue,
+    itemID     : itemID,
+    name       : name,
+    dateDue    : dateDue,
     dateCreated: dateCreated,
     description: description,
   };
@@ -971,43 +928,42 @@ function getEditItemFormData() {
   return data;
 }
 
-
+// adds an item note to the database
 function addItemNote() {
   var content = $("#new-item-note-input").val(); // note content
   var itemID = getOpenItemModalID(); // item id
 
   var data = {
-    'itemID': itemID,
-    'content': content,
-    'function': 'insert-item-note',
+    itemID: itemID,
+    content: content,
+    function: 'insert-item-note',
   };
 
   $.post(BACKEND_ITEM_URL, data, function (response) {
-    getItemNotes(itemID); // update the item notes
-    $("#new-item-note-input").val(''); // clear the input
-    toastAlert('Note added'); // send success alert
-    enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input")); // disable the save button
+    getItemNotes(itemID);                                                       // update the item notes
+    $("#new-item-note-input").val('');                                          // clear the input
+    toastAlert('Note added');                                                   // send success alert
+    enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input"));  // disable the save button
   });
 }
 
-
+// retrieves the an item's notes
 function getItemNotes(itemID) {
   var data = {
-    'itemID': itemID,
-    'function': 'get-item-notes'
+    itemID: itemID,
+    function: 'get-item-notes'
   };
 
-  $.get(BACKEND_ITEM_URL, data, function (response) {
+  $.get(BACKEND_ITEM_URL, data, function(response) {
     var itemNotes = JSON.parse(response);
     setItemNotes(itemNotes);
   });
-
 }
 
+// sets the item notes
 function setItemNotes(itemNotes) {
-
-  var size = itemNotes.length; // number of notes
-  var html = ''; // empty html string to place into the notes section
+  var size = itemNotes.length;  // number of notes
+  var html = '';                // empty html string to place into the notes section
 
   // generate all the html
   for (var count = 0; count < size; count++)
@@ -1017,6 +973,7 @@ function setItemNotes(itemNotes) {
   $("#item-notes-cards").html(html);
 }
 
+// generates and returns the html for an item note
 function getItemNoteCardHtml(itemNote) {
   var content = renderMarkdown(itemNote.content);
 
@@ -1031,8 +988,10 @@ function getItemNoteCardHtml(itemNote) {
   return html;
 }
 
+// deletes an item note
 function deleteItemNote(btn) {
 
+  // exit function if user does not confirm deletion
   if (!confirm('Are you sure you want delete this note?'))
     return;
 
@@ -1045,9 +1004,9 @@ function deleteItemNote(btn) {
   };
 
   $.post(BACKEND_ITEM_URL, data, function (response) {
-    $(itemNote).remove();
-    toastAlert('Note removed');
-    getProjectItems();
+    $(itemNote).remove();       // remove the item note from the dom
+    toastAlert('Note removed'); // send alert
+    getProjectItems();          // updates the project items in the background
   });
 }
 
@@ -1059,8 +1018,8 @@ function clearItemNotesSection() {
   enableButtonFromInput($("#new-item-note-btn"), $("#new-item-note-input")); // disable the save button
 }
 
+// edit an item note
 function editItemNote(btn) {
-
   var itemNote = $(btn).closest(".card-item-note");
   var itemNoteID = $(itemNote).attr("data-item-note-id");
 
@@ -1094,9 +1053,8 @@ function editItemNote(btn) {
 
 }
 
-
+// updates an item note
 function updateItemNote(btn) {
-
   var newContent = $(btn).closest(".edit-item-note").find(".edit-item-note-input").val();
   var itemNote = $(btn).closest(".card-item-note");
   var itemNoteID = $(itemNote).attr("data-item-note-id");
@@ -1138,7 +1096,7 @@ function resetItemNote(btn) {
   });
 }
 
-
+// sets an item to completed
 function updateItemCompleted() {
   var itemID = getOpenItemModalID();
 
@@ -1154,10 +1112,10 @@ function updateItemCompleted() {
     toastAlert('Item incompleted');
   }
 
-  getProjectItems();
+  getProjectItems();  // update the item cards in the background
 }
 
-
+// sets an item to complete
 function setItemToComplete(itemID) {
   var data = {
     itemID: itemID,
@@ -1167,6 +1125,7 @@ function setItemToComplete(itemID) {
   $.post(BACKEND_ITEM_URL, data, setItemModalCompleteButtonToComplete);
 }
 
+// sets an item to incomplete
 function setItemToIncomplete(itemID) {
   var data = {
     itemID: itemID,
@@ -1175,7 +1134,6 @@ function setItemToIncomplete(itemID) {
 
   $.post(BACKEND_ITEM_URL, data, setItemModalCompleteButtonToIncomplete);
 }
-
 
 // sets the complete item modal button to complete
 function setItemModalCompleteButtonToComplete() {
@@ -1197,7 +1155,6 @@ $(document).ready(function () {
     $(this).closest(".info-section").find(".panel").toggleClass('d-none');
   });
 });
-
 
 // returns rendered markdown
 function renderMarkdown(input) {

@@ -13,6 +13,8 @@ function getUserProjects() {
 
   $.get(PHP_FILE, data, function(response) {
     displayProjects(JSON.parse(response));
+
+    console.log(JSON.parse(response));
   });
 }
 

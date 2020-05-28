@@ -20,7 +20,7 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
   
   <!-- project selection -->
   <div id="projects">
-    
+
     <!-- toolbar -->
     <div class="split toolbar">
       <div class="left">
@@ -34,13 +34,29 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
             <!-- new project link -->
             <a class="btn btn-secondary mr-2" href="new-project.php">New</a>
 
+            <!-- project view table or card -->
+            <div class="dropdown mr-2">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">View</button>
+              <div class="dropdown-menu">
+                <!-- card view -->
+                <button class="dropdown-item project-view-option" type="button" data-project-view="card">
+                  <div class="icon-display"><i class='icon bx bx-card'></i><div class="display">Card</div></div>
+                </button>
+                
+                <!-- table view -->
+                <button class="dropdown-item project-view-option active" type="button" data-project-view="table">
+                  <div class="icon-display"><i class='icon bx bx-table'></i><div class="display">Table</div></div>
+                </button>
+              </div>
+            </div>
+
             <!-- project sort options dropdown -->
             <div class="dropdown mr-2">
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Sort</button>
 
               <div class="dropdown-menu">
                 <h6 class="dropdown-header">Name</h6>
-  
+
                 <!-- name asc -->
                 <button class="dropdown-item project-sorting-option active" type="button" data-project-sorting="name_asc">
                   <div class="icon-display"><i class='icon bx bx-sort-a-z'></i><div class="display">Ascending</div></div>

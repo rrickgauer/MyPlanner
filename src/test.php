@@ -72,13 +72,7 @@ include('session.php');
         </tr>
       </thead>
       <tbody>
-        <?php
-          $count = 0;
-          while ($count < 50) {
-            echo '<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>';
-            $count++;
-          }
-        ?>
+
 
       </tbody>
     </table>

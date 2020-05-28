@@ -11,4 +11,4 @@
 <script src="js/autosize.js"></script>
 
 <!-- bootstrap table -->
-<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<!-- <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script> -->

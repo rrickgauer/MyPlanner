@@ -60,7 +60,15 @@ body {background-color: $base-color-grey;}
   }
 }
 
-#projects .row {margin-bottom: 20px;}
+#projects {
+  .row {margin-bottom: 20px;}
+  
+  .toolbar {
+    margin-bottom: 15px;
+    margin-top: 50px;
+  }
+
+}
 
 
 // styles for the sidebar
@@ -408,5 +416,20 @@ input.red, input.red:focus {
 .animate__animated.animate__fadeIn {
   --animate-duration: 200ms;
 }
+
+#project-search-input {
+  width: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

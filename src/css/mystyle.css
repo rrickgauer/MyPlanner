@@ -53,6 +53,10 @@ body {
 #projects .row {
   margin-bottom: 20px;
 }
+#projects .toolbar {
+  margin-bottom: 15px;
+  margin-top: 50px;
+}
 
 .wrapper {
   display: flex;
@@ -366,6 +370,10 @@ input.red, input.red:focus {
 
 .animate__animated.animate__fadeIn {
   --animate-duration: 200ms;
+}
+
+#project-search-input {
+  width: 300px;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

@@ -20,7 +20,7 @@ $projects = getProjects($_SESSION['userID']);
   
   <!-- project selection -->
   <div id="projects">
-    <h2>Your projects</h2>
+    <h5 class="mb-3 mt-3">Your projects</h5>
 
     <!-- project cards go here -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">

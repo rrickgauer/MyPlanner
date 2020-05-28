@@ -6,3 +6,6 @@
 
 <!-- toast -->
 <script src="js/jquery.toast.min.js"></script>
+
+<!-- textarea autosize -->
+<script src="js/autosize.js"></script>

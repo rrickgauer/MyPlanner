@@ -43,7 +43,7 @@ if (isset($_POST['new-project-name'])) {
   <!-- description -->
   <div class="form-group">
     <label for="name">Description:</label>
-    <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+    <textarea class="form-control" rows="1" id="description" name="description"></textarea>
   </div>
 
 
@@ -70,6 +70,7 @@ if (isset($_POST['new-project-name'])) {
   $(document).ready(function() {
    enableFlatpickrDates();
    $("#nav-item-new-project").addClass('active');
+   autosize($('textarea'));
  });
 
   function enableFlatpickrDates() {

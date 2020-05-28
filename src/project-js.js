@@ -18,9 +18,15 @@ var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD; // initial item sorting
 
 
 $(document).ready(function() {
+
+  autosize($('textarea'));
+
   getChecklists();
   getProjectItems();
   addEventListeners();
+
+
+
 
 
 
@@ -1072,6 +1078,8 @@ function editItemNote(btn) {
   var itemNote = $(btn).closest(".card-item-note");
   var itemNoteID = $(itemNote).attr("data-item-note-id");
 
+
+
   // get the old content from the server
   var data = {
     itemNoteID: itemNoteID,
@@ -1098,6 +1106,8 @@ function editItemNote(btn) {
 
     // disable the edit button
     $(itemNote).find(".edit-item-note-btn").prop('disabled', true);
+
+    autosize($('textarea'));
   });
 
 }

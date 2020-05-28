@@ -1,4 +1,4 @@
-const md = window.markdownit();
+// const md = window.markdownit();
 
-
+autosize($('textarea'));
 

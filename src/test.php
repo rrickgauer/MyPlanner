@@ -18,11 +18,8 @@ include('session.php');
   <div class="container">
     <h1 class="custom-font">Test Page</h1>
 
-
-    <div class="donutSpinner">
-      
-    </div>
-
+  
+    <textarea class="form-control" rows="1"></textarea>
 
 
 

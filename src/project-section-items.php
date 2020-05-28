@@ -71,22 +71,7 @@
 <!-- item cards go here -->
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck">
 
-  <table class="items-table"  data-toggle="table" data-show-columns="true" data-show-columns-toggle-all="true">
-    <thead>
-      <tr>
-        <th>Item_ID</th>
-        <th>Name</th>
-        <th>Checklists count</th>
-        <th>Notes count</th>
-        <th>Date created</th>
-        <th>Date due</th>
-        <th>Completed</th>
-        <th>View</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  
+
 </div>
 
 
@@ -219,16 +204,13 @@
             <!-- panel -->
             <div class="panel d-none">
 
-
-  
-
               <div class="row">
                 <div class="col-3">
                   <!-- side bar of item checklists -->
                   <ul class="nav nav-pills flex-column sidebar-item-checklists"></ul>
 
                   <!-- new project checklist dropdown -->
-                  <div class="dropright">
+                  <div class="dropdown">
                     <button class="btn btn-secondary btn-sm" type="button" data-toggle="dropdown">Add checklist</button>
                     <div class="dropdown-menu">
                       <form>

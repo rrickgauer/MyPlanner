@@ -119,7 +119,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
         <!-- notes section -->
         <div class="tab-pane fade" id="project-pills-notes" role="tabpanel">
           <h3>Notes</h3>
-
         </div>
       </div>
 
@@ -214,7 +213,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             <form method="post">
               <!-- new project name input -->
               <div class="form-group">
-                <label for="project-name">New project name:</label>
+                <label for="new-project-name">New project name:</label>
                 <input type="text" class="form-control update-button" name="new-project-name" id="new-project-name" maxlength="50" data-button-id="#new-project-name-btn">
               </div>
 

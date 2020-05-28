@@ -376,15 +376,24 @@ input.red, input.red:focus {
 }
 
 
+.item-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 
 
 
+  .buttons {
+    flex: 1 1 20em;
+    display: flex;
+  }
 
-
-
-
-
-
+  .input-group {
+    flex: 1 1 40em; 
+    padding: 5px;
+    // width: 50%;
+  }
+}
 
 
 

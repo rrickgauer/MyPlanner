@@ -415,9 +415,12 @@ function getProjectItemCount($projectID) {
     date_created_date
     date_created_time
 ********************************************************************/
-function getProjectItems($projectID, $query = '') {
+function getProjectItems($projectID, $sort, $query = '') {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID AND Items.name like :name GROUP by Items.id');
+
+  $stmt = 'SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID AND Items.name like :name GROUP by Items.id ORDER BY ' . $sort;
+
+  $sql = $pdo->prepare($stmt);
 
   $projectID = filter_var($projectID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':projectID', $projectID, PDO::PARAM_INT);
@@ -426,9 +429,7 @@ function getProjectItems($projectID, $query = '') {
   $name = filter_var($name, FILTER_SANITIZE_STRING);
   $sql->bindParam(':name', $name, PDO::PARAM_STR);
 
-
   $sql->execute();
-
   return $sql;
 }
 

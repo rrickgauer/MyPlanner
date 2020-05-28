@@ -36,13 +36,12 @@
     </button>
     <div class="dropdown-menu">
       <h6 class="dropdown-header">Date created</h6>
-      <button class="dropdown-item" type="button">Oldest</button>
-      <button class="dropdown-item" type="button">Newest</button>
+      <button class="dropdown-item item-sorting-option active" data-sorting-option="date_created_old" type="button">Oldest</button>
+      <button class="dropdown-item item-sorting-option" data-sorting-option="date_created_new" type="button">Newest</button>
       <div class="dropdown-divider"></div>
       <h6 class="dropdown-header">Alphabetically</h6>
-      <button class="dropdown-item" type="button">Ascending</button>
-      <button class="dropdown-item" type="button">Descending</button>
-      <!-- <div class="dropdown-divider"></div> -->
+      <button class="dropdown-item item-sorting-option" data-sorting-option="name_asc" type="button">Ascending</button>
+      <button class="dropdown-item item-sorting-option" data-sorting-option="name_desc" type="button">Descending</button>
     </div>
   </div>
 
@@ -64,7 +63,7 @@
   </div>
   <input type="text" class="form-control" id="item-search-input" placeholder="Search for an item...">
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class='bx bx-x'></i></button>
+    <button class="btn btn-outline-secondary" type="button" onclick="clearItemSearchInput()"><i class='bx bx-x'></i></button>
   </div>
 </div>
 

@@ -26,7 +26,18 @@ if (isset($_POST['function']) && $_POST['function'] == 'insert-item' && isset($_
 else if (isset($_GET['function'], $_GET['projectID'], $_GET['query']) && $_GET['function'] == 'get-items') {
   $projectID = $_GET['projectID'];
   $query = $_GET['query'];
-  $items = getProjectItems($projectID, $query)->fetchAll(PDO::FETCH_ASSOC);
+  $sort = $_GET['sort'];
+
+  // determine the sorting order
+  if ($sort == 'date_created_new')
+    $items = getProjectItems($projectID, 'date_created desc', $query)->fetchAll(PDO::FETCH_ASSOC);
+  else if ($sort == 'name_asc')
+    $items = getProjectItems($projectID, 'name asc', $query)->fetchAll(PDO::FETCH_ASSOC);
+  else if ($sort == 'name_desc')
+    $items = getProjectItems($projectID, 'name desc', $query)->fetchAll(PDO::FETCH_ASSOC);
+  else
+    $items = getProjectItems($projectID, 'date_created asc', $query)->fetchAll(PDO::FETCH_ASSOC);
+
   echo json_encode($items);
   exit;
 }

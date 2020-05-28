@@ -4,6 +4,17 @@ const PROJECT_ID = URL_PARAMS.get('projectID');
 const BACKEND_ITEM_URL = 'project-backend-items.php';
 const BACKEND_PROJECT_URL = 'project-backend.php';
 const MD_RENDER = window.markdownit();
+const ITEM_SORTING_OPTIONS = {
+  DATE_CREATED_NEW : 'date_created_new',
+  DATE_CREATED_OLD : 'date_created_old',
+  NAME_ASC         : 'name_asc',
+  NAME_DESC        : 'name_desc',
+};
+
+
+
+var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD; // initial item sorting display
+
 
 
 $(document).ready(function() {
@@ -26,6 +37,11 @@ function addEventListeners() {
 
   $("#item-search-input").on("keyup", function() {
     getProjectItems($("#item-search-input").val());
+  });
+
+
+  $(".item-sorting-option").on("click", function() {
+    updateItemSortingOption(this);
   });
 }
 
@@ -311,10 +327,14 @@ function getProjectItems(query = '') {
     function: 'get-items',
     projectID: PROJECT_ID,
     query: query,
+    sort: itemSorting,
   }
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     displayProjectItems(JSON.parse(response));
+    // console.log(JSON.parse(response));
+
+    console.log(response);
   });
 }
 
@@ -1169,10 +1189,40 @@ function renderMarkdown(input) {
   return MD_RENDER.render(input);
 }
 
+// clears the item search input
+// displays all items
+function clearItemSearchInput() {
+  getProjectItems();
+  $("#item-search-input").val('');  
+}
 
+function updateItemSortingOption(btn) {
+  $(".item-sorting-option").removeClass("active");
+  $(btn).addClass('active');
 
+  // update item sorting
+  switch($(btn).attr("data-sorting-option")) {
+    case 'date_created_new':
+      itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_NEW;
+      break;
 
+    case 'name_asc':
+      itemSorting = ITEM_SORTING_OPTIONS.NAME_ASC;
+      break;
 
+    case 'name_desc':
+      itemSorting = ITEM_SORTING_OPTIONS.NAME_DESC;
+      break;
+    
+    default:
+      itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD;
+      break;
+  }
+
+  // update the item cards
+  getProjectItems($("#item-search-input").val());
+
+}
 
 
 

@@ -22,13 +22,17 @@ $projects = getProjects($_SESSION['userID']);
   <div id="projects">
     <h5 class="mb-3 mt-3">Your projects</h5>
 
+    <input type="text" class="form-control mb-3" id="project-search-input" placeholder="Search for a project...">
+
+
+
     <!-- project cards go here -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
       
       <!-- add new project link -->
-      <div class="col">
+<!--       <div class="col">
         <a class="btn btn-lg btn-primary" href="new-project.php" id="new-project-btn">New project</a>
-      </div>
+      </div> -->
     </div>
   </div>
 

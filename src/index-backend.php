@@ -4,9 +4,11 @@ session_start();
 include('functions.php');
 
 
-// send projects
-if (isset($_GET['function']) && $_GET['function'] == 'get-projects') {
-  $projects = getProjects($_SESSION['userID'])->fetchAll(PDO::FETCH_ASSOC);
+// get the projects
+if (isset($_GET['function'], $_GET['query']) && $_GET['function'] == 'get-projects') {
+  $userID = $_SESSION['userID'];
+  $query = $_GET['query'];
+  $projects = getProjects($userID, $query)->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode($projects);
   exit;
 }

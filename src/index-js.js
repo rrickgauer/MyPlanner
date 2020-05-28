@@ -3,18 +3,29 @@ const PHP_FILE = 'index-backend.php';
 $(document).ready(function() {
   getUserProjects();                        // get all the projects
   $("#nav-item-home").addClass("active");   // set the navbar link to active
+
+  addEventListeners();
 });
 
+
+// adds all the event listeners
+function addEventListeners() {
+
+  $("#project-search-input").on("keyup", function() {
+    getUserProjects($(this).val());
+  });
+
+}
+
 // gets the project cards from the server and displays them on success
-function getUserProjects() {
+function getUserProjects(query = '') {
   var data = {
     function: 'get-projects',
+    query: query,
   };
 
   $.get(PHP_FILE, data, function(response) {
     displayProjects(JSON.parse(response));
-
-    console.log(JSON.parse(response));
   });
 }
 
@@ -36,7 +47,7 @@ function displayProjects(data) {
   }
 
   // set the new html
-  $("#projects .row").prepend(html);
+  $("#projects .row").html(html);
 }
 
 // returns the html for a project card

@@ -14,7 +14,7 @@ const PROJECT_VIEW_OPTIONS = {
 }
 
 var projectSorting = PROJECT_SORTING_OPTIONS.NAME_ASC;  // initial item sorting display
-var projectView = PROJECT_VIEW_OPTIONS.TABLE;            // initial item view display
+var projectView = PROJECT_VIEW_OPTIONS.CARD;            // initial item view display
 
 $(document).ready(function() {
   getUserProjects();                        // get all the projects
@@ -80,7 +80,6 @@ function updateProjectSorting(btn) {
 }
 
 
-
 function updateProjectView(btn) {
   // add active class to clicked button
   $(".project-view-option").removeClass("active");
@@ -95,7 +94,6 @@ function updateProjectView(btn) {
 
   // update the project cards
   getUserProjects($("#project-search-input").val());
-
 }
 
 
@@ -108,12 +106,10 @@ function getUserProjects(query = '') {
   };
 
   $.get(PHP_FILE, data, function(response) {
-
     if (projectView == PROJECT_VIEW_OPTIONS.CARD)
       displayProjectCards(JSON.parse(response));
     else
       displayProjectTable(JSON.parse(response));
-
   });
 }
 
@@ -151,68 +147,65 @@ function getProjectCardHtml(project) {
   return html;
 }
 
-
+// displays the projects as a table
 function displayProjectTable(projects) {
   var html = getProjectTableHtml(projects);
   $("#project-cards").html(html);
 }
 
+// returns the project table html
 function getProjectTableHtml(projects) {
-  var html = '<table class="table mt-4">';
+  var html = '<div class="table-responsive"><table class="table table-hover mt-1">';
   html += '<thead><tr>';
-  html += '<th>Item_ID</th>';
   html += '<th>Name</th>';
-  html += '<th>Item count</th>';
-  html += '<th>Checklist count</th>';
-  html += '<th>Note count</th>';
+  html += '<th>Items</th>';
+  html += '<th>Checklists</th>';
+  html += '<th>Notes</th>';
   html += '<th>Date created</th>';
   html += '<th>Date due</th>';
-  html += '<th>View</th>';
+  html += '<th>Page Link</th>';
   html += '</tr></thead><tbody>';
 
-
+  // generate table rows
   const size = projects.length;
   for (var count = 0; count < size; count++) {
     html += getProjectTableRowHtml(projects[count]);
   }
 
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
 
   return html;
 }
 
-
+// return the html of a project table row
 function getProjectTableRowHtml(project) {
-
-  // create the due date display
-  var dateDueDisplay = 'n/a';
-  if (project.date_due_display_date != null) {
-    dateDueDisplay = project.date_due_display_date;
-    if (project.date_due_display_time != null) {
-      dateDueDisplay += ' at ' + project.date_due_display_time;
-    }
-  }
-
-  // date created display
-  var dateCreatedDisplay = 'n/a';
-  if (project.date_created_display_date != null) {
-    dateCreatedDisplay = project.date_created_display_date;
-    if (project.date_created_display_time != null) {
-      dateCreatedDisplay += ' at ' + project.date_created_display_time;
-    }
-  }
-
-  var html = '<tr data-project-id="' + project.id + '">';
-  html += '<td>' + project.id + '</td>';
+  var html = '<tr class="hover-pointer" data-project-id="' + project.id + '">';
   html += '<td>' + project.name + '</td>';
   html += '<td>' + project.count_items + '</td>';
   html += '<td>' + project.count_checklists + '</td>';
   html += '<td>' + project.count_notes + '</td>';
+
+  var dateDueDisplay = getDisplayDateValue(project.date_due_display_date, project.date_due_display_time);
   html += '<td>' + dateCreatedDisplay + '</td>';
+
+  var dateCreatedDisplay = getDisplayDateValue(project.date_created_display_date, project.date_created_display_time);
   html += '<td>' + dateDueDisplay + '</td>';
-  html += '<td><a href="project.php?projectID=' + project.id + '">View</a></td>';
+
+  html += '<td><a href="project.php?projectID=' + project.id + '"><i class="bx bx-link"></i></a></td>';
   html +='</tr>';
 
   return html;
+}
 
+// returns the corrent display of a date in the project card or table
+function getDisplayDateValue(newDate, newTime) {
+  var display = 'n/a';
+  if (newDate != null) {
+    display = newDate;
+    if (newTime != null) {
+      display += ' at ' + newTime;
+    }
+  }
+
+  return display;
 }

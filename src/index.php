@@ -39,12 +39,12 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">View</button>
               <div class="dropdown-menu">
                 <!-- card view -->
-                <button class="dropdown-item project-view-option" type="button" data-project-view="card">
+                <button class="dropdown-item project-view-option active" type="button" data-project-view="card">
                   <div class="icon-display"><i class='icon bx bx-card'></i><div class="display">Card</div></div>
                 </button>
                 
                 <!-- table view -->
-                <button class="dropdown-item project-view-option active" type="button" data-project-view="table">
+                <button class="dropdown-item project-view-option" type="button" data-project-view="table">
                   <div class="icon-display"><i class='icon bx bx-table'></i><div class="display">Table</div></div>
                 </button>
               </div>

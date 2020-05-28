@@ -384,4 +384,12 @@ input.red, input.red:focus {
   margin-right: 5px;
 }
 
+.table th, .table td {
+  background-color: white;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

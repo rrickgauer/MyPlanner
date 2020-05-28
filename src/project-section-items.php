@@ -29,7 +29,7 @@
     </div>
 
     <!-- item sorting dropdown -->
-    <div class="dropdown">
+    <div class="dropdown mr-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
         Sort items
       </button>
@@ -41,6 +41,15 @@
         <h6 class="dropdown-header">Alphabetically</h6>
         <button class="dropdown-item item-sorting-option" data-sorting-option="name_asc" type="button">Ascending</button>
         <button class="dropdown-item item-sorting-option" data-sorting-option="name_desc" type="button">Descending</button>
+      </div>
+    </div>
+
+    <!-- item sorting dropdown -->
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">View</button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item item-view-option active" data-sorting-option="card" type="button">Card</button>
+        <button class="dropdown-item item-view-option" data-sorting-option="table" type="button">Table</button>
       </div>
     </div>
 
@@ -61,9 +70,23 @@
 
 <!-- item cards go here -->
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck">
-  
-<!-- <div class="col-12 donutSpinner"></div> -->
 
+  <table class="items-table"  data-toggle="table" data-show-columns="true" data-show-columns-toggle-all="true">
+    <thead>
+      <tr>
+        <th>Item_ID</th>
+        <th>Name</th>
+        <th>Checklists count</th>
+        <th>Notes count</th>
+        <th>Date created</th>
+        <th>Date due</th>
+        <th>Completed</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  
 </div>
 
 

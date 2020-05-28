@@ -2,6 +2,10 @@ h1.custom-font {
   font-size: 3.2em;
 }
 
+body {
+  margin-bottom: 20px;
+}
+
 .btn-secondary {
   background: #dcd5d5;
   color: #1a1a1a;

@@ -9,6 +9,10 @@ h1.custom-font {
   font-size: 3.2em;
 }
 
+body {
+  margin-bottom: 20px;
+}
+
 
 .btn-secondary {
   background: #dcd5d5;
@@ -424,3 +428,4 @@ input.red, input.red:focus {
     height: 30px;
     animation: donut-spin 1.2s linear infinite;
 }
+

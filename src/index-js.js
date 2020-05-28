@@ -29,7 +29,10 @@ function displayProjects(data) {
     var dateDue         = data[count].date_due_display_date;
     var timeDue         = data[count].timeDue;
     var countChecklists = data[count].count_checklists;
-    html += getProjectCard(id, name, dateDue, timeDue, countChecklists);
+    var countItems      = data[count].count_items;
+    var countNotes      = data[count].count_notes;
+
+    html += getProjectCard(id, name, dateDue, timeDue, countChecklists, countItems, countNotes);
   }
 
   // set the new html
@@ -37,12 +40,14 @@ function displayProjects(data) {
 }
 
 // returns the html for a project card
-function getProjectCard(id, name, dateDue, timeDue, countChecklists) {
+function getProjectCard(id, name, dateDue, timeDue, countChecklists, countItems, countNotes) {
   var html = '';
   html += '<div class="col"><div class="card card-project" data-project-id="' + id + '">';
   html += '<div class="card-header"><h5>' + name + '</h5></div>';
   html += '<div class="card-body">';
-  html += '<span class="badge badge-secondary">' + countChecklists + '&nbsp;checklists</span>';
+  html += '<span class="badge badge-secondary mr-2">' + countItems + '&nbsp;items</span>';
+  html += '<span class="badge badge-secondary mr-2">' + countChecklists + '&nbsp;checklists</span>';
+  html += '<span class="badge badge-secondary mr-2">' + countNotes + '&nbsp;notes</span>';
   html += '<div class="card-footer">';
   html += '<div class="card-project-date">' + dateDue + '</div>';
   html += '<a href="project.php?projectID=' + id + '">View</a>';

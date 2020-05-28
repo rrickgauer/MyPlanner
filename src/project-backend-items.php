@@ -22,10 +22,11 @@ if (isset($_POST['function']) && $_POST['function'] == 'insert-item' && isset($_
   
 }
 
-// return all the project items
-else if (isset($_GET['function']) && $_GET['function'] == 'get-items' && isset($_GET['projectID'])) {
+// return project items
+else if (isset($_GET['function'], $_GET['projectID'], $_GET['query']) && $_GET['function'] == 'get-items') {
   $projectID = $_GET['projectID'];
-  $items = getProjectItems($projectID)->fetchAll(PDO::FETCH_ASSOC);
+  $query = $_GET['query'];
+  $items = getProjectItems($projectID, $query)->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode($items);
   exit;
 }

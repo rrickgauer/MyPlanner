@@ -1,31 +1,77 @@
-<h5>Items</h5>
+<h2 class="custom-font">Items</h2>
 
-<!-- new item button dropdown -->
-<div class="dropright">
-  <!-- new item button -->
-  <button class="btn btn-secondary" type="button" data-toggle="dropdown">New item</button>
-  
-  <!-- menu -->
-  <div class="dropdown-menu dropdown-form">
 
-    <!-- name -->
-    <div class="form-group">
-      <label for="new-item-name">Name:</label>
-      <input type="text" id="new-item-name" class="form-control update-button" data-button-id="#new-item-btn">
-    </div>
+<div class="d-inline-flex">
+
+  <!-- new item button dropdown menu -->
+  <div class="dropdown mr-2">
+    <!-- new item button -->
+    <button class="btn btn-secondary" type="button" data-toggle="dropdown">New item</button>
     
-    <!-- description -->
-    <div class="form-group">
-      <label for="new-item-description">Description:</label>
-      <textarea class="form-control" rows="5" id="new-item-description" name="description"></textarea>
+    <!-- menu -->
+    <div class="dropdown-menu dropdown-form">
+
+      <!-- name -->
+      <div class="form-group">
+        <label for="new-item-name">Name:</label>
+        <input type="text" id="new-item-name" class="form-control update-button" data-button-id="#new-item-btn">
+      </div>
+      
+      <!-- description -->
+      <div class="form-group">
+        <label for="new-item-description">Description:</label>
+        <textarea class="form-control" rows="5" id="new-item-description" name="description"></textarea>
+      </div>
+      
+      <!-- create item submit button -->
+      <button class="btn btn-primary float-right" id="new-item-btn" type="button" onclick="newProjectItem()" disabled>Create</button>
     </div>
-    
-    <!-- create item submit button -->
-    <button class="btn btn-primary float-right" id="new-item-btn" type="button" onclick="newProjectItem()" disabled>Create</button>
+  </div>
+
+
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+      Sort items
+    </button>
+    <div class="dropdown-menu">
+      <h6 class="dropdown-header">Date created</h6>
+      <button class="dropdown-item" type="button">Oldest</button>
+      <button class="dropdown-item" type="button">Newest</button>
+      <div class="dropdown-divider"></div>
+      <h6 class="dropdown-header">Alphabetically</h6>
+      <button class="dropdown-item" type="button">Ascending</button>
+      <button class="dropdown-item" type="button">Descending</button>
+      <!-- <div class="dropdown-divider"></div> -->
+    </div>
+  </div>
+
+
+</div>
+
+<br><br>
+
+
+
+
+
+
+<!-- search bar -->
+
+<div class="input-group mb-5">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class='bx bx-search'></i></span>
+  </div>
+  <input type="text" class="form-control" id="item-search-input" placeholder="Search for an item...">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class='bx bx-x'></i></button>
   </div>
 </div>
 
-<br>
+
+
+
+
 
 <!-- item cards go here -->
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck"></div>

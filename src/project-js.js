@@ -22,6 +22,11 @@ function addEventListeners() {
     var buttonID = $(this).attr("data-button-id");
     enableButtonFromInput($(buttonID), this);
   });
+
+
+  $("#item-search-input").on("keyup", function() {
+    getProjectItems($("#item-search-input").val());
+  });
 }
 
 // enables-disables a button based on if the specified input is empty
@@ -301,11 +306,11 @@ function deleteProject() {
 }
 
 // returns the project items
-function getProjectItems() {
-
+function getProjectItems(query = '') {
   var data = {
     function: 'get-items',
     projectID: PROJECT_ID,
+    query: query,
   }
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
@@ -1163,3 +1168,11 @@ $(document).ready(function () {
 function renderMarkdown(input) {
   return MD_RENDER.render(input);
 }
+
+
+
+
+
+
+
+

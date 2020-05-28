@@ -6,9 +6,6 @@ $base-color-yellow-hover: #f1d98b;
 $custom-font: 'Fredoka One', cursive;
 
 
-h1.custom-font {
-  font-size: 3.0em; 
-}
 
 
 .btn-secondary {
@@ -30,7 +27,10 @@ h1.custom-font {
 }
 
 
-.custom-font {font-family: $custom-font;}
+.custom-font {
+  font-family: $custom-font;
+  // font-size: 3.0em; 
+}
 
 body {background-color: $base-color-grey;}
 

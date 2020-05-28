@@ -8,7 +8,7 @@ $(document).ready(function() {
 // gets the project cards from the server and displays them on success
 function getUserProjects() {
   var data = {
-    function: 'getProjects',
+    function: 'get-projects',
   };
 
   $.get(PHP_FILE, data, function(response) {

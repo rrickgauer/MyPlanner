@@ -178,9 +178,26 @@ function setProjectValueNull($value) {
     return NULL;
 }
 
+
+
+/************************************************
+* returns:
+
+* id
+* name
+* date_created
+* date_due
+* date_due_display_date
+* date_due_display_time
+* display_index
+* count_checklists
+* count_items
+* count_notes
+************************************************/
 function getProjects($userID) {
   $pdo = dbConnect();
-  $sql = $pdo->prepare('SELECT Projects.id, Projects.name, Projects.date_due, DATE_FORMAT(Projects.date_due, "%c-%d-%Y") AS date_due_display_date, DATE_FORMAT(Projects.date_due, "%l:%i %p") AS date_due_display_time, Projects.display_index, COUNT(Project_Checklists.id) as count_checklists FROM Projects LEFT JOIN Project_Checklists ON Projects.id=Project_Checklists.project_id WHERE user_id=:userID GROUP BY Projects.id ORDER BY Projects.display_index ');
+  $sql = $pdo->prepare('SELECT Projects.id, Projects.name, Projects.date_created, Projects.date_due, (SELECT COUNT(Project_Checklists.id) FROM Project_Checklists WHERE Project_Checklists.project_id=Projects.id) AS count_checklists, (SELECT COUNT(Items.id) FROM Items WHERE Items.project_id=Projects.id) AS count_items, (SELECT COUNT(Project_Notes.id) FROM Project_Notes WHERE Project_Notes.project_id=Projects.id) AS count_notes FROM Projects WHERE Projects.user_id=:userID GROUP BY Projects.id');
+
   $userID = filter_var($userID, FILTER_SANITIZE_NUMBER_INT);
   $sql->bindParam(':userID', $userID, PDO::PARAM_INT);
   $sql->execute();

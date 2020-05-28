@@ -80,55 +80,63 @@ $userInfo = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
     ?>
     
 
-    <h1 class="custom-font text-center">Settings</h1>
+    <h1 class="custom-font text-center mt-5">Settings</h1>
 
-    <div class="row">
+    <div class="card-deck mt-5">
 
-      <div class="col-sm-6 p-3">
-        <h3 class="mb-3 mt-5">Update email</h3>
-        <form method="post">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="mb-4 text-center">Update email</h3>
+          <form method="post">
+            <!-- old email -->
+            <div class="form-group">
+              <label for="old-email-input">Old email:</label>
+              <input type="email" class="form-control" name="new-email-old" id="old-email-input" value="<?php echo $userInfo['email']; ?>" readonly>
+            </div>
 
-          <!-- old email -->
-          <div class="form-group">
-            <label for="old-email-input">Old email:</label>
-            <input type="email" class="form-control" name="new-email-old" id="old-email-input" value="<?php echo $userInfo['email']; ?>" readonly>
-          </div>
+            <!-- new email input -->
+            <div class="form-group">
+              <label for="new-email-input">New email:</label>
+              <input type="email" class="form-control update-button" name="new-email-input" id="new-email-input" data-button-id="#new-email-btn" required>
+            </div>
 
-          <!-- new email input -->
-          <div class="form-group">
-            <label for="new-email-input">New email:</label>
-            <input type="email" class="form-control update-button" name="new-email-input" id="new-email-input" data-button-id="#new-email-btn" required>
-          </div>
+            <div class="float-right">
+              <input type="reset" class="btn btn-secondary" value="Clear">
+              <input type="submit" class="btn btn-primary" id="new-email-btn" value="Save email" disabled>
+            </div>
 
-          <input type="submit" class="btn btn-primary" id="new-email-btn" value="Save email" disabled>
-          <input type="reset" class="btn btn-secondary" value="Clear">
-        </form>
+          </form>
+        </div>
       </div>
+      
+      <div class="card">
+        <div class="card-body">
+          <h3 class="mb-4 text-center">Update password</h3>
 
-      <div class="col-sm-6 p-3">
-        <h3 class="mb-3 mt-5">Update password</h3>
-        
-        <form method="post">
-          <div class="form-group">
-            <label for="old-password">Current password:</label>
-            <input type="password" class="form-control update-password-input" name="old-password" id="old-password" required>
-          </div>
+          <form method="post">
+            <div class="form-group">
+              <label for="old-password">Current password:</label>
+              <input type="password" class="form-control update-password-input" name="old-password" id="old-password" required>
+            </div>
 
-          <div class="form-group">
-            <label for="new-password">New password:</label>
-            <input type="password" class="form-control update-password-input" name="new-password" id="new-password" required>
-          </div>
+            <div class="form-group">
+              <label for="new-password">New password:</label>
+              <input type="password" class="form-control update-password-input" name="new-password" id="new-password" required>
+            </div>
 
-          <div class="form-group">
-            <label for="confirm-password">Confirm password:</label>
-            <input type="password" name="confirm-password" class="form-control update-password-input" id="confirm-password" required>
-            <div class="passwords-must-match-text d-none">&nbsp; Passwords must match</div>
-          </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm password:</label>
+              <input type="password" name="confirm-password" class="form-control update-password-input" id="confirm-password" required>
+              <div class="passwords-must-match-text d-none">&nbsp; Passwords must match</div>
+            </div>
+            
+            <div class="float-right">
+              <button type="button" class="btn btn-secondary" onclick="clearPasswordInputs()">Clear</button>
+              <input type="submit" class="btn btn-primary" id="new-password-btn" value="Save password" disabled>
+            </div>
 
-          <input type="submit" class="btn btn-primary" id="new-password-btn" value="Save password" disabled>
-          <button type="button" class="btn btn-secondary" onclick="clearPasswordInputs()">Clear</button>
-
-        </form>
+          </form>
+        </div>
       </div>
     </div>
 

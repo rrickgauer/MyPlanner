@@ -19,29 +19,21 @@ include('session.php');
     <h1 class="custom-font">Test Page</h1>
 
 
-      <div>
-        <div>
-          
-        
-
-        <ul class="animate__animated animate__slideOutUp">
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-          <li>sup</li>
-        </ul>
-        </div>
+    <div class="donutSpinner">
       
-      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    
+
+
 
 
 

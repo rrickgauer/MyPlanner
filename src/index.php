@@ -16,7 +16,7 @@ $projects = getProjects($_SESSION['userID']);
  <?php include('navbar.php'); ?>
 
  <div class="container">
-  <h1 class="text-center custom-font">My Planner</h1>
+  <h1 class="text-center custom-font mt-5">My Planner</h1>
   
   <!-- project selection -->
   <div id="projects">

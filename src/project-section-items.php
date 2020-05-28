@@ -60,7 +60,11 @@
 
 
 <!-- item cards go here -->
-<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck"></div>
+<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck">
+  
+<!-- <div class="col-12 donutSpinner"></div> -->
+
+</div>
 
 
 <!-- item modal -->
@@ -191,10 +195,12 @@
 
             <!-- panel -->
             <div class="panel d-none">
+
+
+  
+
               <div class="row">
                 <div class="col-3">
-
-                  <!-- <h6>Current lists</h6> -->
                   <!-- side bar of item checklists -->
                   <ul class="nav nav-pills flex-column sidebar-item-checklists"></ul>
 
@@ -214,7 +220,9 @@
                 </div>
 
                 <!-- open checklists go here -->
-                <div class="col-9" id="item-checklists"></div>
+                <div class="col-9" id="item-checklists">
+                  <!-- <span class="donutSpinner"></span> -->
+                </div>
               </div>
             </div>
           </div>

@@ -337,9 +337,6 @@ function getProjectItems(query = '') {
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     displayProjectItems(JSON.parse(response));
-    // console.log(JSON.parse(response));
-
-    console.log(response);
   });
 }
 
@@ -539,6 +536,20 @@ function getItemChecklistSidebar(itemID) {
     itemID: itemID,
   };
 
+  $.ajax({
+    url: BACKEND_ITEM_URL,
+    type: 'get',
+    data: data,
+    beforeSend: function() {
+      $("#item-pills-checklists .donutSpinner").show();
+    },
+
+    success: function(response) {
+      setItemChecklistSidebar(JSON.parse(response));
+    }
+
+  });
+
   $.get(BACKEND_ITEM_URL, data, function(response) {
     setItemChecklistSidebar(JSON.parse(response));
     // console.log(response);
@@ -585,6 +596,9 @@ function getItemChecklistSidebarHtml(checklist) {
   return html;
 }
 
+
+
+
 // opens all the item checklists that are currently save
 function getAllOpenItemChecklists(itemID) {
 
@@ -593,11 +607,11 @@ function getAllOpenItemChecklists(itemID) {
     itemID: itemID,
   };
 
+
+
   $.get(BACKEND_ITEM_URL, data, function(response) {
     var openItemChecklists = JSON.parse(response);
     var size = openItemChecklists.length;
-
-    // console.log(response);
 
     // display all open checklists
     for (var count = 0; count < size; count++) {

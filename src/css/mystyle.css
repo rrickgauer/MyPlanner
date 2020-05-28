@@ -303,6 +303,7 @@ body {
 }
 .info-section .panel {
   margin-left: 53px;
+  overflow: hidden;
 }
 
 #item-pills-info button.completed {
@@ -354,6 +355,10 @@ input.red, input.red:focus {
 .item-toolbar .input-group {
   flex: 1 1 1em;
   padding: 5px;
+}
+
+.animate__animated.animate__fadeIn {
+  --animate-duration: 200ms;
 }
 
 .github-css body {

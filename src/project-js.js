@@ -21,6 +21,11 @@ $(document).ready(function() {
   getChecklists();
   getProjectItems();
   addEventListeners();
+
+
+
+
+
 });
 
 // adds event listeners to some elements
@@ -348,6 +353,8 @@ function displayProjectItems(data) {
   }
 
   $("#items-deck").html(html);
+
+
 }
 
 // returns the html for a project item card
@@ -356,7 +363,7 @@ function getProjectItemCardHTML(item) {
   var html = '';
 
   // main card
-  html += '<div class="col"><div class="card item-card" data-item-id="' + item.id + '">';
+  html += '<div class="col"><div class="card item-card animate__animated animate__fadeIn" data-item-id="' + item.id + '">';
 
   // card header
   html += '<div class="card-header"><div class="left">';
@@ -1181,6 +1188,8 @@ function setItemModalCompleteButtonToIncomplete() {
 $(document).ready(function () {
   $(".btn-show-details").on("click", function () {
     $(this).closest(".info-section").find(".panel").toggleClass('d-none');
+    // $(this).closest(".info-section").find(".panel").toggleClass('animate__animated animate__slideOutUp');
+
   });
 });
 
@@ -1199,6 +1208,8 @@ function clearItemSearchInput() {
 function updateItemSortingOption(btn) {
   $(".item-sorting-option").removeClass("active");
   $(btn).addClass('active');
+
+  $(".item-card").addClass("hide");
 
   // update item sorting
   switch($(btn).attr("data-sorting-option")) {

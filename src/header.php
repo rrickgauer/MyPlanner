@@ -13,5 +13,8 @@
 <!-- toast -->
 <link rel="stylesheet" type="text/css" href="css/jquery.toast.min.css" />
 
+<!-- Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
 <!-- personal css -->
 <link rel="stylesheet" href="css/mystyle.css" />

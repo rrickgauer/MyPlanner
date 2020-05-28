@@ -16,12 +16,42 @@ include('session.php');
   <?php include('navbar.php'); ?>
 
   <div class="container">
-
     <h1 class="custom-font">Test Page</h1>
 
-    <textarea id="input" rows="10" class="form-control"></textarea><br>
-    
-    <button type="button" class="btn btn-primary" onclick="renderMarkdown()">Convert</button>
+
+      <div>
+        <div>
+          
+        
+
+        <ul class="animate__animated animate__slideOutUp">
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+          <li>sup</li>
+        </ul>
+        </div>
+      
+      </div>
+
+
+
+
+
+
+  
+
+
+
 
     
 

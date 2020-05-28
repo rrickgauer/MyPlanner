@@ -13,7 +13,7 @@
         <li class="nav-item"><a class="nav-link" id="nav-item-logout" href="logout.php">Logout</a></li>
 
 
-        <!-- <li class="nav-item"><a class="nav-link" id="nav-item-test" href="test.php">Test Page</a></li> -->
+        <li class="nav-item"><a class="nav-link" id="nav-item-test" href="test.php">Test Page</a></li>
       </ul>
     </div>
   </nav>

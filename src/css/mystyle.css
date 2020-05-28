@@ -352,7 +352,7 @@ input.red, input.red:focus {
   display: flex;
 }
 .item-toolbar .input-group {
-  flex: 1 1 40em;
+  flex: 1 1 1em;
   padding: 5px;
 }
 

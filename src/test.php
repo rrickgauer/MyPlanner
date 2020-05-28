@@ -15,6 +15,48 @@ include('session.php');
   <div class="container">
     <h1 class="custom-font mb-5">Test Page</h1>
 
+
+    <div class="card-deck">
+
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Card header</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <input type="text" class="form-control"><br>
+            <input type="text" class="form-control"><br>
+            <input type="text" class="form-control"><br>
+            <button type="button" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Card header</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <input type="text" class="form-control"><br>
+            <button type="button" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+
+
+
+      
+    </div>
+
+
+
+
+
+
+
+
   
     <table class="my-table " data-toggle="table" data-show-columns="true" data-show-columns-toggle-all="true">
       <thead>

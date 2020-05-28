@@ -53,7 +53,6 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             <button class="dropdown-item" type="button" onclick="deleteProject()">Delete</button>
           </div>
         </div>
-
       </div>
 
 
@@ -61,9 +60,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
 
         <!-- name -->
         <h1 class="custom-font"><?php echo $projectInfo['name']; ?></h1>
-
         <div class="row">
-
           <!-- description -->  
           <div class="col-sm-12 col-md-4">
             <div class="project-info-element">
@@ -95,6 +92,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- navbar for items and pills -->

@@ -89,7 +89,7 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <!-- project cards go here -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"></div>
+    <div id="project-cards"></div>
   </div>
 
 </div>

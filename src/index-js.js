@@ -35,6 +35,7 @@ function addEventListeners() {
 
 function updateProjectSorting(btn) {
 
+  // add fade out animation
   $(".card-project").addClass("animate__animated animate__fadeOut");
 
 
@@ -47,23 +48,18 @@ function updateProjectSorting(btn) {
     case "name_desc":
       projectSorting = PROJECT_SORTING_OPTIONS.NAME_DESC;
       break;
-
     case "date_created_new": 
       projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_NEW;
       break;
-
     case "date_created_old":
       projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_OLD;
       break;
-
     case "date_due_new":
       projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_NEW;
       break;
-
     case "date_due_old":
       projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_OLD;
       break;
-
     default:
       projectSorting = PROJECT_SORTING_OPTIONS.NAME_ASC;
       break;
@@ -88,45 +84,42 @@ function getUserProjects(query = '') {
 }
 
 // displays all the project cards 
-function displayProjects(data) {
-  var html = '';  // empty html
+function displayProjects(projects) {
+  var html = '<div class="card-deck mb-3">';       // empty html
 
-  // create html for the project cards
-  for (var count = 0; count < data.length; count++) {    
-    var id              = data[count].id;
-    var name            = data[count].name;
-    var dateDue         = data[count].date_due_display_date;
-    var timeDue         = data[count].timeDue;
-    var countChecklists = data[count].count_checklists;
-    var countItems      = data[count].count_items;
-    var countNotes      = data[count].count_notes;
-
-    html += getProjectCard(id, name, dateDue, timeDue, countChecklists, countItems, countNotes);
+  for (var count = 0; count <  projects.length; count++) {
+    if (count % 3 == 0)                       // create new card deck
+      html += getCardDeckHtml();
+    
+    html += getProjectCard(projects[count]);  // generated project card
   }
 
+  html += '</div>';                           // close card deck
+
   // set the new html
-  $("#projects .row").html(html);
+  $("#project-cards").html(html);
 }
 
-// returns the html for a project card
-function getProjectCard(id, name, dateDue, timeDue, countChecklists, countItems, countNotes) {
+function getProjectCard(project) {
   var html = '';
-  html += '<div class="col"><div class="card card-project" data-project-id="' + id + '">';
-  html += '<div class="card-header"><h5>' + name + '</h5></div>';
+  html += '<div class="card card-project" data-project-id="' + project.id + '">';
+  html += '<div class="card-header"><h5>' + project.name + '</h5></div>';
   html += '<div class="card-body">';
-  html += '<span class="badge badge-secondary mr-2">' + countItems + '&nbsp;items</span>';
-  html += '<span class="badge badge-secondary mr-2">' + countChecklists + '&nbsp;checklists</span>';
-  html += '<span class="badge badge-secondary mr-2">' + countNotes + '&nbsp;notes</span>';
+  html += '<span class="badge badge-secondary mr-2">' + project.count_items + '&nbsp;items</span>';
+  html += '<span class="badge badge-secondary mr-2">' + project.count_checklists + '&nbsp;checklists</span>';
+  html += '<span class="badge badge-secondary mr-2">' + project.count_notes + '&nbsp;notes</span>';
   html += '<div class="card-footer">';
-  html += '<div class="card-project-date">' + dateDue + '</div>';
-  html += '<a href="project.php?projectID=' + id + '">View</a>';
+  html += '<div class="card-project-date">' + project.date_due_display_date + '</div>';
+  html += '<a href="project.php?projectID=' + project.id + '">View</a>';
   html += '</div>';
-  html += '</div></div></div>';
+  html += '</div></div>';
 
   return html;
 }
 
-
+function getCardDeckHtml() {
+  return '</div><div class="card-deck mb-3">';
+}
 
 
 function printProjectSorting() {

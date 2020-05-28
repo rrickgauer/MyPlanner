@@ -23,6 +23,31 @@ $projects = getProjects($_SESSION['userID']);
     <h5 class="mb-3 mt-3">Your projects</h5>
 
     <input type="text" class="form-control mb-3" id="project-search-input" placeholder="Search for a project...">
+    
+    <!-- project sort options dropdown -->
+    <div class="dropdown">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Sort projects</button>
+      <div class="dropdown-menu">
+
+        <h6 class="dropdown-header">Name</h6>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_asc">Ascending</button>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_desc">Descending</button>
+        <div class="dropdown-divider"></div>
+
+        <h6 class="dropdown-header">Date created</h6>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_old">Oldest</button>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_new">Newest</button>
+        <div class="dropdown-divider"></div>
+
+        <h6 class="dropdown-header">Date due</h6>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_old">Oldest</button>
+        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_new">Newest</button>
+
+      </div>      
+    </div>
+
+
+    <br><br>
 
 
 

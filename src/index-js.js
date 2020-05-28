@@ -11,8 +11,6 @@ const PROJECT_SORTING_OPTIONS = {
 
 var projectSorting = PROJECT_SORTING_OPTIONS.NAME_ASC; // initial item sorting display
 
-
-
 $(document).ready(function() {
   getUserProjects();                        // get all the projects
   $("#nav-item-home").addClass("active");   // set the navbar link to active
@@ -34,11 +32,50 @@ function addEventListeners() {
   });
 }
 
+
+function updateProjectSorting(btn) {
+    // add active class to clicked button
+    $(".project-sorting-option").removeClass("active");
+    $(btn).addClass("active");
+
+    // update projectSorting
+    switch($(btn).attr('data-project-sorting')) {
+      case "name_desc":
+        projectSorting = PROJECT_SORTING_OPTIONS.NAME_DESC;
+        break;
+
+      case "date_created_new": 
+        projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_NEW;
+        break;
+
+      case "date_created_old":
+        projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_OLD;
+        break;
+
+      case "date_due_new":
+        projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_NEW;
+        break;
+
+      case "date_due_old":
+        projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_OLD;
+        break;
+
+      default:
+        projectSorting = PROJECT_SORTING_OPTIONS.NAME_ASC;
+        break;
+    }
+
+
+    // send get the projects in new sorted order
+    getUserProjects($("#project-search-input").val());
+}
+
 // gets the project cards from the server and displays them on success
 function getUserProjects(query = '') {
   var data = {
     function: 'get-projects',
     query: query,
+    sort: projectSorting,
   };
 
   $.get(PHP_FILE, data, function(response) {
@@ -83,45 +120,6 @@ function getProjectCard(id, name, dateDue, timeDue, countChecklists, countItems,
   html += '</div></div></div>';
 
   return html;
-}
-
-
-
-
-
-function updateProjectSorting(btn) {
-    // add active class to clicked button
-    $(".project-sorting-option").removeClass("active");
-    $(btn).addClass("active");
-
-    // update projectSorting
-    switch($(btn).attr('data-project-sorting')) {
-      case "name_desc":
-        projectSorting = PROJECT_SORTING_OPTIONS.NAME_DESC;
-        break;
-
-      case "date_created_new": 
-        projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_NEW;
-        break;
-
-      case "date_created_old":
-        projectSorting = PROJECT_SORTING_OPTIONS.DATE_CREATED_OLD;
-        break;
-
-      case "date_due_new":
-        projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_NEW;
-        break;
-
-      case "date_due_old":
-        projectSorting = PROJECT_SORTING_OPTIONS.DATE_DUE_OLD;
-        break;
-
-      default:
-        projectSorting = PROJECT_SORTING_OPTIONS.NAME_ASC;
-        break;
-    }
-
-    printProjectSorting();
 }
 
 

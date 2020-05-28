@@ -2,7 +2,7 @@
 include('functions.php');
 include('session.php');
 $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
-$projects = getProjects($_SESSION['userID']);
+// $projects = getProjects($_SESSION['userID']);
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ $projects = getProjects($_SESSION['userID']);
       <div class="dropdown-menu">
 
         <h6 class="dropdown-header">Name</h6>
-        <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_asc">Ascending</button>
+        <button class="dropdown-item project-sorting-option active" type="button" data-project-sorting="name_asc">Ascending</button>
         <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_desc">Descending</button>
         <div class="dropdown-divider"></div>
 

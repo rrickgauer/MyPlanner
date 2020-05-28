@@ -413,7 +413,7 @@ input.red, input.red:focus {
 }
 
 
-.animate__animated.animate__fadeIn {
+.animate__animated.animate__fadeIn, .animate__animated.animate__fadeOut {
   --animate-duration: 200ms;
 }
 

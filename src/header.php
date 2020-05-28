@@ -18,3 +18,6 @@
 
 <!-- personal css -->
 <link rel="stylesheet" href="css/mystyle.css" />
+
+<!-- personal github css -->
+<link rel="stylesheet" href="css/github.css" />

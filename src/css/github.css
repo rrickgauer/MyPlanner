@@ -1,0 +1,311 @@
+.github-css body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px;
+  color: #333;
+}
+.github-css body > *:first-child {
+  margin-top: 0 !important;
+}
+.github-css body > *:last-child {
+  margin-bottom: 0 !important;
+}
+.github-css a {
+  color: #4183C4;
+  text-decoration: none;
+}
+.github-css a.absent {
+  color: #cc0000;
+}
+.github-css a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+.github-css h1,
+.github-css h2,
+.github-css h3,
+.github-css h4,
+.github-css h5,
+.github-css h6 {
+  margin: 20px 0 10px;
+  /*padding: 0;*/
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative;
+}
+.github-css h2:first-child,
+.github-css h1:first-child,
+.github-css h1:first-child + h2,
+.github-css h3:first-child,
+.github-css h4:first-child,
+.github-css h5:first-child,
+.github-css h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css h1:hover a.anchor,
+.github-css h2:hover a.anchor,
+.github-css h3:hover a.anchor,
+.github-css h4:hover a.anchor,
+.github-css h5:hover a.anchor,
+.github-css h6:hover a.anchor {
+  text-decoration: none;
+}
+.github-css h1 tt,
+.github-css h1 code {
+  font-size: inherit;
+}
+.github-css h2 tt,
+.github-css h2 code {
+  font-size: inherit;
+}
+.github-css h3 tt,
+.github-css h3 code {
+  font-size: inherit;
+}
+.github-css h4 tt,
+.github-css h4 code {
+  font-size: inherit;
+}
+.github-css h5 tt,
+.github-css h5 code {
+  font-size: inherit;
+}
+.github-css h6 tt,
+.github-css h6 code {
+  font-size: inherit;
+}
+.github-css h1 {
+  font-size: 28px;
+  border-bottom: 1px solid #cccccc;
+  color: black;
+}
+.github-css h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black;
+}
+.github-css h3 {
+  font-size: 18px;
+}
+.github-css h4 {
+  font-size: 16px;
+}
+.github-css h5 {
+  font-size: 14px;
+  padding-top: 10px !important;
+}
+.github-css h6 {
+  color: #777777;
+  font-size: 14px;
+}
+.github-css p,
+.github-css blockquote,
+.github-css table {
+  margin: 15px 0;
+}
+.github-css hr {
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+.github-css body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css body > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css body > h3:first-child,
+.github-css body > h4:first-child,
+.github-css body > h5:first-child,
+.github-css body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css a:first-child h1,
+.github-css a:first-child h2,
+.github-css a:first-child h3,
+.github-css a:first-child h4,
+.github-css a:first-child h5,
+.github-css a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.github-css h1 p,
+.github-css h2 p,
+.github-css h3 p,
+.github-css h4 p,
+.github-css h5 p,
+.github-css h6 p {
+  margin-top: 0;
+}
+.github-css dl {
+  padding: 0;
+}
+.github-css dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+.github-css dl dt:first-child {
+  padding: 0;
+}
+.github-css dl dt > :first-child {
+  margin-top: 0;
+}
+.github-css dl dt > :last-child {
+  margin-bottom: 0;
+}
+.github-css dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+.github-css dl dd > :first-child {
+  margin-top: 0;
+}
+.github-css dl dd > :last-child {
+  margin-bottom: 0;
+}
+.github-css blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+.github-css blockquote > :first-child {
+  margin-top: 0;
+}
+.github-css blockquote > :last-child {
+  margin-bottom: 0;
+}
+.github-css table {
+  padding: 0;
+}
+.github-css table tr {
+  border-top: 1px solid #cccccc;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+.github-css table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.github-css table tr th {
+  font-weight: bold;
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+.github-css table tr td {
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+.github-css table tr th :first-child,
+.github-css table tr td :first-child {
+  margin-top: 0;
+}
+.github-css table tr th :last-child,
+.github-css table tr td :last-child {
+  margin-bottom: 0;
+}
+.github-css img {
+  max-width: 100%;
+}
+.github-css span.frame {
+  display: block;
+  overflow: hidden;
+}
+.github-css span.frame > span {
+  border: 1px solid #dddddd;
+  display: block;
+  float: left;
+  overflow: hidden;
+  margin: 13px 0 0;
+  padding: 7px;
+  width: auto;
+}
+.github-css span.frame span img {
+  display: block;
+  float: left;
+}
+.github-css span.frame span span {
+  clear: both;
+  color: #333333;
+  display: block;
+  padding: 5px 0 0;
+}
+.github-css span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.github-css span.align-center > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: center;
+}
+.github-css span.align-center span img {
+  margin: 0 auto;
+  text-align: center;
+}
+.github-css span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.github-css span.align-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px 0 0;
+  text-align: right;
+}
+.github-css span.align-right span img {
+  margin: 0;
+  text-align: right;
+}
+.github-css span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left;
+}
+.github-css span.float-left span {
+  margin: 13px 0 0;
+}
+.github-css span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right;
+}
+.github-css span.float-right > span {
+  display: block;
+  overflow: hidden;
+  margin: 13px auto 0;
+  text-align: right;
+}
+
+/*# sourceMappingURL=github.css.map */

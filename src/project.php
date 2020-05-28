@@ -68,7 +68,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
           <div class="col-sm-12 col-md-4">
             <div class="project-info-element">
               <p class="descriptor">Description</p>
-              <p class="data"><?php echo $projectInfo['description']; ?></p>          
+              <div class="data github-css"><?php echo $projectInfo['description']; ?></div>          
             </div>
           </div>
 

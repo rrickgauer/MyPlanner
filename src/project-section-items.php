@@ -105,7 +105,7 @@
               <div class="info-section description">
                 <div class="heading">
                   <div class="icon"><i class='bx bx-detail'></i></div>
-                  <div class="description github-css">Description</div>
+                  <div class="description">Description</div>
                 </div>
                 <div class="panel content"></div>
               </div>

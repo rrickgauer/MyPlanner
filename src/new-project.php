@@ -31,7 +31,7 @@ if (isset($_POST['new-project-name'])) {
 
  <div class="container">
 
-  <h1>New Project</h1> 
+  <h1 class="custom-font text-center">New Project</h1> 
   
   <form method="post">
    <!-- project name -->
@@ -50,11 +50,15 @@ if (isset($_POST['new-project-name'])) {
   <!-- date due -->
   <div class="form-group">
     <label for="name">Date due:</label>
-    <input type="date" class="form-control" id="date-due" name="date-due">
+    <input type="date" class="form-control" id="date-due" name="date-due" required>
   </div>
 
   <!-- submit button -->
-  <input type="submit" class="btn btn-primary float-right" value="Create project">
+  <div class="float-right">
+    <button type="reset" class="btn btn-secondary">Reset</button>
+    <input type="submit" class="btn btn-primary" value="Create project">
+  </div>
+
 </form>
 
 </div>

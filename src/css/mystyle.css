@@ -376,4 +376,12 @@ input.red, input.red:focus {
   width: 300px;
 }
 
+.icon-display {
+  display: flex;
+  align-items: center;
+}
+.icon-display .icon {
+  margin-right: 5px;
+}
+
 /*# sourceMappingURL=mystyle.css.map */

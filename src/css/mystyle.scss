@@ -421,7 +421,14 @@ input.red, input.red:focus {
   width: 300px;
 }
 
-
+.icon-display {
+  display: flex;
+  align-items: center;
+  
+  .icon {
+    margin-right: 5px;
+  }
+}
 
 
 

@@ -20,9 +20,9 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
   
   <!-- project selection -->
   <div id="projects">
-
+    
+    <!-- toolbar -->
     <div class="split toolbar">
-
       <div class="left">
         <h3>Your projects</h3>
       </div>
@@ -30,6 +30,8 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
       <div class="right">
         <div class="d-flex">
           <div class="buttons d-flex">
+
+            <!-- new project link -->
             <a class="btn btn-secondary mr-2" href="new-project.php">New</a>
 
             <!-- project sort options dropdown -->
@@ -38,18 +40,43 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
 
               <div class="dropdown-menu">
                 <h6 class="dropdown-header">Name</h6>
-                <button class="dropdown-item project-sorting-option active" type="button" data-project-sorting="name_asc">Ascending</button>
-                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_desc">Descending</button>
-                <div class="dropdown-divider"></div>
+  
+                <!-- name asc -->
+                <button class="dropdown-item project-sorting-option active" type="button" data-project-sorting="name_asc">
+                  <div class="icon-display"><i class='icon bx bx-sort-a-z'></i><div class="display">Ascending</div></div>
+                </button>
+                
+                <!-- name desc -->
+                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="name_desc">
+                  <div class="icon-display"><i class='icon bx bx-sort-z-a'></i><div class="display">Descending</div></div>
+                </button>
 
+                <div class="dropdown-divider"></div>
                 <h6 class="dropdown-header">Date created</h6>
-                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_old">Oldest</button>
-                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_new">Newest</button>
-                <div class="dropdown-divider"></div>
+                
+                <!-- date created oldest -->
+                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_old">
+                  <div class="icon-display"><i class='icon bx bx-sort-up'></i><div class="display">Oldest</div></div>
+                </button>
+                
+                <!-- date created newest -->
+                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_created_new">
+                  <div class="icon-display"><i class='icon bx bx-sort-down'></i><div class="display">Newest</div></div>
+                </button>
 
+                <div class="dropdown-divider"></div>
                 <h6 class="dropdown-header">Date due</h6>
-                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_old">Oldest</button>
-                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_new">Newest</button>
+                
+                <!-- date due oldest -->
+                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_old">
+                  <div class="icon-display"><i class='icon bx bx-sort-up'></i><div class="display">Oldest</div></div>
+                </button>
+
+                <!-- date due newest -->
+                <button class="dropdown-item project-sorting-option" type="button" data-project-sorting="date_due_new">
+                  <div class="icon-display"><i class='icon bx bx-sort-down'></i><div class="display">Newest</div></div>
+                </button>
+
               </div>      
             </div>
           </div>
@@ -59,14 +86,11 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
         </div>
       </div>
       
-
-
     </div>
 
     <!-- project cards go here -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"></div>
   </div>
-
 
 </div>
 

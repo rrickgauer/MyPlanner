@@ -9,6 +9,8 @@ if (isset($_POST['new-email']) && isset($_POST['new-password1']) && isset($_POST
     $_SESSION['userID'] = getUserID($_POST['new-email']);
     header('Location: index.php');
     exit;
+  } else {
+    $accountCreationAttempt = false;  // used to set an alert on the page
   }
 }
 
@@ -20,7 +22,7 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
     header('Location: index.php');
     exit;
   } else {
-    $loginAttempt = false;
+    $loginAttempt = false;  // used to set an alert on the page
   }
 }
 
@@ -44,6 +46,7 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
             <h2 class="custom-font text-center mb-4">Login</h2>
 
             <?php 
+              // user attempted an invalid login
               if (isset($loginAttempt) && !$loginAttempt) {
                 echo getAlert('Login failed.', 'danger');
               }
@@ -72,6 +75,13 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
         <div class="card">
           <div class="card-body">
             <h2 class="custom-font text-center mb-4">Create account</h2>
+
+            <?php 
+              // user attempted an invalid account creation
+              if (isset($accountCreationAttempt) && !$accountCreationAttempt) {
+                echo getAlert('Account was not created. Please try again.', 'danger');
+              }
+            ?>
 
             <!-- create account form -->
             <form method="post">

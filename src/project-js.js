@@ -12,8 +12,8 @@ const ITEM_SORTING_OPTIONS = {
 };
 
 const ITEM_VIEW_OPTIONS = {
-  TABLE = 'table',
-  CARD = 'card',
+  TABLE: 'table',
+  CARD: 'card',
 };
 
 var itemView = ITEM_VIEW_OPTIONS.CARD;                    // intial item view display
@@ -1247,7 +1247,9 @@ function updateItemViewOption(btn) {
 
   // switch the active classes
   $(".item-view-option").removeClass("active");
-  $(btn).addClass("active"); 
+  $(btn).addClass("active");
+
+  $(".item-card").addClass("hide"); 
 }
 
 

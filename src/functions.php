@@ -438,13 +438,16 @@ function getProjectItemCount($projectID) {
     count_checklists
     count_notes
     date_due_date
+    date_due_time
     date_created_date
     date_created_time
 ********************************************************************/
 function getProjectItems($projectID, $sort, $query = '') {
   $pdo = dbConnect();
 
-  $stmt = 'SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID AND Items.name like :name GROUP by Items.id ORDER BY ' . $sort;
+  // $stmt = 'SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID AND Items.name like :name GROUP by Items.id ORDER BY ' . $sort;
+
+  $stmt = 'SELECT Items.id as id, Items.name, Items.date_created, Items.date_due, Items.completed, Items.display_index, (select count(Item_Checklists.id) from Item_Checklists where Item_Checklists.item_id=Items.id) as count_checklists, (select count(Item_Notes.id) from Item_Notes where Item_Notes.item_id=Items.id) as count_notes, date_format(Items.date_due, "%c/%e/%Y") as date_due_date, date_format(Items.date_due, "%l:%i%p") as date_due_time, date_format(Items.date_created, "%c/%e/%Y") as date_created_date, date_format(Items.date_created, "%l:%i%p") as date_created_time from Items LEFT join Item_Checklists on Items.id=Item_Checklists.item_id LEFT JOIN Item_Notes on Items.id=Item_Notes.item_id WHERE Items.project_id=:projectID AND Items.name like :name GROUP by Items.id ORDER BY ' . $sort;
 
   $sql = $pdo->prepare($stmt);
 

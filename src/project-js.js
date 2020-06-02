@@ -339,6 +339,8 @@ function getProjectItems(query = '') {
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     displayProjectItems(JSON.parse(response));
+
+    console.log(JSON.parse(response));
   });
 }
 
@@ -435,7 +437,7 @@ function getProjectItemCardHtml(item) {
   return html;
 }
 
-
+// returns the html for the project item table
 function getProjectItemTableHtml(items) {
   var html = '<div class="table-responsive"><table class="table items-table"><thead><tr>';
   html += '<th>Name</th>';
@@ -457,21 +459,22 @@ function getProjectItemTableHtml(items) {
 }
 
 
-
+// returns the html for a project item table row
 function getProjectItemTableRowHtml(item) {
   var html = '<tr data-item-id="' + item.id + '">';
   html += '<td>' + item.name + '</td>';
   html += '<td>' + item.count_checklists + '</td>';
   html += '<td>' + item.count_notes + '</td>';
-  html += '<td>' + item.date_created_date + '</td>';
-  html += '<td>' + item.date_due_date + '</td>';
+  html += '<td>' + getProjectItemDateDisplay(item.date_created_date, item.date_created_time) + '</td>';
+  html += '<td>' + getProjectItemDateDisplay(item.date_due_date, item.date_due_time) + '</td>';
 
   if (item.completed == 'y') {
     html += '<td><i class="bx bxs-check-circle"></i></td>';
-  } else {
+  } 
+
+  else {
     html += '<td></td>';
   }
-
   
   html += '<td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#item-modal" onclick="openItemModal(' + item.id + ')">View</button></td>';
   html += '</tr>';
@@ -479,6 +482,19 @@ function getProjectItemTableRowHtml(item) {
   return html;
 }
 
+// returns the correct display date for an item due date and date created
+function getProjectItemDateDisplay(displayDate, displayTime) {
+  var html = 'n/a';
+  if (displayDate != null) {
+    html = displayDate;
+
+    if (displayTime != null) {
+      html += ' at ' + displayTime;
+    }
+  }
+
+  return html;
+}
 
 
 

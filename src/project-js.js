@@ -343,24 +343,50 @@ function getProjectItems(query = '') {
 }
 
 // displays a project item
-function displayProjectItems(data) {
-  var size = data.length;
+function displayProjectItems(items) {
+  var size = items.length;
   var html = '';
 
-  for (var count = 0; count < size; count++) {
-    html += getProjectItemCardHTML(data[count]);
+  // display items as cards
+  if (itemView == ITEM_VIEW_OPTIONS.CARD) {
+    html += getProjectItemCardsHtml(items);
+  }
+
+  // display items as a table
+  else {
+    html += getProjectItemTableHtml(items);
   }
 
   $("#items-deck").html(html);
 }
 
+
+function getProjectItemCardsHtml(items) {
+  var html = '<div class="card-deck">';
+
+  for (var count = 0; count < items.length; count++) {
+    // after 3 cards have been created print a new card deck
+    if (count % 3 == 0){
+      html += '</div><div class="card-deck">';
+    }
+
+    // append card html to the cards html
+    html += getProjectItemCardHtml(items[count]);
+  }
+
+  html += '</div>';   // close the card deck
+
+  return html;
+}
+
+
 // returns the html for a project item card
-function getProjectItemCardHTML(item) {
+function getProjectItemCardHtml(item) {
 
   var html = '';
 
   // main card
-  html += '<div class="col"><div class="card item-card animate__animated animate__fadeIn" data-item-id="' + item.id + '">';
+  html += '<div class="card item-card animate__animated" data-item-id="' + item.id + '">';
 
   // card header
   html += '<div class="card-header"><div class="left">';
@@ -404,11 +430,62 @@ function getProjectItemCardHTML(item) {
   html += '<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#item-modal" onclick="openItemModal(' + item.id + ')">View</button>';
   html += '</div>';
 
-  html += '</div></div>';
+  html += '</div>';
 
   return html;
-
 }
+
+
+function getProjectItemTableHtml(items) {
+  var html = '<div class="table-responsive"><table class="table items-table"><thead><tr>';
+  html += '<th>Name</th>';
+  html += '<th>Checklists</th>';
+  html += '<th>Notes</th>';
+  html += '<th>Date Created</th>';
+  html += '<th>Date Due</th>';
+  html += '<th>Completed</th>';
+  html += '<th>View</th></tr></thead><tbody>';
+
+  // get the rows here
+  for (var count = 0; count < items.length; count++) {
+    html += getProjectItemTableRowHtml(items[count]);
+  }
+
+  // close the table
+  html += '</tbody></table></div>';
+  return html;
+}
+
+
+
+function getProjectItemTableRowHtml(item) {
+  var html = '<tr data-item-id="' + item.id + '">';
+  html += '<td>' + item.name + '</td>';
+  html += '<td>' + item.count_checklists + '</td>';
+  html += '<td>' + item.count_notes + '</td>';
+  html += '<td>' + item.date_created_date + '</td>';
+  html += '<td>' + item.date_due_date + '</td>';
+  html += '<td>' + item.completed + '</td>';
+  html += '<td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#item-modal" onclick="openItemModal(' + item.id + ')">View</button></td>';
+  html += '</tr>';
+
+  return html;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // inserts a new project item into the database
 function newProjectItem() {
@@ -1249,7 +1326,18 @@ function updateItemViewOption(btn) {
   $(".item-view-option").removeClass("active");
   $(btn).addClass("active");
 
-  $(".item-card").addClass("hide"); 
+  // fade out the item cards
+  $(".item-card").addClass("animate__zoomOut");
+
+
+  // update the item sorting
+  if ($(btn).attr('data-sorting-option') == ITEM_VIEW_OPTIONS.TABLE) {
+    itemView = ITEM_VIEW_OPTIONS.TABLE;
+  } else {
+    itemView = ITEM_VIEW_OPTIONS.CARD;
+  }
+
+  getProjectItems($("#item-seaarch-input").val());
 }
 
 

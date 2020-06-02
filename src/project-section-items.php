@@ -67,7 +67,7 @@
 
 
 <!-- item cards go here -->
-<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="items-deck">
+<div id="items-deck">
 
 
 </div>

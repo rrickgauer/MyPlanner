@@ -30,9 +30,7 @@
 
     <!-- item sorting dropdown -->
     <div class="dropdown mr-2">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-        Sort items
-      </button>
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Sort items</button>
       <div class="dropdown-menu">
         <h6 class="dropdown-header">Date created</h6>
         <button class="dropdown-item item-sorting-option active" data-sorting-option="date_created_old" type="button">Oldest</button>
@@ -44,7 +42,7 @@
       </div>
     </div>
 
-    <!-- item sorting dropdown -->
+    <!-- view dropdown -->
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">View</button>
       <div class="dropdown-menu">

@@ -11,7 +11,13 @@ const ITEM_SORTING_OPTIONS = {
   NAME_DESC        : 'name_desc',
 };
 
-var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD; // initial item sorting display
+const ITEM_VIEW_OPTIONS = {
+  TABLE = 'table',
+  CARD = 'card',
+};
+
+var itemView = ITEM_VIEW_OPTIONS.CARD;                    // intial item view display
+var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD;  // initial item sorting display
 
 $(document).ready(function() {
   autosize($('textarea'));
@@ -39,6 +45,10 @@ function addEventListeners() {
 
   $(".item-sorting-option").on("click", function() {
     updateItemSortingOption(this);
+  });
+
+  $(".item-view-option").on('click', function() {
+    updateItemViewOption(this);
   });
 }
 
@@ -1231,8 +1241,16 @@ function updateItemSortingOption(btn) {
 
   // update the item cards
   getProjectItems($("#item-search-input").val());
-
 }
+
+function updateItemViewOption(btn) {
+
+  // switch the active classes
+  $(".item-view-option").removeClass("active");
+  $(btn).addClass("active"); 
+}
+
+
 
 
 

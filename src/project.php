@@ -33,9 +33,7 @@ $projectInfo = getProjectInfo($_GET['projectID'])->fetch(PDO::FETCH_ASSOC);
       </div>
       
       <!-- checklists -->
-      <ul>
-
-      </ul>
+      <ul></ul>
     </nav>
 
     <div id="content">

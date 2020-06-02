@@ -31,35 +31,41 @@ if (isset($_POST['new-project-name'])) {
 
  <div class="container">
 
-  <h1 class="custom-font text-center">New Project</h1> 
-  
-  <form method="post">
-   <!-- project name -->
-   <div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="new-project-name" maxlength="50" required autofocus>
+  <div class="card mt-5">
+    <div class="card-body">
+      <h1 class="custom-font text-center ">New Project</h1> 
+      
+      <form method="post">
+       <!-- project name -->
+       <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" class="form-control" id="new-project-name" name="new-project-name" maxlength="50" required autofocus>
+      </div>
+
+      <!-- date due -->
+      <div class="form-group">
+        <label for="name">Date due *</label>
+        <input type="date" class="form-control" id="date-due" name="date-due" required>
+      </div>
+
+      <!-- description -->
+      <div class="form-group">
+        <label for="name">Description</label>
+        <textarea class="form-control" rows="1" id="description" name="description"></textarea>
+      </div>
+
+      <!-- submit button -->
+      <div class="float-right">
+        <button type="button" class="btn btn-secondary" onclick="clearInputs()">Reset</button>
+        <input type="submit" class="btn btn-primary" id="create-project-btn" value="Create project" disabled>
+      </div>
+    </form>
+
   </div>
 
-  <!-- description -->
-  <div class="form-group">
-    <label for="name">Description:</label>
-    <textarea class="form-control" rows="1" id="description" name="description"></textarea>
-  </div>
+</div>
 
 
-  <!-- date due -->
-  <div class="form-group">
-    <label for="name">Date due:</label>
-    <input type="date" class="form-control" id="date-due" name="date-due" required>
-  </div>
-
-  <!-- submit button -->
-  <div class="float-right">
-    <button type="reset" class="btn btn-secondary">Reset</button>
-    <input type="submit" class="btn btn-primary" value="Create project">
-  </div>
-
-</form>
 
 </div>
 <?php include('footer.php'); ?>

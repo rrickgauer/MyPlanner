@@ -439,7 +439,7 @@ function getProjectItemCardHtml(item) {
 
 // returns the html for the project item table
 function getProjectItemTableHtml(items) {
-  var html = '<div class="table-responsive"><table class="table items-table"><thead><tr>';
+  var html = '<div class="table-responsive"><table class="table items-table animate__animated"><thead><tr>';
   html += '<th>Name</th>';
   html += '<th>Checklists</th>';
   html += '<th>Notes</th>';
@@ -1337,8 +1337,9 @@ function updateItemViewOption(btn) {
   $(".item-view-option").removeClass("active");
   $(btn).addClass("active");
 
-  // fade out the item cards
+  // fade out the item cards and table
   $(".item-card").addClass("animate__zoomOut");
+  $(".items-table").addClass("animate__zoomOut").addClass("animate__faster");
 
 
   // update the item sorting

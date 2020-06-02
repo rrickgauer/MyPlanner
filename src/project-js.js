@@ -16,7 +16,7 @@ const ITEM_VIEW_OPTIONS = {
   CARD: 'card',
 };
 
-var itemView = ITEM_VIEW_OPTIONS.TABLE;                   // intial item view display
+var itemView = ITEM_VIEW_OPTIONS.CARD;                   // intial item view display
 var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD;  // initial item sorting display
 
 $(document).ready(function() {
@@ -339,8 +339,6 @@ function getProjectItems(query = '') {
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     displayProjectItems(JSON.parse(response));
-
-    console.log(JSON.parse(response));
   });
 }
 
@@ -364,12 +362,12 @@ function displayProjectItems(items) {
 
 // returns the full html of all item cards
 function getProjectItemCardsHtml(items) {
-  var html = '<div class="card-deck">';
+  var html = '<div class="card-deck mb-3">';
 
   for (var count = 0; count < items.length; count++) {
     // after 3 cards have been created print a new card deck
-    if (count % 3 == 0){
-      html += '</div><div class="card-deck">';
+    if (count % 4 == 0){
+      html += '</div><div class="card-deck mb-3">';
     }
 
     // append card html to the cards html

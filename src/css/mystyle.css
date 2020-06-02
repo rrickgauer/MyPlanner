@@ -191,8 +191,8 @@ body {
 }
 #items-deck .item-card .item-card-stats {
   display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
+  flex-flow: column wrap;
+  justify-content: space-around;
 }
 #items-deck .item-card .item-card-stats .item-card-stat {
   margin: 5px;
@@ -204,7 +204,6 @@ body {
   background-color: #efecec;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body .right {
-  display: block;
   margin-left: 10px;
 }
 #items-deck .item-card .item-card-stats .item-card-stat .card-body .right .description {

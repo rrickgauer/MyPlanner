@@ -208,23 +208,13 @@ body {background-color: $base-color-grey;}
       }
     }
 
-
-
-
-
     .item-card-stats {      
       display: flex;
       flex-flow: column wrap;
-      // flex-grow: 1;
-      // flex-wrap: wrap;
       justify-content: space-around;
-
-
 
       .item-card-stat {
         margin: 5px;
-
-        // flex-wrap: wrap;
 
         .card-body {
           display: flex;
@@ -232,16 +222,8 @@ body {background-color: $base-color-grey;}
           padding: 5px 10px;
           background-color: $base-color-grey;
 
-          // flex-wrap: wrap;
-
-
-
-
-
           .right {
-            // display: block;
             margin-left: 10px;
-
             .description {font-weight: bold;}
           }
 

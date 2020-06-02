@@ -11,27 +11,13 @@ const ITEM_SORTING_OPTIONS = {
   NAME_DESC        : 'name_desc',
 };
 
-
-
 var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD; // initial item sorting display
 
-
-
 $(document).ready(function() {
-
   autosize($('textarea'));
-
   getChecklists();
   getProjectItems();
   addEventListeners();
-
-
-
-
-
-
-
-
 });
 
 // adds event listeners to some elements
@@ -356,8 +342,6 @@ function displayProjectItems(data) {
   }
 
   $("#items-deck").html(html);
-
-
 }
 
 // returns the html for a project item card
@@ -602,18 +586,12 @@ function getItemChecklistSidebarHtml(checklist) {
   return html;
 }
 
-
-
-
 // opens all the item checklists that are currently save
 function getAllOpenItemChecklists(itemID) {
-
   var data = {
     function: 'get-open-item-checklists',
     itemID: itemID,
   };
-
-
 
   $.get(BACKEND_ITEM_URL, data, function(response) {
     var openItemChecklists = JSON.parse(response);
@@ -628,7 +606,6 @@ function getAllOpenItemChecklists(itemID) {
 
 // open an item checklist
 function openItemChecklist(itemChecklistID) {
-
   var data = {
     function: 'get-item-checklist-items',
     itemChecklistID: itemChecklistID,
@@ -1077,8 +1054,6 @@ function clearItemNotesSection() {
 function editItemNote(btn) {
   var itemNote = $(btn).closest(".card-item-note");
   var itemNoteID = $(itemNote).attr("data-item-note-id");
-
-
 
   // get the old content from the server
   var data = {

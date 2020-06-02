@@ -51,6 +51,8 @@
       </div>
     </div>
 
+    
+
   </div>
 
   <!-- item search bar -->

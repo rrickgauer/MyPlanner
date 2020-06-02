@@ -29,9 +29,9 @@ if (isset($_POST['new-project-name'])) {
 <body>
  <?php include('navbar.php'); ?>
 
- <div class="container">
+ <div class="container p-5 mt-3">
 
-  <div class="card mt-5">
+  <div class="card mt-2 px-5">
     <div class="card-body">
       <h1 class="custom-font text-center ">New Project</h1> 
       

@@ -139,7 +139,10 @@ function getProjectCardHtml(project) {
   html += '<span class="badge badge-secondary mr-2">' + project.count_checklists + '&nbsp;checklists</span>';
   html += '<span class="badge badge-secondary mr-2">' + project.count_notes + '&nbsp;notes</span>';
   html += '<div class="card-footer">';
-  html += '<div class="card-project-date">' + project.date_due_display_date + '</div>';
+
+  var dateDueDisplay = getDisplayDateValue(project.date_due_display_date, project.date_due_display_time);
+  html += '<div class="card-project-date"><b>Due:&nbsp</b>' + dateDueDisplay + '</div>';
+
   html += '<a href="project.php?projectID=' + project.id + '">View</a>';
   html += '</div>';
   html += '</div></div>';

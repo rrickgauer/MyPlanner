@@ -24,7 +24,7 @@ $user = getUserInfo($_SESSION['userID'])->fetch(PDO::FETCH_ASSOC);
     <!-- toolbar -->
     <div class="split toolbar">
       <div class="left">
-        <h3>Your projects</h3>
+        <h2>Your projects</h2>
       </div>
       
       <div class="right">

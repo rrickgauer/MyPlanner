@@ -185,10 +185,10 @@ function getProjectTableRowHtml(project) {
   html += '<td>' + project.count_checklists + '</td>';
   html += '<td>' + project.count_notes + '</td>';
 
-  var dateDueDisplay = getDisplayDateValue(project.date_due_display_date, project.date_due_display_time);
+  var dateCreatedDisplay = getDisplayDateValue(project.date_created_display_date, project.date_created_display_time);
   html += '<td>' + dateCreatedDisplay + '</td>';
 
-  var dateCreatedDisplay = getDisplayDateValue(project.date_created_display_date, project.date_created_display_time);
+  var dateDueDisplay = getDisplayDateValue(project.date_due_display_date, project.date_due_display_time);
   html += '<td>' + dateDueDisplay + '</td>';
 
   html += '<td><a href="project.php?projectID=' + project.id + '"><i class="bx bx-link"></i></a></td>';

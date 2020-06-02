@@ -50,6 +50,13 @@ function addEventListeners() {
   $(".item-view-option").on('click', function() {
     updateItemViewOption(this);
   });
+
+
+  $(".item-complete-option").on('change', function() {
+    updateItemViewCompleted();
+  });
+
+
 }
 
 // enables-disables a button based on if the specified input is empty
@@ -386,7 +393,13 @@ function getProjectItemCardHtml(item) {
   var html = '';
 
   // main card
-  html += '<div class="card item-card animate__animated" data-item-id="' + item.id + '">';
+  // html += '<div class="card item-card animate__animated" data-item-id="' + item.id + '">';
+
+  // main cards
+  if (item.completed == 'y')
+    html += '<div class="card item-card animate__animated" data-item-id="' + item.id + '" data-item-completed="true">';
+  else
+    html += '<div class="card item-card animate__animated" data-item-id="' + item.id + '" data-item-completed="false">';
 
   // card header
   html += '<div class="card-header"><div class="left">';
@@ -1352,7 +1365,14 @@ function updateItemViewOption(btn) {
   getProjectItems($("#item-seaarch-input").val());
 }
 
+function updateItemViewCompleted() {
 
+  if ($("#item-complete-option").prop('checked') == true) {
+    $('.item-card[data-item-completed="true"]').remove();
+  } else {
+    getProjectItems();
+  }
+}
 
 
 

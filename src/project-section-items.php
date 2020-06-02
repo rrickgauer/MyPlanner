@@ -43,7 +43,7 @@
     </div>
 
     <!-- view dropdown -->
-    <div class="dropdown">
+    <div class="dropdown mr-3">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">View</button>
       <div class="dropdown-menu">
         <button class="dropdown-item item-view-option active" data-sorting-option="card" type="button">Card</button>
@@ -51,6 +51,11 @@
       </div>
     </div>
 
+    <!-- show/hide completed -->
+    <div class="custom-control custom-checkbox mt-2">
+      <input type="checkbox" class="custom-control-input item-complete-option" id="item-complete-option">
+      <label class="custom-control-label" for="item-complete-option">Show incomplete</label>
+    </div>
 
 
   </div>

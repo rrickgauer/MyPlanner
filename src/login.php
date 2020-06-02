@@ -8,6 +8,7 @@ if (isset($_POST['new-email']) && isset($_POST['new-password1']) && isset($_POST
     session_start();
     $_SESSION['userID'] = getUserID($_POST['new-email']);
     header('Location: index.php');
+    exit;
   }
 }
 
@@ -18,6 +19,8 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
     $_SESSION['userID'] = getUserID($_POST['login-email']);
     header('Location: index.php');
     exit;
+  } else {
+    $loginAttempt = false;
   }
 }
 
@@ -39,6 +42,12 @@ if (isset($_POST['login-email']) && isset($_POST['login-password'])) {
         <div class="card">
           <div class="card-body">            
             <h2 class="custom-font text-center mb-4">Login</h2>
+
+            <?php 
+              if (isset($loginAttempt) && !$loginAttempt) {
+                echo getAlert('Login failed.', 'danger');
+              }
+            ?>
 
             <!-- Log In Form -->
             <form method="post">

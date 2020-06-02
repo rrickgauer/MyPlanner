@@ -446,7 +446,7 @@ function getProjectItemTableHtml(items) {
   html += '<th>Date Created</th>';
   html += '<th>Date Due</th>';
   html += '<th>Completed</th>';
-  html += '<th>View</th></tr></thead><tbody>';
+  html += '<th>Open</th></tr></thead><tbody>';
 
   // get the rows here
   for (var count = 0; count < items.length; count++) {

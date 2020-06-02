@@ -16,7 +16,7 @@ const ITEM_VIEW_OPTIONS = {
   CARD: 'card',
 };
 
-var itemView = ITEM_VIEW_OPTIONS.CARD;                    // intial item view display
+var itemView = ITEM_VIEW_OPTIONS.TABLE;                   // intial item view display
 var itemSorting = ITEM_SORTING_OPTIONS.DATE_CREATED_OLD;  // initial item sorting display
 
 $(document).ready(function() {
@@ -360,7 +360,7 @@ function displayProjectItems(items) {
   $("#items-deck").html(html);
 }
 
-
+// returns the full html of all item cards
 function getProjectItemCardsHtml(items) {
   var html = '<div class="card-deck">';
 
@@ -465,24 +465,19 @@ function getProjectItemTableRowHtml(item) {
   html += '<td>' + item.count_notes + '</td>';
   html += '<td>' + item.date_created_date + '</td>';
   html += '<td>' + item.date_due_date + '</td>';
-  html += '<td>' + item.completed + '</td>';
+
+  if (item.completed == 'y') {
+    html += '<td><i class="bx bxs-check-circle"></i></td>';
+  } else {
+    html += '<td></td>';
+  }
+
+  
   html += '<td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#item-modal" onclick="openItemModal(' + item.id + ')">View</button></td>';
   html += '</tr>';
 
   return html;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

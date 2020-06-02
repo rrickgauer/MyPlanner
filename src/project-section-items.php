@@ -46,8 +46,8 @@
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">View</button>
       <div class="dropdown-menu">
-        <button class="dropdown-item item-view-option active" data-sorting-option="card" type="button">Card</button>
-        <button class="dropdown-item item-view-option" data-sorting-option="table" type="button">Table</button>
+        <button class="dropdown-item item-view-option" data-sorting-option="card" type="button">Card</button>
+        <button class="dropdown-item item-view-option active" data-sorting-option="table" type="button">Table</button>
       </div>
     </div>
 

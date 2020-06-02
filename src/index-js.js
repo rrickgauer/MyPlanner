@@ -179,7 +179,7 @@ function getProjectTableHtml(projects) {
 
 // return the html of a project table row
 function getProjectTableRowHtml(project) {
-  var html = '<tr class="hover-pointer" data-project-id="' + project.id + '">';
+  var html = '<tr data-project-id="' + project.id + '">';
   html += '<td>' + project.name + '</td>';
   html += '<td>' + project.count_items + '</td>';
   html += '<td>' + project.count_checklists + '</td>';
